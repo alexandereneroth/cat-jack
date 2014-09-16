@@ -6,7 +6,7 @@ while( current_round <= best_of ) {
 	house_cards = []
 	player_bet = 0
 
-	player_bet = player place_bet
+	player_bet = PLAYER INPUT
 
 	player_cards.add(new card)
 	player_cards.add(new card)
@@ -17,7 +17,7 @@ while( current_round <= best_of ) {
 	print all player_cards
 
 	while(player_cards.value < 21){
-		player chose hit(),
+		PLAYER INPUT chose hit(),
 		or double_Down(),
 		or stay(); 
 	}
