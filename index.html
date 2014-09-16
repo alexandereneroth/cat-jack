@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <script>
-	var playerTotalValue = 0;
-	var computerPlayerValue = 0;
+	var player_total = 0;
+	var computer_total = 0;
+	var game_over = false;
+	var round_number = 0;
 
 	function getCard() {
-		return Math.floor(Math.random() * 14)+1;
-	};
+		return Math.floor(Math.random() * 11)+1;
+	}
 
+	function startGame() {
+		round_number++;
+
+
+		var player_card = getCard();
+		player_total += player_card;
+
+		var computer_card = getCard();
+		computer_total += computer_card;
+
+		console.log("Player gets: " + player_card + "\nPlayer total: " + player_total);
+		console.log("Computer gets " + computer_card + "\nComputer total: " + computer_total);
+	}
+
+	function playerRound () {
+
+	}
+
+	function computerRound () {
+
+	}
+
+
+	// Main game loop
+	while (!game_over) {
+		playRound();
+	}
 	
-
-	while(playerTotalValue < 10000) {
-		var x = getCard();
-		if(x > 14) {
-			console.log("x is too big");
-		}
-		playerTotalValue += x;
-		console.log(getCard());
+	// getCard() test
+	// while(playerTotalValue < 10000) {
+	// 	var x = getCard();
+	// 	if(x > 14) {
+	// 		console.log("x is too big");
+	// 	}
+	// 	playerTotalValue += x;
+	// 	console.log(getCard());
 	}
 </script>
 
