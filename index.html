@@ -4,10 +4,54 @@
 	var computer_total = 0;
 	var game_over = false;
 	var round_number = 0;
+	var card_deck = [];
 
-	function getCard() {
-		return Math.floor(Math.random() * 11)+1;
+	function makeDeck() {
+		var new_deck;
+		for(var x = 0; x < 4; x++) {
+			switch (x) {
+				case 0:
+				new_deck.push('AC', '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', '10C', 'JC', 'QC', 'KC');
+				break;
+				case 1:
+				new_deck.push('AH', '2H', '3H', '4H', '5H', '6H', '7H', '8H', '9H', '10H', 'JH', 'QH', 'KH');
+				break;
+				case 2:
+				new_deck.push('AD', '2D', '3D', '4D', '5D', '6D', '7D', '8D', '9D', '10D', 'JD', 'QD', 'KD');
+				break;
+				case 3:
+				new_deck.push('AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', '10S', 'JS', 'QS', 'KS');
+			}
+
+		}
+		return new_deck;
 	}
+
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  		// While there remain elements to shuffle...
+  		while (0 !== currentIndex) {
+	    	// Pick a remaining element...
+	    	randomIndex = Math.floor(Math.random() * currentIndex);
+	    	currentIndex -= 1;
+
+	    	// And swap it with the current element.
+	    	temporaryValue = array[currentIndex];
+	    	array[currentIndex] = array[randomIndex];
+	    	array[randomIndex] = temporaryValue;
+	    }
+
+	    return array;
+	}
+
+	console.log(card_deck);
+	console.log(card_deck.length);
+
+
+	// function getCard() {
+	// 	return Math.floor(Math.random() * 11)+1;
+	// }
 
 	function startGame() {
 		round_number++;
@@ -33,9 +77,9 @@
 
 
 	// Main game loop
-	while (!game_over) {
-		playRound();
-	}
+	// while (!game_over) {
+	// 	playRound();
+	// }
 	
 	// getCard() test
 	// while(playerTotalValue < 10000) {
@@ -45,7 +89,6 @@
 	// 	}
 	// 	playerTotalValue += x;
 	// 	console.log(getCard());
-	}
 </script>
 
 

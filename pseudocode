@@ -1,6 +1,10 @@
 num best_of = X
 num player_money = X
 
+card_deck = {
+	
+}
+
 while( current_round <= best_of ) {
 	player_cards = []
 	house_cards = []
