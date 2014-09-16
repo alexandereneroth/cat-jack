@@ -5,6 +5,8 @@
 	var game_over = false;
 	var round_number = 0;
 	var card_deck = [];
+	var player_cards = [];
+	var computer_cards = [];
 
 	function makeDeck() {
 		var new_deck;
@@ -54,21 +56,36 @@
 	// }
 
 	function startGame() {
-		round_number++;
+		player_cards.push(card_deck.pop());
+		player_cards.push(card_deck.pop());
+		computer_cards.push(card_deck.pop());
+		computer_cards.push(card_deck.pop());
+		console.log('your cards: ' + player_cards[0] + ', ' + player_cards[1]);
+		console.log('computers cards: ' + computer_cards[0]);
+	}
 
+	function cardsValue(cards) {
+		
+		switch(cards[0][0]){
+		
+			case 'J':
+			return 10;
+			case 'D':
+			return 10;
+			case 'K':
+			return 10;
+			default:
+			console.log('Invalid card');
+		}
 
-		var player_card = getCard();
-		player_total += player_card;
-
-		var computer_card = getCard();
-		computer_total += computer_card;
-
-		console.log("Player gets: " + player_card + "\nPlayer total: " + player_total);
-		console.log("Computer gets " + computer_card + "\nComputer total: " + computer_total);
+	cards[0][0] = 
+		
 	}
 
 	function playerRound () {
+		while (player_cards){
 
+		}
 	}
 
 	function computerRound () {
