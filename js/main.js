@@ -87,34 +87,25 @@ function getValue(cards) {
 	return value;
 }
 
-function getChoice(isFirstChoice) {
-	var choice;
-	if (isFirstChoice) {
-		choice = prompt('a: Hit\nb: Stand').toLowerCase().trim();
-	} else {
-		choice = prompt('Incorrect input!\nPlease enter \'a\' or \'b\'\n\n' +
-			'a: Hit\nb: Stand').toLowerCase().trim();
-	}
-	return choice;
-}
 
-function playRound() {
+function getChoice() {
 	var choice;
-	var isFirstChoice = true;
-	var choiceIsValid = false;
+	var choiceMessage = 'a: Hit\nb: Stand'; // Default message to get choice
 
-	while (!choiceIsValid) {
-		choice = getChoice(isFirstChoice);
+	// Lets player choose to hit or stand
+	for (;;) {
+		choice = prompt(choiceMessage).toLowerCase().trim();
 		if (choice === 'a') {
 			console.log('You have been hit');
-			choiceIsValid = true;
-			GAME_OVER = true;
+			return 'hit';
 		} else if (choice === 'b') {
 			console.log('You have been stood up');
-			choiceIsValid = true;
-			GAME_OVER = true;
+			return 'stand';
 		}
-		isFirstChoice = false;
+
+		// If we get wrong input change message to let player know.
+		choiceMessage = 'Incorrect input!\nPlease enter \'a\' or \'b\'\n\n' +
+			'a: Hit\nb: Stand';
 	}
 }
 
@@ -127,7 +118,8 @@ while (!GAME_OVER) {
 		GAME_OVER = true;
 	}
 
-	playRound();
+	getChoice();
+	GAME_OVER = true;
 }
 
 
