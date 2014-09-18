@@ -1,9 +1,15 @@
 'use strict';
+var playerDeck = {
+	cards: [],
+	cardsValue,
+	addCard: function () {
+		var drawnCard = cardDeck.pop();
+	}
+};
 var playerCards = [];
 var computerCards = [];
 var cardDeck = [];
 var GAME_OVER = false;
-
 
 function createDeck(numberOfDecks) {
 	var newDeck = [];
