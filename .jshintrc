@@ -20,6 +20,7 @@
   "smarttabs": true,
   "globals": {
       "console": false,
-      "prompt": false
+      "prompt": false,
+      "_": false
   }
 }
