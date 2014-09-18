@@ -4,7 +4,6 @@ var computerCards = [];
 var cardDeck = [];
 var GAME_OVER = false;
 
-
 function createDeck(numberOfDecks) {
 	var newDeck = [];
 	for (var x = 0; x < numberOfDecks; x++) {
