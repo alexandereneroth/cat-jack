@@ -1,4 +1,8 @@
 'use strict';
+var player = {};
+player.hand = {};
+player.name = '';
+player.bank = 100;
 var playerCards = [];
 var computerCards = [];
 var cardDeck = [];
