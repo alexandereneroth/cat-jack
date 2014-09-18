@@ -41,6 +41,12 @@ function shuffle(array) {
 	return array;
 }
 
+function dealCardTo(player, numberOfCards) {
+	for (var x = 0; x < numberOfCards; x++) {
+		player.push(cardDeck.pop());
+	}
+}
+
 function startGame() {
 
 	// Ta fyra kortlekar och blanda dem
@@ -48,10 +54,8 @@ function startGame() {
 	shuffle(cardDeck);
 
 	// Huset och spelaren drar två kort
-	playerCards.push(cardDeck.pop());
-	playerCards.push(cardDeck.pop());
-	computerCards.push(cardDeck.pop());
-	computerCards.push(cardDeck.pop());
+	dealCardTo(playerCards, 2);
+	dealCardTo(computerCards, 2);
 
 	// Visa ett av husets kort och alla spelarnas kort
 	console.log('your cards: ' + playerCards[0] + ', ' + playerCards[1]);
