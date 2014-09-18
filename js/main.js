@@ -1,11 +1,4 @@
 'use strict';
-var playerDeck = {
-	cards: [],
-	cardsValue,
-	addCard: function () {
-		var drawnCard = cardDeck.pop();
-	}
-};
 var playerCards = [];
 var computerCards = [];
 var cardDeck = [];
