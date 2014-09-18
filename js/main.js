@@ -2,7 +2,7 @@
 var playerCards = [];
 var computerCards = [];
 var cardDeck = [];
-
+var GAME_OVER = false;
 
 
 function createDeck(numberOfDecks) {
@@ -42,9 +42,6 @@ function startGame() {
 	shuffle(cardDeck);
 
 	// Huset och spelaren drar två kort
-	playerCards.push(cardDeck.pop());
-	playerCards.push(cardDeck.pop());
-	playerCards.push(cardDeck.pop());
 	playerCards.push(cardDeck.pop());
 	playerCards.push(cardDeck.pop());
 	computerCards.push(cardDeck.pop());
@@ -87,10 +84,40 @@ function getValue(cards) {
 	return value;
 }
 
+function getChoice() {
+	var choice = prompt('a: Hit\nb: Stand').toLowerCase().trim();
+	return choice;
+}
+
+function playRound() {
+	var choice;
+	var choiceIsValid = false;
+
+	while (!choiceIsValid) {
+		choice = getChoice();
+		if (choice === 'a') {
+			console.log('You have been hit');
+			choiceIsValid = true;
+			GAME_OVER = true;
+		} else if (choice === 'b') {
+			console.log('You have been stood up');
+			choiceIsValid = true;
+			GAME_OVER = true;
+		}
+	}
+}
+
 //________/ Start Game \___________
 startGame();
-console.log(getValue(playerCards));
 
+while (!GAME_OVER) {
+	if (getValue(playerCards) === 21) {
+		console.log('Congratulations you have BlackJack!');
+		GAME_OVER = true;
+	}
+
+	playRound();
+}
 
 
 // getCard() test
