@@ -79,7 +79,7 @@ function getValue(cards) {
 	}
 
 	// If we have any Aces count down their value from 11 to 1 if total value is over 21
-	while (value > 21 && numAces !== 0) {
+	while (numAces !== 0 && value > 21) {
 		console.log('Counting down aces');
 		value -= 10;
 		--numAces;
