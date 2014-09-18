@@ -87,17 +87,24 @@ function getValue(cards) {
 	return value;
 }
 
-function getChoice() {
-	var choice = prompt('a: Hit\nb: Stand').toLowerCase().trim();
+function getChoice(isFirstChoice) {
+	var choice;
+	if (isFirstChoice) {
+		choice = prompt('a: Hit\nb: Stand').toLowerCase().trim();
+	} else {
+		choice = prompt('Incorrect input!\nPlease enter \'a\' or \'b\'\n\n' +
+			'a: Hit\nb: Stand').toLowerCase().trim();
+	}
 	return choice;
 }
 
 function playRound() {
 	var choice;
+	var isFirstChoice = true;
 	var choiceIsValid = false;
 
 	while (!choiceIsValid) {
-		choice = getChoice();
+		choice = getChoice(isFirstChoice);
 		if (choice === 'a') {
 			console.log('You have been hit');
 			choiceIsValid = true;
@@ -107,6 +114,7 @@ function playRound() {
 			choiceIsValid = true;
 			GAME_OVER = true;
 		}
+		isFirstChoice = false;
 	}
 }
 
