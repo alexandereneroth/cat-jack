@@ -40,26 +40,37 @@ function dealCardTo(player, numberOfCards) {
 	}
 }
 
-function startGame() {
+function prepareDeck() {
 
 	// Ta fyra kortlekar och blanda dem
 	cardDeck = createDeck(4);
 	shuffle(cardDeck);
+}
+
+function dealBeginningHand() {
 
 	// Huset och spelaren drar två kort
 	dealCardTo(playerCards, 2);
 	dealCardTo(computerCards, 2);
+}
 
-	// Visa ett av husets kort och alla spelarnas kort
-	console.log('your cards: ' + playerCards[0] + ', ' + playerCards[1]);
+
+// Print all player cards and one dealer card
+function printHands() {
+	var printMessage = '';
+
+	// Add the players card to printMessage
+	for (var i = 0; i < playerCards.length; i++) {
+		printMessage += playerCards[i];
+	}
+
+	// Skriv ut korten
+	console.log('your cards: ' + printMessage);
 	console.log('computers cards: ' + computerCards[0]);
-
-
 }
 
 
 function getValue(cards) {
-	console.log(cards);
 	var value = 0;
 	var numAces = 0;
 
@@ -109,17 +120,34 @@ function getChoice() {
 	}
 }
 
+
+
+function playRound() {
+
+	// Hit or Stand
+	var choice = getChoice();
+
+	if (choice === 'hit') {
+		dealCardTo(playerCards, 1);
+		printHands();
+	} else if (choice === 'stand') {
+		GAME_OVER = true;
+	}
+}
+
+
+
 //________/ Start Game \___________
-startGame();
+prepareDeck();
+dealBeginningHand();
+printHands();
 
 while (!GAME_OVER) {
 	if (getValue(playerCards) === 21) {
 		console.log('Congratulations you have BlackJack!');
 		GAME_OVER = true;
 	}
-
-	getChoice();
-	GAME_OVER = true;
+	playRound();
 }
 
 
