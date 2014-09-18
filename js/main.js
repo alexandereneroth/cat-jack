@@ -1,7 +1,20 @@
 'use strict';
+
+// Global variables
+
+var playerCards = [];
+var computerCards = [];
+var cardDeck = [];
+var GAME_OVER = false;
+
+// ***
+
+
+// Dealer Object
 var dealer = {};
 /**
- **	@return The highest possible numerical value of the card (which is 11 for aces).
+ **	@return The highest possible numerical value of the card (which is 11 for
+ ** aces).
  **/
 dealer.valueCard = function (card) {
 	if (isNaN(Number(card[0]))) {
@@ -13,6 +26,8 @@ dealer.valueCard = function (card) {
 	return Number(card[0]);
 };
 
+
+// Player Object
 var player = {};
 player.name = '';
 player.bank = 100;
@@ -36,11 +51,6 @@ player.hand.addCard = function (card) {
 		}
 	}
 };
-
-var playerCards = [];
-var computerCards = [];
-var cardDeck = [];
-var GAME_OVER = false;
 
 function createDeck(numberOfDecks) {
 	var newDeck = [];
