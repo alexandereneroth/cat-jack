@@ -1,25 +1,29 @@
 'use strict';
-var Dealer = {
-	/**
-	 **	@return The highest possible numerical value of the card (which is 11 for aces).
-	 **/
-	valueCard: function (card) {
-		if (isNaN(Number(card[0]))) {
-			if (card[0] === 'A') {
-				return 11; // The card is an ace.
-			}
-			return 10; // The card is either a 10, a queen, a king, ...etc
+var dealer = {};
+/**
+ **	@return The highest possible numerical value of the card (which is 11 for aces).
+ **/
+dealer.valueCard = function (card) {
+	if (isNaN(Number(card[0]))) {
+		if (card[0] === 'A') {
+			return 11; // The card is an ace.
 		}
-		return Number(card[0]);
+		return 10; // The card is either a 10, a queen, a king, ...etc
 	}
+	return Number(card[0]);
 };
 
-hand.cards = [];
-hand.aces = 0;
-hand.value = 0;
-hand.addCard = function (card) {
+var player = {};
+player.name = '';
+player.bank = 100;
+
+player.hand = {};
+player.hand.cards = [];
+player.hand.aces = 0;
+player.hand.value = 0;
+player.hand.addCard = function (card) {
 	this.cards.push(card);
-	var cardValue = Dealer.valueCard(card);
+	var cardValue = dealer.valueCard(card);
 	this.value += cardValue;
 
 	if (cardValue === 11) { // if the card that was added is an ace
