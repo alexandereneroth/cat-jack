@@ -44,6 +44,9 @@ function startGame() {
 	// Huset och spelaren drar två kort
 	playerCards.push(cardDeck.pop());
 	playerCards.push(cardDeck.pop());
+	playerCards.push(cardDeck.pop());
+	playerCards.push(cardDeck.pop());
+	playerCards.push(cardDeck.pop());
 	computerCards.push(cardDeck.pop());
 	computerCards.push(cardDeck.pop());
 
@@ -60,20 +63,23 @@ function getValue(cards) {
 	var value = 0;
 	var numAces = 0;
 
+	// Check through cards and assign value
 	for (var x = 0; x < cards.length; x++) {
-		if (isNaN(Number(cards[x][0]))) {
-			console.log(cards[x][0]);
-			if (cards[x][0] === 'A') {
+		if (isNaN(Number(cards[x][0]))) { // Check for  A, K, Q, J or T
+			if (cards[x][0] === 'A') { // If A..
 				value += 11;
 				++numAces;
-			} else {
+			} else { // If K, Q, J or T
 				value += 10;
 			}
+		} else { // If 1, 2, 3, 4, 5, 6, 7, 8, 9
+			value += Number(cards[x][0]);
 		}
-		value += Number(cards[x][0]);
 	}
 
+	// If we have any Aces count down their value from 11 to 1 if total value is over 21
 	while (value > 21 && numAces !== 0) {
+		console.log('Counting down aces');
 		value -= 10;
 		--numAces;
 	}
@@ -91,7 +97,7 @@ console.log(getValue(playerCards));
 // while(playerTotalValue < 10000) {
 // 	var x = getCard();
 // 	if(x > 14) {
-// 		console.log("x is too big");
+// 		console.log('x is too big');
 // 	}
 // 	playerTotalValue += x;
 // 	console.log(getCard());
