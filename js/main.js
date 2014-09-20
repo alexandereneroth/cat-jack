@@ -1,7 +1,8 @@
 'use strict';
 
-// Global variables
-
+/********************
+ * Global Variables *
+ *******************/
 var playerCards = [];
 var computerCards = [];
 var cardDeck = [];
@@ -10,24 +11,98 @@ var GAME_OVER = false;
 // ***
 
 
-// Dealer Object
-var dealer = {};
-/**
- **	@return The highest possible numerical value of the card (which is 11 for
- ** aces).
- **/
+
+/***********
+ * Objects *
+ **********/
+
+// Dealer object
+var dealer = {
+	name: 'Joe the Dealer'
+};
 dealer.valueCard = function (card) {
 	if (isNaN(Number(card[0]))) {
 		if (card[0] === 'A') {
-			return 11; // The card is an ace.
+			return 11; // The card is an A.
 		}
-		return 10; // The card is either a 10, a queen, a king, ...etc
+		return 10; // The card is either a T, J, Q, K
+	} else { // If 1, 2, 3, 4, 5, 6, 7, 8, 9
+		return Number(card[0]);
 	}
-	return Number(card[0]);
 };
 
+dealer.getCardValue = function (cards) {
+	var value = 0;
+	var numAces = 0;
 
-// Player Object
+	// Check through cards and assign value
+	for (var x = 0; x < cards.length; x++) {
+		if (isNaN(Number(cards[x][0]))) { // Check for  A, K, Q, J or T
+			if (cards[x][0] === 'A') { // If A..
+				value += 11;
+				++numAces;
+			} else { // If K, Q, J or T
+				value += 10;
+			}
+		} else { // If 1, 2, 3, 4, 5, 6, 7, 8, 9
+			value += Number(cards[x][0]);
+		}
+	}
+
+	// If we have any Aces count down their value from 11 to 1 if total value 
+	// is over 21
+	while (numAces !== 0 && value > 21) {
+		value -= 10;
+		--numAces;
+	}
+
+	return value;
+};
+
+dealer.getDeck = function (numberOfDecks) {
+	var newDeck = [];
+	for (var x = 0; x < numberOfDecks; x++) {
+		newDeck.push('AC', '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', 'TC',
+			'JC', 'QC', 'KC');
+		newDeck.push('AH', '2H', '3H', '4H', '5H', '6H', '7H', '8H', '9H', 'TH',
+			'JH', 'QH', 'KH');
+		newDeck.push('AD', '2D', '3D', '4D', '5D', '6D', '7D', '8D', '9D', 'TD',
+			'JD', 'QD', 'KD');
+		newDeck.push('AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', 'TS',
+			'JS', 'QS', 'KS');
+	}
+	return newDeck;
+};
+
+dealer.shuffleDeck = function (array) {
+	var currentIndex = array.length,
+		temporaryValue, randomIndex;
+
+	// While there remain elements to shuffle...
+	while (0 !== currentIndex) {
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+
+	return array;
+};
+
+dealer.dealCardTo = function (player, numberOfCards) {
+	for (var x = 0; x < numberOfCards; x++) {
+		player.push(cardDeck.pop());
+	}
+};
+
+// ***
+
+
+// Player object
 var player = {};
 player.name = '';
 player.bank = 100;
@@ -52,85 +127,26 @@ player.hand.addCard = function (card) {
 	}
 };
 
-function createDeck(numberOfDecks) {
-	var newDeck = [];
-	for (var x = 0; x < numberOfDecks; x++) {
-		newDeck.push('AC', '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', 'TC',
-			'JC', 'QC', 'KC');
-		newDeck.push('AH', '2H', '3H', '4H', '5H', '6H', '7H', '8H', '9H', 'TH',
-			'JH', 'QH', 'KH');
-		newDeck.push('AD', '2D', '3D', '4D', '5D', '6D', '7D', '8D', '9D', 'TD',
-			'JD', 'QD', 'KD');
-		newDeck.push('AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', 'TS',
-			'JS', 'QS', 'KS');
-	}
-	return newDeck;
-}
+// ***
 
-function shuffle(array) {
-	var currentIndex = array.length,
-		temporaryValue, randomIndex;
 
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-		// Pick a remaining element...
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
 
-		// And swap it with the current element.
-		temporaryValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = temporaryValue;
-	}
-
-	return array;
-}
-
-function getValue(cards) {
-	var value = 0;
-	var numAces = 0;
-
-	// Check through cards and assign value
-	for (var x = 0; x < cards.length; x++) {
-		if (isNaN(Number(cards[x][0]))) { // Check for  A, K, Q, J or T
-			if (cards[x][0] === 'A') { // If A..
-				value += 11;
-				++numAces;
-			} else { // If K, Q, J or T
-				value += 10;
-			}
-		} else { // If 1, 2, 3, 4, 5, 6, 7, 8, 9
-			value += Number(cards[x][0]);
-		}
-	}
-
-	// If we have any Aces count down their value from 11 to 1 if total value is over 21
-	while (numAces !== 0 && value > 21) {
-		value -= 10;
-		--numAces;
-	}
-
-	return value;
-}
-
-function dealCardTo(player, numberOfCards) {
-	for (var x = 0; x < numberOfCards; x++) {
-		player.push(cardDeck.pop());
-	}
-}
+/**********************
+ * Gameflow functions *
+ **********************/
 
 function prepareDeck() {
 
-	// Ta fyra kortlekar och blanda dem
-	cardDeck = createDeck(4);
-	shuffle(cardDeck);
+	// Take four decks and shuffle them
+	cardDeck = dealer.getDeck(4);
+	dealer.shuffleDeck(cardDeck);
 }
 
 function dealBeginningHand() {
 
-	// Huset och spelaren drar två kort
-	dealCardTo(playerCards, 2);
-	dealCardTo(computerCards, 2);
+	// House and player gets two cards each.
+	dealer.dealCardTo(playerCards, 2);
+	dealer.dealCardTo(computerCards, 2);
 }
 
 
@@ -145,7 +161,7 @@ function printHands() {
 
 	// Skriv ut korten
 	console.log('your cards: ' + printMessage + '\n Total value: ' +
-		getValue(playerCards));
+		dealer.getCardValue(playerCards));
 	console.log('computers cards: ' + computerCards[0]);
 }
 
@@ -179,34 +195,29 @@ function playRound() {
 	var choice = getChoice();
 
 	if (choice === 'hit') {
-		dealCardTo(playerCards, 1);
+		dealer.dealCardTo(playerCards, 1);
 		printHands();
 	} else if (choice === 'stand') {
 		GAME_OVER = true;
 	}
 }
 
+// ***
 
 
-//________/ Start Game \___________
+
+/**************
+ * Start Game *
+ *************/
+
 prepareDeck();
 dealBeginningHand();
 printHands();
 
 while (!GAME_OVER) {
-	if (getValue(playerCards) === 21) {
+	if (dealer.getCardValue(playerCards) === 21) {
 		console.log('Congratulations you have BlackJack!');
 		GAME_OVER = true;
 	}
 	playRound();
 }
-
-
-// getCard() test
-// while(playerTotalValue < 10000) {
-// 	var x = getCard();
-// 	if(x > 14) {
-// 		console.log('x is too big');
-// 	}
-// 	playerTotalValue += x;
-// 	console.log(getCard());
