@@ -21,6 +21,7 @@
   "globals": {
       "console": false,
       "prompt": false,
+      "alert": false,
       "_": false
   }
 }

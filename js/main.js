@@ -25,64 +25,74 @@ var Game = function (dealerName, playerName) {
 
 	};
 
-	this.playRound = function () {
+	this.playerRound = function () {
+		var roundOver = false;
+		var message = '';
+		var focusMessage = '';
+		var choice;
 
-		// Hit or Stand
-		var choice = this.getChoice(this.getGameStatus());
+		// If round is not over
+		while (!roundOver) {
 
-		if (choice === 'hit') {
-			this.dealer.dealCardTo(this.player.hand, 1);
-
+			// Check if player is Bust or has BlackJack
 			if (this.player.hand.totalValue === 21) {
-				console.log('Congratulations, you have BlackJack!');
-				this.gameOver = true;
+				focusMessage = 'BlackJack!';
+				roundOver = true;
 			} else if (this.player.hand.totalValue > 21) {
-				console.log('You went over 21 and busted!');
-				this.gameOver = true;
+				focusMessage = 'Bust!';
+				roundOver = true;
 			}
 
-		} else if (choice === 'stand') {
-			this.gameOver = true;
+			message = this.getGameStatusMessage(focusMessage);
+			focusMessage = '';
+
+			// If this is not the last round
+			if (!roundOver) { // Prompt the player and let him hit or stand
+				choice = this.checkChoice(prompt(message + '\n\na: Hit\nb: Stand'));
+				if (choice === 'hit') {
+					this.dealer.dealCardTo(this.player.hand, 1);
+				} else if (choice === 'stand') {
+					roundOver = true;
+				} else if (choice === 0) {
+					focusMessage = 'Incorrect input!';
+				}
+			} else { // Else just display an alert with info
+				alert(message);
+			}
 		}
 	};
 
 
-	// Print all player cards and one dealer card
-	this.getGameStatus = function () {
+	// Creates and returns string with game status
+	this.getGameStatusMessage = function (focusMessage) {
 		var playerCards = '';
 		var gameStatus = '';
 
 		// Add the players card to playerCards
 		for (var i = 0; i < this.player.hand.cards.length; i++) {
-			playerCards += this.player.hand.cards[i] + ' ';
+			playerCards += this.player.hand.cards[i] + ' | ';
 		}
 
-		// Add cards to gameStatus
-		gameStatus += 'Your cards: ' + playerCards + '\nValue: ' +
+		// Add cards and special alert to message
+		gameStatus += 'Your cards: | ' + playerCards + '\nValue: ' +
 			this.player.hand.totalValue + '\n';
-		gameStatus += 'Dealer cards: ' + this.dealer.hand.cards[0];
+		gameStatus += 'Dealer cards: ' + this.dealer.hand.cards[0] + '\n\n';
+		gameStatus += '- - - - - - - - - - - -' + '\n';
+		gameStatus += '| ' + focusMessage + ' |' + '\n';
+		gameStatus += '- - - - - - - - - - - -' + '\n';
 
 		return gameStatus;
 	};
 
-
-	this.getChoice = function (gameStatus) {
-		var choice;
-		var choiceMessage = gameStatus;
-		choiceMessage += '\n\na: Hit\nb: Stand'; // Default message to get choice
-
-		// Lets player choose to hit or stand
-		for (;;) {
-			choice = prompt(choiceMessage).toLowerCase().trim();
-			if (choice === 'a') {
-				return 'hit';
-			} else if (choice === 'b') {
-				return 'stand';
-			}
-
-			// If we get wrong input change message to let player know.
-			choiceMessage += '\n\nIncorrect input!\nPlease enter \'a\' or \'b\'\n\n' +
-				'a: Hit\nb: Stand';
+	// Trims and checks user choice, returns 0 if choice is invalid
+	this.checkChoice = function (choice) {
+		var trimmedChoice = choice.toLowerCase().trim();
+		if (trimmedChoice === 'a') {
+			return 'hit';
+		} else if (trimmedChoice === 'b') {
+			return 'stand';
+		} else {
+			return 0;
 		}
 	};
 };
@@ -206,11 +216,13 @@ var Player = function (name) {
  *************/
 var myGame = new Game('Joe the Dealer', 'Jitan');
 myGame.startGame();
+myGame.playerRound();
+myGame.dealerRound();
 
-while (!myGame.gameOver) {
-	// if (myGame.dealer.getCardValue(this.player.hand.cards) === 21) {
-	// 	console.log('Congratulations you have BlackJack!');
-	// 	GAME_OVER = true;
-	// }
-	myGame.playRound();
-}
+// while (!myGame.gameOver) {
+// 	// if (myGame.dealer.getCardValue(this.player.hand.cards) === 21) {
+// 	// 	console.log('Congratulations you have BlackJack!');
+// 	// 	GAME_OVER = true;
+// 	// }
+// 	myGame.playerRound();
+// }
