@@ -148,7 +148,7 @@ var Dealer = function (name) {
 	};
 	// Draw cards until the outcome of BlackJack can be determined.
 	this.drawAbove = function (playerHandValue) {
-		if (this.hand.totalValue === 21 || playerHandValue === 0) {
+		if (this.hand.totalValue === 21 || playerHandValue === 0) { // playerHandValue === 0 happens if all players have busted
 			return;
 		}
 		// If the player hand value is less than 17, try to draw above 17 anyway.
