@@ -28,10 +28,19 @@ var Game = function (dealerName, playerName) {
 	this.playRound = function () {
 
 		// Hit or Stand
-		var choice = this.getChoice();
+		var choice = this.getChoice(this.getGameStatus());
 
 		if (choice === 'hit') {
 			this.dealer.dealCardTo(this.player.hand, 1);
+
+			if (this.player.hand.totalValue === 21) {
+				console.log('Congratulations, you have BlackJack!');
+				this.gameOver = true;
+			} else if (this.player.hand.totalValue > 21) {
+				console.log('You went over 21 and busted!');
+				this.gameOver = true;
+			}
+
 		} else if (choice === 'stand') {
 			this.gameOver = true;
 		}
@@ -39,38 +48,40 @@ var Game = function (dealerName, playerName) {
 
 
 	// Print all player cards and one dealer card
-	this.printHands = function () {
-		var printMessage = '';
+	this.getGameStatus = function () {
+		var playerCards = '';
+		var gameStatus = '';
 
-		// Add the players card to printMessage
+		// Add the players card to playerCards
 		for (var i = 0; i < this.player.hand.cards.length; i++) {
-			printMessage += this.player.hand.cards[i] + ' ';
+			playerCards += this.player.hand.cards[i] + ' ';
 		}
 
-		// Skriv ut korten
-		console.log('your cards: ' + printMessage + '\n Total totalValue: ' +
-			this.player.hand.totalValue);
-		console.log('dealer cards: ' + this.dealer.hand[0]);
+		// Add cards to gameStatus
+		gameStatus += 'Your cards: ' + playerCards + '\nValue: ' +
+			this.player.hand.totalValue + '\n';
+		gameStatus += 'Dealer cards: ' + this.dealer.hand.cards[0];
+
+		return gameStatus;
 	};
 
 
-	this.getChoice = function () {
+	this.getChoice = function (gameStatus) {
 		var choice;
-		var choiceMessage = 'a: Hit\nb: Stand'; // Default message to get choice
+		var choiceMessage = gameStatus;
+		choiceMessage += '\n\na: Hit\nb: Stand'; // Default message to get choice
 
 		// Lets player choose to hit or stand
 		for (;;) {
 			choice = prompt(choiceMessage).toLowerCase().trim();
 			if (choice === 'a') {
-				console.log('You have been hit');
 				return 'hit';
 			} else if (choice === 'b') {
-				console.log('You have been stood up');
 				return 'stand';
 			}
 
 			// If we get wrong input change message to let player know.
-			choiceMessage = 'Incorrect input!\nPlease enter \'a\' or \'b\'\n\n' +
+			choiceMessage += '\n\nIncorrect input!\nPlease enter \'a\' or \'b\'\n\n' +
 				'a: Hit\nb: Stand';
 		}
 	};
@@ -121,7 +132,6 @@ var Dealer = function (name) {
 		// Take four decks and shuffle them
 		this.deck = this.getDeck(4);
 		this.shuffleDeck(this.deck);
-		console.log('prepareDeck has run');
 	};
 
 	this.dealCardTo = function (hand, numberOfCards) {
@@ -135,7 +145,6 @@ var Dealer = function (name) {
 		// House and player gets two cards each.
 		this.dealCardTo(player.hand, 2);
 		this.dealCardTo(this.hand, 2);
-		console.log('dealBeginningHand has run');
 	};
 };
 
@@ -144,19 +153,15 @@ var Dealer = function (name) {
 
 
 // Hand Object Constructor 
-var Hand = function (parentThis) {
+var Hand = function () {
 	this.cards = [];
 	this.numberOfAces = 0;
 	this.totalValue = 0;
-	this.parentThis = parentThis;
 
 	this.addCard = function (card) {
 		var cardValue = this.getCardValue(card);
-		console.log('adding card: ' + card + ' - value: ' + cardValue);
 		this.cards.push(card);
 		this.totalValue += cardValue;
-		console.log('totalValue is now: ' + this.totalValue);
-
 
 		// if (cardValue === 11) { // if the card that was added is an ace
 		// 	console.log('adding 11');
@@ -201,7 +206,6 @@ var Player = function (name) {
  *************/
 var myGame = new Game('Joe the Dealer', 'Jitan');
 myGame.startGame();
-// myGame.printHands();
 
 while (!myGame.gameOver) {
 	// if (myGame.dealer.getCardValue(this.player.hand.cards) === 21) {
