@@ -160,13 +160,32 @@ var Dealer = function (name) {
 			if (this.hand.totalValue > 20) {
 				return;
 			}
-			this.hand.addCard(this.deck.pop());
+			var drawnCard = this.deck.pop();
+			console.log('The house drew ' + drawnCard);
+			this.hand.addCard(drawnCard);
 		}
+	};
+	this.getMostValuableHand = function (playerArray) {
+		var mostValuableHand = 0;
+		for (var i = 0; i < playerArray.length; i++) {
+			var handValue = playerArray[i].hand.totalValue;
+			if (handValue > mostValuableHand && handValue < 22) {
+				mostValuableHand = handValue;
+			}
+		}
+		return mostValuableHand;
 	};
 	this.declareWinner = function (playerArray) {
 		// Determine the winner(s).
-		var winningHandValue = this.hand.totalValue; // initialized with the house as the winner.
-		var winners = [this];
+		var winningHandValue = 0;
+		var winners = [];
+
+		if (this.hand.totalValue < 22) {
+			// initialized with the house as the winner.
+			winningHandValue = this.hand.totalValue;
+			winners = [this];
+		}
+
 		for (var i = 0; i < playerArray.length; i++) {
 			var handValue = playerArray[i].hand.totalValue;
 			if (handValue > winningHandValue && handValue < 22) {
@@ -182,13 +201,13 @@ var Dealer = function (name) {
 		if (winners.length > 1) {
 			message = 'The players: \n';
 			for (var x = 0; x < winners.length; x++) {
-				message = message + winners[x] + '\n';
+				message = message + winners[x].name + '\n';
 			}
 			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
 		} else {
 			message = winners[0].name + ' won with ' + winningHandValue + '!';
 		}
-		console.log(message);
+		console.log(message + '\n');
 	};
 };
 
@@ -258,3 +277,6 @@ while (!myGame.gameOver) {
 	// }
 	myGame.playRound();
 }
+var dealer = myGame.dealer;
+dealer.drawAbove(dealer.getMostValuableHand([myGame.player])); // attempt to draw above the player with the most valuable hand.
+dealer.declareWinner([myGame.player]);
