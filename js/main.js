@@ -146,6 +146,50 @@ var Dealer = function (name) {
 		this.dealCardTo(player.hand, 2);
 		this.dealCardTo(this.hand, 2);
 	};
+	// Draw cards until the outcome of BlackJack can be determined.
+	this.drawAbove = function (playerHandValue) {
+		if (this.hand.totalValue === 21) {
+			return;
+		}
+		// If the player hand value is less than 17, try to draw above 17 anyway.
+		if (playerHandValue < 17) {
+			playerHandValue = 17;
+		}
+		// Draw cards until the player hand value had been matched or exceeded.
+		while (this.hand.totalValue < playerHandValue) {
+			if (this.hand.totalValue > 20) {
+				return;
+			}
+			this.hand.addCard(this.deck.pop());
+		}
+	};
+	this.declareWinner = function (playerArray) {
+		// Determine the winner(s).
+		var winningHandValue = this.hand.totalValue; // initialized with the house as the winner.
+		var winners = [this];
+		for (var i = 0; i < playerArray.length; i++) {
+			var handValue = playerArray[i].hand.totalValue;
+			if (handValue > winningHandValue && handValue < 22) {
+				winningHandValue = handValue;
+				winners = []; //empty the array
+				winners.push(playerArray[i]);
+			} else if (handValue === winningHandValue) {
+				winners.push(playerArray[i]);
+			}
+		}
+		// Print out the winner(s).
+		var message = '';
+		if (winners.length > 1) {
+			message = 'The players: \n';
+			for (var x = 0; x < winners.length; x++) {
+				message = message + winners[x] + '\n';
+			}
+			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
+		} else {
+			message = winners[0].name + ' won with ' + winningHandValue + '!';
+		}
+		console.log(message);
+	};
 };
 
 // ***
