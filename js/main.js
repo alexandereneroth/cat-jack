@@ -156,6 +156,69 @@ var Dealer = function (name) {
 		this.dealCardTo(player.hand, 2);
 		this.dealCardTo(this.hand, 2);
 	};
+	// Draw cards until the outcome of BlackJack can be determined.
+	this.drawAbove = function (playerHandValue) {
+		if (this.hand.totalValue === 21 || playerHandValue === 0) { // playerHandValue === 0 happens if all players have busted
+			return;
+		}
+		// If the player hand value is less than 17, try to draw above 17 anyway.
+		if (playerHandValue < 17) {
+			playerHandValue = 17;
+		}
+		// Draw cards until the player hand value had been matched or exceeded.
+		while (this.hand.totalValue < playerHandValue) {
+			if (this.hand.totalValue > 20) {
+				return;
+			}
+			var drawnCard = this.deck.pop();
+			console.log('The house drew ' + drawnCard);
+			this.hand.addCard(drawnCard);
+		}
+	};
+	this.getMostValuableHand = function (playerArray) {
+		var mostValuableHand = 0;
+		for (var i = 0; i < playerArray.length; i++) {
+			var handValue = playerArray[i].hand.totalValue;
+			if (handValue > mostValuableHand && handValue < 22) {
+				mostValuableHand = handValue;
+			}
+		}
+		return mostValuableHand;
+	};
+	this.declareWinner = function (playerArray) {
+		// Determine the winner(s).
+		var winningHandValue = 0;
+		var winners = [];
+
+		if (this.hand.totalValue < 22) {
+			// initialized with the house as the winner.
+			winningHandValue = this.hand.totalValue;
+			winners = [this];
+		}
+
+		for (var i = 0; i < playerArray.length; i++) {
+			var handValue = playerArray[i].hand.totalValue;
+			if (handValue > winningHandValue && handValue < 22) {
+				winningHandValue = handValue;
+				winners = []; //empty the array
+				winners.push(playerArray[i]);
+			} else if (handValue === winningHandValue) {
+				winners.push(playerArray[i]);
+			}
+		}
+		// Print out the winner(s).
+		var message = '';
+		if (winners.length > 1) {
+			message = 'The players: \n';
+			for (var x = 0; x < winners.length; x++) {
+				message = message + winners[x].name + '\n';
+			}
+			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
+		} else {
+			message = winners[0].name + ' won with ' + winningHandValue + '!';
+		}
+		console.log(message + '\n');
+	};
 };
 
 // ***
@@ -216,6 +279,7 @@ var Player = function (name) {
  *************/
 var myGame = new Game('Joe the Dealer', 'Jitan');
 myGame.startGame();
+<<<<<<< HEAD
 myGame.playerRound();
 myGame.dealerRound();
 
@@ -226,3 +290,16 @@ myGame.dealerRound();
 // 	// }
 // 	myGame.playerRound();
 // }
+=======
+
+while (!myGame.gameOver) {
+	// if (myGame.dealer.getCardValue(this.player.hand.cards) === 21) {
+	// 	console.log('Congratulations you have BlackJack!');
+	// 	GAME_OVER = true;
+	// }
+	myGame.playRound();
+}
+var dealer = myGame.dealer;
+dealer.drawAbove(dealer.getMostValuableHand([myGame.player])); // attempt to draw above the player with the most valuable hand.
+dealer.declareWinner([myGame.player]);
+>>>>>>> dealerDrawAbove
