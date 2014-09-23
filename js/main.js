@@ -1,12 +1,5 @@
 'use strict';
 
-/********************
- * Global Variables *
- *******************/
-
-// ***
-
-
 
 /***********
  * Objects *
@@ -62,10 +55,16 @@ var Game = function (dealerName, playerName) {
 		}
 	};
 
+	this.dealerRound = function () {
+		// attempt to draw above the player with the most valuable hand.
+		this.dealer.drawAbove(this.dealer.getMostValuableHand([this.player]));
+		this.dealer.declareWinner([this.player]);
+	};
 
 	// Creates and returns string with game status
 	this.getGameStatusMessage = function (focusMessage) {
 		var playerCards = '';
+		var dealerCards = '';
 		var gameStatus = '';
 
 		// Add the players card to playerCards
@@ -236,16 +235,16 @@ var Hand = function () {
 		this.cards.push(card);
 		this.totalValue += cardValue;
 
-		// if (cardValue === 11) { // if the card that was added is an ace
-		// 	console.log('adding 11');
-		// 	this.numberOfAces++;
-		// }
-		// if (this.totalValue > 21) { // if the value of the hand is over 21
-		// 	if (this.numberOfAces > 0) { // and there are aces in the hand
-		// 		this.totalValue -= 10; // change the value of an ace to 1
-		// 		this.numberOfAces--;
-		// 	}
-		// }
+		if (cardValue === 11) { // if the card that was added is an ace
+			console.log('adding 11');
+			this.numberOfAces++;
+		}
+		if (this.totalValue > 21) { // if the value of the hand is over 21
+			if (this.numberOfAces > 0) { // and there are aces in the hand
+				this.totalValue -= 10; // change the value of an ace to 1
+				this.numberOfAces--;
+			}
+		}
 	};
 
 	this.getCardValue = function (card) {
@@ -259,7 +258,7 @@ var Hand = function () {
 		} else { // If 1, 2, 3, 4, 5, 6, 7, 8, 9
 			cardValue = Number(card[0]);
 		}
-		return cardValue;
+		return cardValue
 	};
 };
 
@@ -279,27 +278,5 @@ var Player = function (name) {
  *************/
 var myGame = new Game('Joe the Dealer', 'Jitan');
 myGame.startGame();
-<<<<<<< HEAD
 myGame.playerRound();
 myGame.dealerRound();
-
-// while (!myGame.gameOver) {
-// 	// if (myGame.dealer.getCardValue(this.player.hand.cards) === 21) {
-// 	// 	console.log('Congratulations you have BlackJack!');
-// 	// 	GAME_OVER = true;
-// 	// }
-// 	myGame.playerRound();
-// }
-=======
-
-while (!myGame.gameOver) {
-	// if (myGame.dealer.getCardValue(this.player.hand.cards) === 21) {
-	// 	console.log('Congratulations you have BlackJack!');
-	// 	GAME_OVER = true;
-	// }
-	myGame.playRound();
-}
-var dealer = myGame.dealer;
-dealer.drawAbove(dealer.getMostValuableHand([myGame.player])); // attempt to draw above the player with the most valuable hand.
-dealer.declareWinner([myGame.player]);
->>>>>>> dealerDrawAbove
