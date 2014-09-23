@@ -10,6 +10,7 @@ var game = {
 		game.dealer.dealFirstHand(game.player);
 		game.playerRound();
 		game.dealerRound();
+		game.dealer.declareWinner([game.player]);
 	},
 
 	playerRound: function () {
