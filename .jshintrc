@@ -21,6 +21,8 @@
   "globals": {
       "console": false,
       "prompt": false,
+      "alert": false,
+      "game": false,
       "_": false
   }
 }
