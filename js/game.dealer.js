@@ -61,70 +61,59 @@ game.createDealer = function (dealerName) {
 
 
 	// Draw cards until the outcome of BlackJack can be determined.
-	that.drawAbove = function (playerHandValue) {
-		if (hand.totalValue === 21 || playerHandValue === 0) { // playerHandValue === 0 happens if all players have busted
+	that.playRound = function () {
+		if (hand.getTotalValue() === 21) {
 			return;
 		}
-		// If the player hand value is less than 17, try to draw above 17 anyway.
-		if (playerHandValue < 17) {
-			playerHandValue = 17;
-		}
 		// Draw cards until the player hand value had been matched or exceeded.
-		while (hand.totalValue < playerHandValue) {
-			if (hand.totalValue > 20) {
+		while (hand.getTotalValue() < 17) {
+			if (hand.getTotalValue() > 20) {
 				return;
 			}
-			var drawnCard = this.deck.pop();
+			var drawnCard = deck.pop();
 			console.log('The house drew ' + drawnCard);
-			this.hand.addCard(drawnCard);
+			hand.addCard(drawnCard);
 		}
+		alert(game.getGameStatusMessage(hand));
 	};
-	that.getMostValuableHand = function (playerArray) {
-		var mostValuableHand = 0;
-		for (var i = 0; i < playerArray.length; i++) {
-			var handValue = playerArray[i].hand.totalValue;
-			if (handValue > mostValuableHand && handValue < 22) {
-				mostValuableHand = handValue;
-			}
-		}
-		return mostValuableHand;
-	};
+
+
 
 	// TODO
-	that.declareWinner = function (playerArray) {
-		// Determine the winner(s).
-		var winningHandValue = 0;
-		var winners = [];
+	// that.declareWinner = function (playerArray) {
+	// 	// Determine the winner(s).
+	// 	var winningHandValue = 0;
+	// 	var winners = [];
 
-		if (hand.totalValue < 22) {
-			// initialized with the house as the winner.
-			winningHandValue = hand.totalValue;
-			winners = [name];
-		}
+	// 	if (hand.getTotalValue() < 22) {
+	// 		// initialized with the house as the winner.
+	// 		winningHandValue = hand.getTotalValue();
+	// 		winners = [name];
+	// 	}
 
-		for (var i = 0; i < playerArray.length; i++) {
-			var handValue = playerArray[i].hand.totalValue;
-			if (handValue > winningHandValue && handValue < 22) {
-				winningHandValue = handValue;
-				winners = []; //empty the array
-				winners.push(playerArray[i].getName());
-			} else if (handValue === winningHandValue) {
-				winners.push(playerArray[i].getName());
-			}
-		}
-		// Print out the winner(s).
-		var message = '';
-		if (winners.length > 1) {
-			message = 'The players: \n';
-			for (var x = 0; x < winners.length; x++) {
-				message = message + winners[x].name + '\n';
-			}
-			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
-		} else {
-			message = winners[0].name + ' won with ' + winningHandValue + '!';
-		}
-		console.log(message + '\n');
-	};
+	// 	for (var i = 0; i < playerArray.length; i++) {
+	// 		var handValue = playerArray[i].hand.getTotalValue();
+	// 		if (handValue > winningHandValue && handValue < 22) {
+	// 			winningHandValue = handValue;
+	// 			winners = []; //empty the array
+	// 			winners.push(playerArray[i].getName());
+	// 		} else if (handValue === winningHandValue) {
+	// 			winners.push(playerArray[i].getName());
+	// 		}
+	// 	}
+	// 	// Print out the winner(s).
+	// 	var message = '';
+	// 	if (winners.length > 1) {
+	// 		message = 'The players: \n';
+	// 		for (var x = 0; x < winners.length; x++) {
+	// 			message = message + winners[x].name + '\n';
+	// 		}
+	// 		message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
+	// 	} else {
+	// 		message = winners[0].name + ' won with ' + winningHandValue + '!';
+	// 	}
+	// 	console.log(message + '\n');
+	// };
 
 	that.getHand = function () {
 		return hand;

@@ -43,5 +43,15 @@ game.createHand = function () {
 		return cards;
 	};
 
+	that.getCardString = function () {
+		var cardString = '| ';
+
+		// Add the hands card to playerCards
+		for (var i = 0; i < cards.length; i++) {
+			cardString += cards[i] + ' | ';
+		}
+		return cardString;
+	};
+
 	return that;
 };

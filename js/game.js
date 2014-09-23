@@ -8,6 +8,8 @@ var game = {
 	startGame: function () {
 		game.dealer.prepareDeck();
 		game.dealer.dealFirstHand(game.player);
+		game.playerRound();
+		game.dealerRound();
 	},
 
 	playerRound: function () {
@@ -49,26 +51,17 @@ var game = {
 	},
 
 	dealerRound: function () {
-		// attempt to draw above the player with the most valuable hand.
-		game.dealer.drawAbove(game.dealer.getMostValuableHand([game.player]));
-		game.dealer.declareWinner([game.player]);
+		game.dealer.playRound();
 	},
 
 	// Creates and returns string with game status
 	getGameStatusMessage: function (focusMessage) {
-		var playerCards = '';
-		// var dealerCards = '';
 		var gameStatus = '';
-
-		// Add the players card to playerCards
-		for (var i = 0; i < game.player.getHand().getCards().length; i++) {
-			playerCards += game.player.getHand().getCards()[i] + ' | ';
-		}
-
 		// Add cards and special alert to message
-		gameStatus += 'Your cards: | ' + playerCards + '\nValue: ' +
+		gameStatus += 'Your cards: ' + game.player.getHand().getCardString() + '\nValue: ' +
 			game.player.getHand().getTotalValue() + '\n';
-		gameStatus += 'Dealer cards: ' + game.dealer.getHand().getCards()[0] + '\n\n';
+		gameStatus += 'Dealer cards: ' + game.dealer.getHand().getCardString() + '\nValue: ' +
+			game.dealer.getHand().getTotalValue() + '\n\n';
 		gameStatus += '- - - - - - - - - - - -' + '\n';
 		gameStatus += '| ' + focusMessage + ' |' + '\n';
 		gameStatus += '- - - - - - - - - - - -' + '\n';
