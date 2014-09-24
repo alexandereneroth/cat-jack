@@ -4,13 +4,13 @@ game.getCard = function (rank, suit) {
 
 	function getSuitSymbol() {
 		if (suit === 'H') {
-			return 'v';
+			return '\u2665';
 		} else if (suit === 'S') {
-			return '^';
+			return '\u2660';
 		} else if (suit === 'C') {
-			return '&';
+			return '\u2663';
 		} else if (suit === 'D') {
-			return 'o';
+			return '\u2666';
 		} else {
 			throw 'invalid suit identifier';
 		}
@@ -19,39 +19,41 @@ game.getCard = function (rank, suit) {
 	that.id = rank + suit;
 	that.rank = rank;
 	that.suit = suit;
+	that.picture = [
+		' _____ ',
+		'|' + (rank !== 'T' ? rank + ' ' : '10') + '   |',
+		'|     |',
+		'|  ' + getSuitSymbol() + '  |',
+		'|     |',
+		'|___' + (rank !== 'T' ? '_' + rank : '10') + '|'
+	];
 
-	that.picture = ' _____ 
-|' + rank + '    |
-|     |
-|  ' + getSuitSymbol() + '  |
-|     |
-|____' + rank + '|';
-
+	return that;
 };
 
 game.getDeck = function () {
 	var that = {};
 	that.cards = [
-		game.getCard('2', 'heart'), game.getCard('3', 'heart'), game.getCard('4', 'heart'),
-		game.getCard('5', 'heart'), game.getCard('6', 'heart'), game.getCard('7', 'heart'),
-		game.getCard('8', 'heart'), game.getCard('9', 'heart'), game.getCard('T', 'heart'),
-		game.getCard('J', 'heart'), game.getCard('K', 'heart'), game.getCard('Q', 'heart'),
-		game.getCard('A', 'heart'),
-		game.getCard('2', 'spade'), game.getCard('3', 'spade'), game.getCard('4', 'spade'),
-		game.getCard('5', 'spade'), game.getCard('6', 'spade'), game.getCard('7', 'spade'),
-		game.getCard('8', 'spade'), game.getCard('9', 'spade'), game.getCard('T', 'spade'),
-		game.getCard('J', 'spade'), game.getCard('K', 'spade'), game.getCard('Q', 'spade'),
-		game.getCard('A', 'spade'),
-		game.getCard('2', 'club'), game.getCard('3', 'club'), game.getCard('4', 'club'),
-		game.getCard('5', 'club'), game.getCard('6', 'club'), game.getCard('7', 'club'),
-		game.getCard('8', 'club'), game.getCard('9', 'club'), game.getCard('T', 'club'),
-		game.getCard('J', 'club'), game.getCard('K', 'club'), game.getCard('Q', 'club'),
-		game.getCard('A', 'club'),
-		game.getCard('2', 'diamond'), game.getCard('3', 'diamond'), game.getCard('4', 'diamond'),
-		game.getCard('5', 'diamond'), game.getCard('6', 'diamond'), game.getCard('7', 'diamond'),
-		game.getCard('8', 'diamond'), game.getCard('9', 'diamond'), game.getCard('T', 'diamond'),
-		game.getCard('J', 'diamond'), game.getCard('K', 'diamond'), game.getCard('Q', 'diamond'),
-		game.getCard('A', 'diamond')
+		game.getCard('2', 'H'), game.getCard('3', 'H'), game.getCard('4', 'H'),
+		game.getCard('5', 'H'), game.getCard('6', 'H'), game.getCard('7', 'H'),
+		game.getCard('8', 'H'), game.getCard('9', 'H'), game.getCard('T', 'H'),
+		game.getCard('J', 'H'), game.getCard('K', 'H'), game.getCard('Q', 'H'),
+		game.getCard('A', 'H'),
+		game.getCard('2', 'S'), game.getCard('3', 'S'), game.getCard('4', 'S'),
+		game.getCard('5', 'S'), game.getCard('6', 'S'), game.getCard('7', 'S'),
+		game.getCard('8', 'S'), game.getCard('9', 'S'), game.getCard('T', 'S'),
+		game.getCard('J', 'S'), game.getCard('K', 'S'), game.getCard('Q', 'S'),
+		game.getCard('A', 'S'),
+		game.getCard('2', 'C'), game.getCard('3', 'C'), game.getCard('4', 'C'),
+		game.getCard('5', 'C'), game.getCard('6', 'C'), game.getCard('7', 'C'),
+		game.getCard('8', 'C'), game.getCard('9', 'C'), game.getCard('T', 'C'),
+		game.getCard('J', 'C'), game.getCard('K', 'C'), game.getCard('Q', 'C'),
+		game.getCard('A', 'C'),
+		game.getCard('2', 'D'), game.getCard('3', 'D'), game.getCard('4', 'D'),
+		game.getCard('5', 'D'), game.getCard('6', 'D'), game.getCard('7', 'D'),
+		game.getCard('8', 'D'), game.getCard('9', 'D'), game.getCard('T', 'D'),
+		game.getCard('J', 'D'), game.getCard('K', 'D'), game.getCard('Q', 'D'),
+		game.getCard('A', 'D')
 	];
 	return that;
 };
