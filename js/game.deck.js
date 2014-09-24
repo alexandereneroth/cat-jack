@@ -3,7 +3,7 @@ game.getDeck = function (numberOfDecks) {
 	var that = {};
 	that.cards = [];
 
-	that.pop = function () {
+	that.pop = function () { // exists so we can type deck.pop(), instead of deck.cards.pop()
 		return that.cards.pop();
 	};
 
