@@ -4,20 +4,34 @@ var game = {
 	dealer: {},
 	name: 'Twenty One BlackJack',
 	gameOver: false,
+	isDealerRound: false,
+	isFirstRound: true,
 
 	startGame: function () {
+		// Reset game round variables
+		game.isDealerRound = false;
+		game.isFirstRound = true;
+
+		// Main game function calls
 		game.dealer.prepareDeck();
 		game.dealer.dealFirstHand(game.player);
+		game.playerRound();
+		game.dealerRound();
+		game.dealer.declareWinner([game.player]);
 	},
 
 	playerRound: function () {
+		var isFirstRound = true;
 		var roundOver = false;
 		var message = '';
-		var focusMessage = '';
+		var focusMessage = 'Welcome to a new game of Twenty One BlackJack!';
 		var choice;
 
 		// If round is not over
 		while (!roundOver) {
+			if (isFirstRound) {
+
+			}
 
 			// Check if player is Bust or has BlackJack
 			var totValue = game.player.getHand().getTotalValue();
@@ -49,29 +63,41 @@ var game = {
 	},
 
 	dealerRound: function () {
-		// attempt to draw above the player with the most valuable hand.
-		game.dealer.drawAbove(game.dealer.getMostValuableHand([game.player]));
-		game.dealer.declareWinner([game.player]);
+		game.isDealerRound = true;
+		game.dealer.playRound();
 	},
 
 	// Creates and returns string with game status
 	getGameStatusMessage: function (focusMessage) {
-		var playerCards = '';
-		// var dealerCards = '';
 		var gameStatus = '';
+		var dealerHandString = '';
+		var dealerHand = game.dealer.getHand();
+		var totalValue = '';
 
-		// Add the players card to playerCards
-		for (var i = 0; i < game.player.getHand().getCards().length; i++) {
-			playerCards += game.player.getHand().getCards()[i] + ' | ';
+		// If it is the dealer round show all cards
+		if (game.isDealerRound) {
+			dealerHandString = dealerHand.getCardString();
+			totalValue = dealerHand.getTotalValue();
+		} else { // otherwise only the first one
+			dealerHandString = dealerHand.getCards()[0];
+			totalValue = dealerHand.getCardValue(dealerHand.getCards()[0]);
 		}
-
 		// Add cards and special alert to message
-		gameStatus += 'Your cards: | ' + playerCards + '\nValue: ' +
-			game.player.getHand().getTotalValue() + '\n';
-		gameStatus += 'Dealer cards: ' + game.dealer.getHand().getCards()[0] + '\n\n';
-		gameStatus += '- - - - - - - - - - - -' + '\n';
-		gameStatus += '| ' + focusMessage + ' |' + '\n';
-		gameStatus += '- - - - - - - - - - - -' + '\n';
+		gameStatus += game.dealer.getName() + '\'s hand:\n';
+		gameStatus += dealerHandString + '\nValue: ' +
+			totalValue + '\n\n';
+
+		gameStatus += '\n';
+
+		gameStatus += game.player.getName() + '\'s hand:\n';
+		gameStatus += game.player.getHand().getCardString() + '\nValue: ' +
+			game.player.getHand().getTotalValue() + '\n\n';
+
+		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
+		gameStatus += '\n';
+		gameStatus += focusMessage + '\n';
+		gameStatus += '\n';
+		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
 
 		return gameStatus;
 	},
