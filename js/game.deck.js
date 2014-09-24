@@ -27,6 +27,9 @@ game.getCard = function (rank, suit) {
 		'|     |',
 		'|___' + (rank !== 'T' ? '_' + rank : '10') + '|'
 	];
+	that.toString = function () {
+		return that.id;
+	}
 
 	return that;
 };
@@ -34,6 +37,10 @@ game.getCard = function (rank, suit) {
 game.getDecks = function (numberOfDecks) {
 	var that = {};
 	that.cards = [];
+
+	that.pop = function () {
+		return that.cards.pop();
+	};
 
 	for (var i = 0; i < numberOfDecks; ++i) {
 		that.cards.push(

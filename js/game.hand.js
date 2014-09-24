@@ -25,7 +25,8 @@ game.createHand = function () {
 		return totalValue;
 	};
 
-	that.getCardValue = function (card) {
+	that.getCardValue = function (cardObject) {
+		var card = cardObject.id;
 		var cardValue = 0;
 		if (isNaN(Number(card[0]))) {
 			if (card[0] === 'A') { // The card is an A.
