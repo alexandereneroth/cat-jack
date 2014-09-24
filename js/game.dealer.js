@@ -48,7 +48,7 @@ game.createDealer = function (dealerName) {
 	that.prepareDeck = function () {
 
 		// Take four decks and shuffle them
-		deck = game.getDecks(4);
+		deck = game.getDeck(4);
 		that.shuffleDeck(deck);
 	};
 
