@@ -33,7 +33,7 @@ game.createHand = function () {
 			} else { // The card is either a T, J, Q, K
 				cardValue = 10;
 			}
-		} else { // If 1, 2, 3, 4, 5, 6, 7, 8, 9
+		} else { // If 2, 3, 4, 5, 6, 7, 8, 9
 			cardValue = Number(card[0]);
 		}
 		return cardValue;

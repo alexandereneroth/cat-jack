@@ -5,6 +5,10 @@ game.createDealer = function (dealerName) {
 	var hand = game.createHand();
 	var deck = [];
 
+	that.getName = function () {
+		return name;
+	};
+
 	that.getDeck = function (numberOfDecks) {
 		var newDeck = [];
 		for (var x = 0; x < numberOfDecks; x++) {
@@ -63,6 +67,10 @@ game.createDealer = function (dealerName) {
 	// Draw cards until the outcome of BlackJack can be determined.
 	that.playRound = function () {
 		var drawnCard;
+
+		// Reveal hidden card before drawing
+		alert(game.getGameStatusMessage('Dealer reveals: ' + hand.getCards()[1]));
+
 		if (hand.getTotalValue() === 21) {
 			return;
 		}
@@ -72,11 +80,11 @@ game.createDealer = function (dealerName) {
 				return;
 			}
 			drawnCard = deck.pop();
-			console.log('The house drew ' + drawnCard);
 			hand.addCard(drawnCard);
+			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard));
 		}
-		alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard));
 	};
+
 
 	that.declareWinner = function (playerArray) {
 		// Determine the winner(s).
@@ -106,13 +114,13 @@ game.createDealer = function (dealerName) {
 		if (winners.length > 1) {
 			message = 'The players: \n';
 			for (var x = 0; x < winners.length; x++) {
-				message = message + winners[x].name + '\n';
+				message = message + winners[x] + '\n';
 			}
 			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
 		} else {
-			message = winners[0].name + ' won with ' + winningHandValue + '!';
+			message = winners[0] + ' won with ' + winningHandValue + '!';
 		}
-		console.log(message + '\n');
+		alert(game.getGameStatusMessage(message));
 	};
 
 	that.getHand = function () {
