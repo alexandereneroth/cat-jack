@@ -5,22 +5,6 @@ game.createHand = function () {
 		totalValue = 0,
 		that = {};
 
-	that.addCard = function (card) {
-		var cardValue = this.getCardValue(card);
-		cards.push(card);
-		totalValue += cardValue;
-
-		if (cardValue === 11) { // if the card that was added is an ace
-			numberOfAces++;
-		}
-		if (totalValue > 21) { // if the value of the hand is over 21
-			if (numberOfAces > 0) { // and there are aces in the hand
-				totalValue -= 10; // change the value of an ace to 1
-				numberOfAces--;
-			}
-		}
-	};
-
 	that.getTotalValue = function () {
 		return totalValue;
 	};
@@ -52,6 +36,39 @@ game.createHand = function () {
 			cardString += cards[i] + ' | ';
 		}
 		return cardString;
+	};
+
+	that.addCard = function (card) {
+		var cardValue = that.getCardValue(card);
+		cards.push(card);
+		totalValue += cardValue;
+
+		if (cardValue === 11) { // If the card that was added is an ace
+			numberOfAces++;
+		}
+		if (totalValue > 21) { // If the value of the hand is over 21
+			if (numberOfAces > 0) { // and there are aces in the hand
+				totalValue -= 10; // change the value of an ace to 1
+				numberOfAces--;
+			}
+		}
+	};
+
+	that.removeLastCard = function () {
+		var lastCardValue = that.getCardValue(cards.pop());
+
+		// If the last card was an ace
+		if (lastCardValue === 11) {
+			// and adding it without converting it to a 1 would have caused totalValue to go over 21
+			if (totalValue - 11 > 11) {
+				totalValue -= 1; // then the ace only added a value of 1 to totalValue, so remove 1
+			} else {
+				totalValue -= 11; // otherwise remove 11
+				numberOfAces--;
+			}
+		} else {
+			totalValue -= lastCardValue;
+		}
 	};
 
 	return that;
