@@ -101,7 +101,7 @@ game.getCard = function (rank, suit) {
 	];
 
 	// remove the method below? it is only used for testing purposes ATM
-	that.getPictureWithNewlines = function () {
+	that.getPicture = function () {
 		var pictureWithNewlines = '';
 		for (var i = 0; i < that.picture.length; ++i) {
 			pictureWithNewlines += that.picture[i] + '\n';

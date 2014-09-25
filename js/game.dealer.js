@@ -1,17 +1,25 @@
 'use strict';
 game.createDealer = function (dealerName) {
 	var that = {};
+	//    ______________________
+	//___/        PRIVATE       \___
 	var name = dealerName;
 	var hand = game.createHand();
-	var deck = [];
+	var deck = game.getDeck(1);
 
+	//    ______________________
+	//___/        PUBLIC        \___
 	that.getName = function () {
 		return name;
 	};
 
-	that.shuffleDeck = function (deck) {
+	that.setNumberOfCardDecks = function (numberOfDecks) {
+		deck = game.getDeck(4);
+	};
 
+	that.shuffleDeck = function () {
 		var cards = deck.cards;
+
 		var currentIndex = cards.length,
 			temporaryValue, randomIndex;
 
@@ -28,13 +36,6 @@ game.createDealer = function (dealerName) {
 		}
 
 		return cards;
-	};
-
-	that.prepareDeck = function () {
-
-		// Take four decks and shuffle them
-		deck = game.getDeck(4);
-		that.shuffleDeck(deck);
 	};
 
 	that.dealCardTo = function (hand, numberOfCards) {

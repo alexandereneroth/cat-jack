@@ -13,7 +13,9 @@ var game = {
 		game.isFirstRound = true;
 
 		// Main game function calls
-		game.dealer.prepareDeck();
+		game.dealer.setNumberOfCardDecks(4)
+		game.dealer.shuffleDeck();
+
 		game.dealer.dealFirstHand(game.player);
 		game.playerRound();
 		game.dealerRound();
@@ -56,8 +58,11 @@ var game = {
 				} else if (choice === 0) {
 					focusMessage = 'Incorrect input!';
 				} else if (choice === -1) {
-                    throw { name: 'Canceled game', message: 'User canceled game' };
-                }
+					throw {
+						name: 'Canceled game',
+						message: 'User canceled game'
+					};
+				}
 			} else { // Else just display an alert with info
 				alert(message);
 			}
@@ -81,9 +86,9 @@ var game = {
 			dealerHandString = dealerHand.getCardString();
 			totalValue = dealerHand.getTotalValue();
 		} else {
-		    // otherwise only the first one
-			dealerHandString = dealerHand.getCards()[0];
-			totalValue = dealerHand.getCardValue(dealerHand.getCards()[0]);
+			// otherwise only the first one
+			dealerHandString = dealerHand.getCards()[0].getPicture();
+			totalValue = dealerHand.getCards()[0].value;
 		}
 		// Add cards and special alert to message
 		gameStatus += game.dealer.getName() + '\'s hand:\n';
@@ -107,17 +112,17 @@ var game = {
 
 	// Trims and checks user choice, returns 0 if choice is invalid or -1 if user has canceled
 	checkChoice: function (choice) {
-        if (choice !== null) {
-		    choice = choice.toLowerCase().trim();
-        }
+		if (choice !== null) {
+			choice = choice.toLowerCase().trim();
+		}
 
 		if (choice === 'a') {
 			return 'hit';
 		} else if (choice === 'b') {
 			return 'stand';
 		} else if (choice === null) {
-            return -1;
-        } else {
+			return -1;
+		} else {
 			return 0;
 		}
 	}
