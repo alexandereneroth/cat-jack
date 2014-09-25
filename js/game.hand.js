@@ -54,22 +54,5 @@ game.createHand = function () {
 		}
 	};
 
-	that.removeLastCard = function () {
-		var lastCardValue = that.getCardValue(cards.pop());
-
-		// If the last card was an ace
-		if (lastCardValue === 11) {
-			// and adding it without converting it to a 1 would have caused totalValue to go over 21
-			if (totalValue - 11 > 11) {
-				totalValue -= 1; // then the ace only added a value of 1 to totalValue, so remove 1
-			} else {
-				totalValue -= 11; // otherwise remove 11
-				numberOfAces--;
-			}
-		} else {
-			totalValue -= lastCardValue;
-		}
-	};
-
 	return that;
 };
