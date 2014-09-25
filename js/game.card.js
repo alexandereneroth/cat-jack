@@ -2,9 +2,8 @@
 game.getCard = function (rank, suit) {
 	var that = {};
 
-	//   ***************************
-	//  ***        PRIVATE        ***
-	// **********************************************
+	//    ______________________
+	//___/       PRIVATE        \___
 
 	// Returns the value of the card (in numbers)
 	function getValue() {
@@ -82,10 +81,8 @@ game.getCard = function (rank, suit) {
 
 		return row;
 	};
-
-	//   ***************************
-	//  ***        PUBLIC         ***
-	// **********************************************
+	//    ______________________
+	//___/        PUBLIC        \___
 
 	// Used when the old format for representing cards is needed 
 	// (2H,TC,AS,4D, etc)
@@ -100,9 +97,10 @@ game.getCard = function (rank, suit) {
 		'|         |',
 		'|         |',
 		getCardBottomRow(rank),
-		' \uFFE3\uFFE3\uFFE3 ' //code for the special character ¯. (FULLWIDTH MACRON)
+		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
-	// remove? it is only used for testing purposes atm
+
+	// remove the method below? it is only used for testing purposes ATM
 	that.getPictureWithNewlines = function () {
 		var pictureWithNewlines = '';
 		for (var i = 0; i < that.picture.length; ++i) {
@@ -110,6 +108,7 @@ game.getCard = function (rank, suit) {
 		}
 		return pictureWithNewlines;
 	};
+
 	that.toString = function () {
 		return that.id;
 	};
