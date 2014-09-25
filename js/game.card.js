@@ -16,15 +16,58 @@ game.getCard = function (rank, suit) {
 		}
 	};
 
+	function getCardTopRow(rank) {
+		var row = '';
+		row += '|';
+
+		if (rank === 'T') {
+			row += '10   ' + getSuitSymbol();
+		} else if (rank === 'J') {
+			row += ' ' + rank + '      ' + getSuitSymbol();
+
+		} else if (rank === 'J' && suit === 'S') {
+			row += ' ' + rank + '      ' + getSuitSymbol();
+		} else {
+			row += rank + '     ' + getSuitSymbol();
+		}
+
+		row += '|';
+
+		return row;
+	};
+
+	function getCardBottomRow(rank) {
+		var row = '';
+		row += '|';
+
+		if (rank === 'T') {
+			row += getSuitSymbol() + '   10';
+		} else if (rank === 'J') {
+			row += getSuitSymbol() + '      ' + rank + ' ';
+
+		} else if (rank === 'J' && suit === 'S') {
+			row += getSuitSymbol() + '      ' + rank + ' ';
+		} else {
+			row += getSuitSymbol() + '     ' + rank;
+		}
+
+		row += '|';
+
+		return row;
+	};
+
 	that.id = rank + suit; // Used when the old format for representing cards is needed (2H,TC,AS,4D, etc)
 	that.rank = rank;
 	that.suit = suit;
+
+	// Inline if statement, which is used to handle the special case of tens 
+	// ('10' instad of 'T' which also makes it two letters instad of one)
 	that.picture = [
 		' ______ ',
-		'|' + (rank !== 'T' ? rank + '     ' + getSuitSymbol() : '10   ' + getSuitSymbol()) + '|', // Inline if statement, which is used to handle the special case of tens ('10' instad of 'T' which also makes it two letters instad of one)
+		getCardTopRow(rank),
 		'|         |',
 		'|         |',
-		'|' + (rank !== 'T' ? getSuitSymbol() + '     ' + rank : getSuitSymbol() + '   10') + '|',
+		getCardBottomRow(rank),
 		' \uFFE3\uFFE3\uFFE3 '
 	];
 	that.getPictureWithNewlines = function () {
