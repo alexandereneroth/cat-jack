@@ -26,8 +26,26 @@ var game = {
 		var isFirstRound = true;
 		var roundOver = false;
 		var message = '';
-		var focusMessage = 'Welcome to a new game of Twenty One BlackJack!';
+		var focusMessage = 'a) Hit    b) Stand';
 		var choice;
+		alert(
+			'         ---------------------------------  \n' +
+			'       \\ Welcome to a new game of BlackJack! /\n' +
+			'         -----      ------------------------\n' +
+			'                  | /\n' +
+			'                 /\n' +
+			'   |\\___/|\n' +
+			'   ) ~  ~  (\n' +
+			'=\\  \u22bb    /=\n' +
+			'    )----(\n' +
+			'  /         \\\n' +
+			'  |          |\n' +
+			' /           \\\n' +
+			' \\           /\n' +
+			'  \\__    _/\n' +
+			'      ( (\n' +
+			'       ) )\n' +
+			'      (_(');
 
 		// If round is not over
 		while (!roundOver) {
@@ -50,7 +68,7 @@ var game = {
 
 			// If this is not the last round
 			if (!roundOver) { // Prompt the player and let him hit or stand
-				choice = game.checkChoice(prompt(message + '\n\na: Hit\nb: Stand'));
+				choice = game.checkChoice(prompt(message));
 				if (choice === 'hit') {
 					game.dealer.dealCardTo(game.player.getHand(), 1);
 				} else if (choice === 'stand') {
@@ -92,13 +110,13 @@ var game = {
 		}
 		// Add cards and special alert to message
 		gameStatus += game.dealer.getName() + '\'s hand:\n';
-		gameStatus += dealerHandString + '\nValue: ' +
+		gameStatus += dealerHandString + 'Value: ' +
 			totalValue + '\n\n';
 
 		gameStatus += '\n';
 
 		gameStatus += game.player.getName() + '\'s hand:\n';
-		gameStatus += game.player.getHand().getCardString() + '\nValue: ' +
+		gameStatus += game.player.getHand().getCardString() + 'Value: ' +
 			game.player.getHand().getTotalValue() + '\n\n';
 
 		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
