@@ -57,13 +57,13 @@ game.createDealer = function (dealerName) {
 		var drawnCard;
 
 		// Reveal hidden card before drawing
-		alert(game.getGameStatusMessage('Dealer reveals: ' + hand.getCards()[1]));
+		alert(game.getGameStatusMessage('Dealer reveals: ' + hand.getCards()[1].id));
 
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
 
-			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard));
+			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard.id));
 		}
 	};
 

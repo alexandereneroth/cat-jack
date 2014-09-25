@@ -87,7 +87,7 @@ var game = {
 			totalValue = dealerHand.getTotalValue();
 		} else {
 			// otherwise only the first one
-			dealerHandString = dealerHand.getCards()[0].getPicture();
+			dealerHandString = dealerHand.getCards()[0].getPictureString();
 			totalValue = dealerHand.getCards()[0].value;
 		}
 		// Add cards and special alert to message

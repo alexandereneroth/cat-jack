@@ -37,7 +37,7 @@ game.getCard = function (rank, suit) {
 	};
 
 	// returns top row part of the ASCII art card picture
-	function getCardTopRow(rank) {
+	function getPictureTopRow(rank) {
 		var row = '';
 		row += '|';
 		// Tens have two symbols in their rank, and thus require less spaces
@@ -62,7 +62,7 @@ game.getCard = function (rank, suit) {
 
 	// returns bottom row part of the ASCII art card picture 
 	// (reversed order of the top row)
-	function getCardBottomRow(rank) {
+	function getPictureBottomRow(rank) {
 		var row = '';
 		row += '|';
 
@@ -93,24 +93,20 @@ game.getCard = function (rank, suit) {
 
 	that.picture = [
 		' ______ ',
-		getCardTopRow(rank),
+		getPictureTopRow(rank),
 		'|         |',
 		'|         |',
-		getCardBottomRow(rank),
+		getPictureBottomRow(rank),
 		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
 
 	// remove the method below? it is only used for testing purposes ATM
-	that.getPicture = function () {
+	that.getPictureString = function () {
 		var pictureWithNewlines = '';
 		for (var i = 0; i < that.picture.length; ++i) {
 			pictureWithNewlines += that.picture[i] + '\n';
 		}
 		return pictureWithNewlines;
-	};
-
-	that.toString = function () {
-		return that.id;
 	};
 
 	return that;
