@@ -20,15 +20,23 @@ game.getCard = function (rank, suit) {
 	that.rank = rank;
 	that.suit = suit;
 	that.picture = [
-		' _____ ',
-		'|' + (rank !== 'T' ? rank + ' ' : '10') + '   |', // Inline if statement, which is used to handle the special case of tens ('10' instad of 'T' which also makes it two letters instad of one)
-		'|  ' + getSuitSymbol() + '  |',
-		'|     |',
-		'|___' + (rank !== 'T' ? '_' + rank : '10') + '|'
+		' ______ ',
+		'|' + (rank !== 'T' ? rank + '     ' + getSuitSymbol() : '10   ' + getSuitSymbol()) + '|', // Inline if statement, which is used to handle the special case of tens ('10' instad of 'T' which also makes it two letters instad of one)
+		'|         |',
+		'|         |',
+		'|' + (rank !== 'T' ? getSuitSymbol() + '     ' + rank : getSuitSymbol() + '   10') + '|',
+		' \uFFE3\uFFE3\uFFE3 '
 	];
+	that.getPictureWithNewlines = function () {
+		var pictureWithNewlines = '';
+		for (var i = 0; i < that.picture.length; ++i) {
+			pictureWithNewlines += that.picture[i] + '\n';
+		}
+		return pictureWithNewlines;
+	};
 	that.toString = function () {
 		return that.id;
-	}
+	};
 
 	return that;
 };
