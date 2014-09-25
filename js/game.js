@@ -55,7 +55,9 @@ var game = {
 					roundOver = true;
 				} else if (choice === 0) {
 					focusMessage = 'Incorrect input!';
-				}
+				} else if (choice === -1) {
+                    throw { name: 'Canceled game', message: 'User canceled game' };
+                }
 			} else { // Else just display an alert with info
 				alert(message);
 			}
@@ -78,7 +80,8 @@ var game = {
 		if (game.isDealerRound) {
 			dealerHandString = dealerHand.getCardString();
 			totalValue = dealerHand.getTotalValue();
-		} else { // otherwise only the first one
+		} else {
+		    // otherwise only the first one
 			dealerHandString = dealerHand.getCards()[0];
 			totalValue = dealerHand.getCardValue(dealerHand.getCards()[0]);
 		}
@@ -102,14 +105,19 @@ var game = {
 		return gameStatus;
 	},
 
-	// Trims and checks user choice, returns 0 if choice is invalid
+	// Trims and checks user choice, returns 0 if choice is invalid or -1 if user has canceled
 	checkChoice: function (choice) {
-		var trimmedChoice = choice.toLowerCase().trim();
-		if (trimmedChoice === 'a') {
+        if (choice !== null) {
+		    choice = choice.toLowerCase().trim();
+        }
+
+		if (choice === 'a') {
 			return 'hit';
-		} else if (trimmedChoice === 'b') {
+		} else if (choice === 'b') {
 			return 'stand';
-		} else {
+		} else if (choice === null) {
+            return -1;
+        } else {
 			return 0;
 		}
 	}
