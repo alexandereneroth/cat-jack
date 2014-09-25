@@ -29,11 +29,20 @@ game.createHand = function () {
 	};
 
 	that.getCardString = function () {
-		var cardString = '| ';
+		// var cardString = '| ';
 
-		// Add the hands card to playerCards
-		for (var i = 0; i < cards.length; i++) {
-			cardString += cards[i] + ' | ';
+		// // Add the hands card to playerCards
+		// for (var i = 0; i < cards.length; i++) {
+		// 	cardString += cards[i] + ' | ';
+		// }
+
+		var cardString = '';
+		var pictureRows = cards[0].picture.length;
+		for (var row = 0; row < pictureRows; ++row) {
+			for (var card = 0; card < cards.length; ++card) {
+				cardString += cards[card].picture[row] + '  ';
+			}
+			cardString += '\n';
 		}
 		return cardString;
 	};
