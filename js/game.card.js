@@ -2,6 +2,23 @@
 game.getCard = function (rank, suit) {
 	var that = {};
 
+	//   ***************************
+	//  ***        PRIVATE        ***
+	// **********************************************
+
+	// Returns the value of the card (in numbers)
+	function getValue() {
+		var value = Number(rank);
+
+		if (rank === 'A') { // A
+			return 11;
+		}
+		if (isNaN(value)) { // T J Q K
+			return 10;
+		}
+		return value; // 2 3 4 5 6 7 8 9
+	};
+
 	// Returns different special unicode pictogram suit symbols,
 	// depending on what suit the card is of.
 	function getSuitSymbol() {
@@ -65,11 +82,17 @@ game.getCard = function (rank, suit) {
 
 		return row;
 	};
+
+	//   ***************************
+	//  ***        PUBLIC         ***
+	// **********************************************
+
 	// Used when the old format for representing cards is needed 
 	// (2H,TC,AS,4D, etc)
 	that.id = rank + suit;
 	that.rank = rank;
 	that.suit = suit;
+	that.value = (getValue());
 
 	that.picture = [
 		' ______ ',
