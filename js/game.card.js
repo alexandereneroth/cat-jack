@@ -29,7 +29,7 @@ game.getCard = function (rank, suit) {
 			row += '10   ' + getSuitSymbol();
 			// 'J' looks better if it is indented 1 space into the card
 		} else if (rank === 'J') {
-			row += ' ' + rank + '      ' + getSuitSymbol();
+			row += ' ' + rank + '     ' + getSuitSymbol();
 
 			// 'J' and the spades symbol take up far less vertical space than other 
 			// characters so more spaces are needed.
@@ -52,7 +52,7 @@ game.getCard = function (rank, suit) {
 		if (rank === 'T') {
 			row += getSuitSymbol() + '   10';
 		} else if (rank === 'J') {
-			row += getSuitSymbol() + '      ' + rank + ' ';
+			row += getSuitSymbol() + '     ' + rank + ' ';
 
 		} else if (rank === 'J' && suit === 'S') {
 			row += getSuitSymbol() + '      ' + rank + ' ';
