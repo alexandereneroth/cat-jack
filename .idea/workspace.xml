@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd9be02d-c431-4ad6-a4d1-4c84efbf8841" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game.play.js" afterPath="$PROJECT_DIR$/js/game.play.js" />
-    </list>
+    <list default="true" id="fd9be02d-c431-4ad6-a4d1-4c84efbf8841" name="Default" comment="" />
     <ignored path="twenty_one.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
