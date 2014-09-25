@@ -31,8 +31,8 @@ game.getCard = function (rank, suit) {
 		} else if (rank === 'J') {
 			row += ' ' + rank + '     ' + getSuitSymbol();
 
-			// 'J' and the spades symbol take up far less vertical space than other 
-			// characters so more spaces are needed.
+			// 'J' and the spades symbol take up far less vertical space  
+			// than other characters so more spaces are needed.
 		} else if (rank === 'J' && suit === 'S') {
 			row += ' ' + rank + '      ' + getSuitSymbol();
 		} else {
@@ -44,7 +44,8 @@ game.getCard = function (rank, suit) {
 		return row;
 	};
 
-	// returns bottom row part of the ASCII art card picture (reversed order of the top row)
+	// returns bottom row part of the ASCII art card picture 
+	// (reversed order of the top row)
 	function getCardBottomRow(rank) {
 		var row = '';
 		row += '|';
@@ -64,8 +65,9 @@ game.getCard = function (rank, suit) {
 
 		return row;
 	};
-
-	that.id = rank + suit; // Used when the old format for representing cards is needed (2H,TC,AS,4D, etc)
+	// Used when the old format for representing cards is needed 
+	// (2H,TC,AS,4D, etc)
+	that.id = rank + suit;
 	that.rank = rank;
 	that.suit = suit;
 
@@ -77,6 +79,7 @@ game.getCard = function (rank, suit) {
 		getCardBottomRow(rank),
 		' \uFFE3\uFFE3\uFFE3 ' //code for the special character ¯. (FULLWIDTH MACRON)
 	];
+	// remove? it is only used for testing purposes atm
 	that.getPictureWithNewlines = function () {
 		var pictureWithNewlines = '';
 		for (var i = 0; i < that.picture.length; ++i) {
