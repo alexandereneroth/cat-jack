@@ -51,23 +51,17 @@ game.createDealer = function (dealerName) {
 	};
 
 
-	// Draw cards until the outcome of BlackJack can be determined.
+	// Draw cards until the hands value is 17 or above, and under 22.
 	that.playRound = function () {
 		var drawnCard;
 
 		// Reveal hidden card before drawing
 		alert(game.getGameStatusMessage('Dealer reveals: ' + hand.getCards()[1]));
 
-		if (hand.getTotalValue() === 21) {
-			return;
-		}
-		// Draw cards until the player hand value had been matched or exceeded.
-		while (hand.getTotalValue() < 17) {
-			if (hand.getTotalValue() > 20) {
-				return;
-			}
+		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
+
 			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard));
 		}
 	};

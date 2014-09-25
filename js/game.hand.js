@@ -5,22 +5,6 @@ game.createHand = function () {
 		numberOfAces = 0,
 		totalValue = 0;
 
-	that.addCard = function (card) {
-		var cardValue = this.getCardValue(card);
-		cards.push(card);
-		totalValue += cardValue;
-
-		if (cardValue === 11) { // if the card that was added is an ace
-			numberOfAces++;
-		}
-		if (totalValue > 21) { // if the value of the hand is over 21
-			if (numberOfAces > 0) { // and there are aces in the hand
-				totalValue -= 10; // change the value of an ace to 1
-				numberOfAces--;
-			}
-		}
-	};
-
 	that.getTotalValue = function () {
 		return totalValue;
 	};
@@ -52,6 +36,22 @@ game.createHand = function () {
 			cardString += cards[i] + ' | ';
 		}
 		return cardString;
+	};
+
+	that.addCard = function (card) {
+		var cardValue = that.getCardValue(card);
+		cards.push(card);
+		totalValue += cardValue;
+
+		if (cardValue === 11) { // If the card that was added is an ace
+			numberOfAces++;
+		}
+		if (totalValue > 21) { // If the value of the hand is over 21
+			if (numberOfAces > 0) { // and there are aces in the hand
+				totalValue -= 10; // change the value of an ace to 1
+				numberOfAces--;
+			}
+		}
 	};
 
 	return that;
