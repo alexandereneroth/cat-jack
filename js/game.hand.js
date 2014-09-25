@@ -1,9 +1,9 @@
 'use strict';
 game.createHand = function () {
-	var cards = [],
+	var that = {},
+		cards = [],
 		numberOfAces = 0,
-		totalValue = 0,
-		that = {};
+		totalValue = 0;
 
 	that.addCard = function (card) {
 		var cardValue = this.getCardValue(card);
