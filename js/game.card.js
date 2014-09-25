@@ -100,7 +100,6 @@ game.getCard = function (rank, suit) {
 		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
 
-	// remove the method below? it is only used for testing purposes ATM
 	that.getPictureString = function () {
 		var pictureWithNewlines = '';
 		for (var i = 0; i < that.picture.length; ++i) {

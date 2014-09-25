@@ -71,36 +71,42 @@ game.createDealer = function (dealerName) {
 	that.declareWinner = function (playerArray) {
 		// Determine the winner(s).
 		var winningHandValue = 0;
-		var winners = [];
+		var winnerNames = [];
 
+		// if the dealer has a possibility of winning
 		if (hand.getTotalValue() < 22) {
-			// initialized with the house as the winner.
+			// initialize with the dealer as the winner.
 			winningHandValue = hand.getTotalValue();
-			winners = [name];
+			winnerNames = [name];
 		}
 
 		for (var i = 0; i < playerArray.length; i++) {
 
 			var playerHandValue = playerArray[i].getHand().getTotalValue();
-
+			// If this player has the best hand value so far in the loop
 			if (playerHandValue > winningHandValue && playerHandValue < 22) {
+				// set it as the winner
 				winningHandValue = playerHandValue;
-				winners = []; //empty the array
-				winners.push(playerArray[i].getName());
+				winnerNames = []; //empties the array
+				winnerNames.push(playerArray[i].getName());
+				// Or if this player has the same as the best hand value so far
 			} else if (playerHandValue === winningHandValue) {
-				winners.push(playerArray[i].getName());
+				//add it to the list of winnerNames
+				winnerNames.push(playerArray[i].getName());
 			}
 		}
 		// Print out the winner(s).
 		var message = '';
-		if (winners.length > 1) {
+		if (winnerNames.length > 1) {
 			message = 'The players: \n';
-			for (var x = 0; x < winners.length; x++) {
-				message = message + winners[x] + '\n';
+			for (var x = 0; x < winnerNames.length; x++) {
+				message = message + winnerNames[x] + '\n';
 			}
 			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
+		} else if (winnerNames.length === 1) {
+			message = winnerNames[0] + ' won with ' + winningHandValue + '!';
 		} else {
-			message = winners[0] + ' won with ' + winningHandValue + '!';
+			message = 'Everyone busted!';
 		}
 		alert(game.getGameStatusMessage(message));
 	};
