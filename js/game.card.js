@@ -22,7 +22,6 @@ game.getCard = function (rank, suit) {
 	that.picture = [
 		' _____ ',
 		'|' + (rank !== 'T' ? rank + ' ' : '10') + '   |', // Inline if statement, which is used to handle the special case of tens ('10' instad of 'T' which also makes it two letters instad of one)
-		'|     |',
 		'|  ' + getSuitSymbol() + '  |',
 		'|     |',
 		'|___' + (rank !== 'T' ? '_' + rank : '10') + '|'
