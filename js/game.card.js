@@ -2,9 +2,11 @@
 game.getCard = function (rank, suit) {
 	var that = {};
 
+	// Returns different special unicode pictogram suit symbols,
+	// depending on what suit the card is of.
 	function getSuitSymbol() {
 		if (suit === 'H') {
-			return '\u2665'; // These are the unicode codes for the different suit symbols
+			return '\u2665';
 		} else if (suit === 'S') {
 			return '\u2660';
 		} else if (suit === 'C') {
@@ -12,19 +14,25 @@ game.getCard = function (rank, suit) {
 		} else if (suit === 'D') {
 			return '\u2666';
 		} else {
-			throw 'invalid suit identifier'; // Shows the string (which is throwed) as an error message if this line is ever reached
+			// Shows the string (which is throwed) as an  
+			// error message if this line is ever reached
+			throw 'invalid suit identifier';
 		}
 	};
 
+	// returns top row part of the ASCII art card picture
 	function getCardTopRow(rank) {
 		var row = '';
 		row += '|';
-
+		// Tens have two symbols in their rank, and thus require less spaces
 		if (rank === 'T') {
 			row += '10   ' + getSuitSymbol();
+			// 'J' looks better if it is indented 1 space into the card
 		} else if (rank === 'J') {
 			row += ' ' + rank + '      ' + getSuitSymbol();
 
+			// 'J' and the spades symbol take up far less vertical space than other 
+			// characters so more spaces are needed.
 		} else if (rank === 'J' && suit === 'S') {
 			row += ' ' + rank + '      ' + getSuitSymbol();
 		} else {
@@ -36,6 +44,7 @@ game.getCard = function (rank, suit) {
 		return row;
 	};
 
+	// returns bottom row part of the ASCII art card picture (reversed order of the top row)
 	function getCardBottomRow(rank) {
 		var row = '';
 		row += '|';
@@ -60,15 +69,13 @@ game.getCard = function (rank, suit) {
 	that.rank = rank;
 	that.suit = suit;
 
-	// Inline if statement, which is used to handle the special case of tens 
-	// ('10' instad of 'T' which also makes it two letters instad of one)
 	that.picture = [
 		' ______ ',
 		getCardTopRow(rank),
 		'|         |',
 		'|         |',
 		getCardBottomRow(rank),
-		' \uFFE3\uFFE3\uFFE3 '
+		' \uFFE3\uFFE3\uFFE3 ' //code for the special character ¯. (FULLWIDTH MACRON)
 	];
 	that.getPictureWithNewlines = function () {
 		var pictureWithNewlines = '';
