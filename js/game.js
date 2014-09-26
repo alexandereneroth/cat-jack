@@ -100,19 +100,26 @@ var game = {
 
 		// Initialized with what should be shown for the dealer when it is
 		// the dealers round. (both cards, and full value)
-		var dealerHandString = dealerHand.getCardString();
-		var dealerValue = dealerHand.getTotalValue();
+		var dealerHandValue = dealerHand.getTotalValue();
 
-		// If it is the players round, show only one card and its value
+		// If it is the players round, show one card backside up,
+		// and only one cards value.
 		if (game.isPlayerRound) {
-			dealerHandString = dealerHand.getCards()[0].getPictureString();
-			dealerValue = dealerHand.getCards()[0].value;
+			if (dealerHand.getCard(1).isFrontsideUp) {
+				dealerHand.getCard(1).flip();
+			}
+			dealerHandValue = dealerHand.getCards()[0].value;
+		} else {
+			//flip it back
+			if (dealerHand.getCard(1).isFrontsideUp == false) {
+				dealerHand.getCard(1).flip();
+			}
 		}
 
 		// Add cards and special alert to message
 		gameStatus += game.dealer.getName() + '\'s hand:\n';
-		gameStatus += dealerHandString + 'Value: ' +
-			dealerValue + '\n\n';
+		gameStatus += dealerHand.getCardString() + 'Value: ' +
+			dealerHandValue + '\n\n';
 
 		gameStatus += '\n';
 

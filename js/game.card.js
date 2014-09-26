@@ -90,8 +90,9 @@ game.getCard = function (rank, suit) {
 	that.rank = rank;
 	that.suit = suit;
 	that.value = (getValue());
+	that.isFrontsideUp = true; // used for representing flipping of the card
 
-	that.picture = [
+	that.frontside = [
 		' ______ ',
 		getPictureTopRow(rank),
 		'|         |',
@@ -100,12 +101,42 @@ game.getCard = function (rank, suit) {
 		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
 
-	that.getPictureString = function () {
-		var pictureWithNewlines = '';
-		for (var i = 0; i < that.picture.length; ++i) {
-			pictureWithNewlines += that.picture[i] + '\n';
+	that.backside = [
+		'  .  .  .  ',
+		'.         .',
+		'.         .',
+		'.         .',
+		' .  .  . .   ',
+		''
+	];
+
+	// Returns the backside or the upside, depending on how the card is flipped.
+	that.getPictureArray = function () {
+		if (that.isFrontsideUp) {
+			return that.frontside;
+		} else {
+			return that.backside;
 		}
-		return pictureWithNewlines;
+	};
+
+	that.getPictureString = function () {
+		var upside;
+		if (that.isFrontsideUp) {
+			upside = that.frontside;
+		} else {
+			upside = that.backside;
+		}
+
+		var picture = '';
+		for (var i = 0; i < upside.length; ++i) {
+			picture += upside[i] + '\n';
+		}
+		return picture;
+	};
+
+	that.flip = function () {
+		// sets the bool to its opposite value
+		that.isFrontsideUp = !that.isFrontsideUp;
 	};
 
 	return that;
