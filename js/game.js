@@ -30,7 +30,7 @@ var game = {
 		var choice;
 		alert(
 			'         --------------------------------  \n' +
-			'       ( Welcome to a new game of BlackJack!  )\n' +
+			'       (   Welcome to a new game of CatJack!   )\n' +
 			'         -----\\      -----------------------\n' +
 			'                    | /\n' +
 			'                   /\n' +
