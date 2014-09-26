@@ -29,11 +29,11 @@ var game = {
 		var focusMessage = 'a) Hit    b) Stand';
 		var choice;
 		alert(
-			'         ---------------------------------  \n' +
-			'       \\ Welcome to a new game of BlackJack! /\n' +
-			'         -----      ------------------------\n' +
-			'                  | /\n' +
-			'                 /\n' +
+			'         --------------------------------  \n' +
+			'       ( Welcome to a new game of BlackJack!  )\n' +
+			'         -----\\      -----------------------\n' +
+			'                    | /\n' +
+			'                   /\n' +
 			'   |\\___/|\n' +
 			'   ) \u2ABD  \u2ABE   (\n' +
 			'=\\  \u22bb     /=\n' +
@@ -64,7 +64,6 @@ var game = {
 			}
 
 			message = game.getGameStatusMessage(focusMessage);
-			focusMessage = '';
 
 			// If this is not the last round
 			if (!roundOver) { // Prompt the player and let him hit or stand
@@ -74,7 +73,7 @@ var game = {
 				} else if (choice === 'stand') {
 					roundOver = true;
 				} else if (choice === 0) {
-					focusMessage = 'Incorrect input!';
+					focusMessage = 'Incorrect input!\na) Hit    b) Stand';
 				} else if (choice === -1) {
 					throw {
 						name: 'Canceled game',
@@ -82,6 +81,7 @@ var game = {
 					};
 				}
 			} else { // Else just display an alert with info
+				focusMessage = '';
 				alert(message);
 			}
 		}

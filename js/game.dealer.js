@@ -98,7 +98,6 @@ game.createDealer = function (dealerName) {
 		// Print out the winner(s).
 		var message = '';
 		if (winnerNames.length > 1) {
-			message = 'The players: \n';
 			for (var x = 0; x < winnerNames.length; x++) {
 				message = message + winnerNames[x] + '\n';
 			}
