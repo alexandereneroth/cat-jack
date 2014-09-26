@@ -97,10 +97,13 @@ var game = {
 		var gameStatus = '';
 
 		var dealerHand = game.dealer.getHand();
+
+		// Initialized with what should be shown for the dealer when it is
+		// the dealers round. (both cards, and full value)
 		var dealerHandString = dealerHand.getCardString();
 		var dealerValue = dealerHand.getTotalValue();
 
-		// If it is the players round, show only one card
+		// If it is the players round, show only one card and its value
 		if (game.isPlayerRound) {
 			dealerHandString = dealerHand.getCards()[0].getPictureString();
 			dealerValue = dealerHand.getCards()[0].value;
