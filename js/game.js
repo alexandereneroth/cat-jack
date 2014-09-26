@@ -4,12 +4,12 @@ var game = {
 	dealer: {},
 	name: 'Twenty One BlackJack',
 	gameOver: false,
-	isDealerRound: false,
+	isPlayerRound: true,
 	isFirstRound: true,
 
 	startGame: function () {
 		// Reset game round variables
-		game.isDealerRound = false;
+		game.isPlayerRound = true;
 		game.isFirstRound = true;
 
 		// Main game function calls
@@ -88,30 +88,28 @@ var game = {
 	},
 
 	dealerRound: function () {
-		game.isDealerRound = true;
+		game.isPlayerRound = false;
 		game.dealer.playRound();
 	},
 
 	// Creates and returns string with game status
 	getGameStatusMessage: function (focusMessage) {
 		var gameStatus = '';
-		var dealerHandString = '';
-		var dealerHand = game.dealer.getHand();
-		var totalValue = '';
 
-		// If it is the dealer round show all cards
-		if (game.isDealerRound) {
-			dealerHandString = dealerHand.getCardString();
-			totalValue = dealerHand.getTotalValue();
-		} else {
-			// otherwise only the first one
+		var dealerHand = game.dealer.getHand();
+		var dealerHandString = dealerHand.getCardString();
+		var dealerValue = dealerHand.getTotalValue();
+
+		// If it is the players round, show only one card
+		if (game.isPlayerRound) {
 			dealerHandString = dealerHand.getCards()[0].getPictureString();
-			totalValue = dealerHand.getCards()[0].value;
+			dealerValue = dealerHand.getCards()[0].value;
 		}
+
 		// Add cards and special alert to message
 		gameStatus += game.dealer.getName() + '\'s hand:\n';
 		gameStatus += dealerHandString + 'Value: ' +
-			totalValue + '\n\n';
+			dealerValue + '\n\n';
 
 		gameStatus += '\n';
 
