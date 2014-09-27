@@ -104,30 +104,16 @@ game.createDealer = function (dealerName) {
 			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
 		} else if (winnerNames.length === 1) {
 			message = winnerNames[0] + ' won with ' + winningHandValue + '!';
-			alert(
-				'\n' +
-				'.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .\n' +
-				'.\n' +
-				'.                           Yay!,                         .\n' +
-				'.                        you won!                          .\n' +
-				'.                                                                                              .\n' +
-				'.                        .-o=o-.                            .\n' +
-				'.                 ,   /=o=o=o=\\ .-.                           .\n' +
-				'.               _|\\|o=O=o=O=|    \\                        .\n' +
-				'.          __.\'   a`\\o=o=o=(`\\    /                     .\n' +
-				'.          \'.    a 4/`|.---"""\'`\\  \\ ;\'`)  .---.             .\n' +
-				'.             \\    .\'   /      .---\'    |_.\'   /  .-._)           .\n' +
-				'.              `)   _.\'      /        /`-.__.\'  /                 .\n' +
-				'.                `\'-.____;        /\'-._____.-\'                 .\n' +
-				'.                           `"""`                                    .\n' +
-				'.                                                                                      .\n' +
-				'.                                                                                      .\n' +
-				'.                                                                                      .\n' +
-				'.    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .\n' +
-				'                                       ASCII art by jgs'
-			);
 		} else {
 			message = 'Everyone busted!';
+		}
+
+		var gameOverMsg = '';
+		if (winnerNames[0] === game.player.getName() ||
+			winnerNames[1] === game.player.getName()) {
+			gameOverMsg = 'You Win!';
+		} else {
+			gameOverMsg = 'You Lose!';
 		}
 		alert(game.getGameStatusMessage(message));
 	};
