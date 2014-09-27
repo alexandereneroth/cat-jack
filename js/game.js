@@ -108,7 +108,7 @@ var game = {
 			if (dealerHand.getCard(1).isFrontsideUp) {
 				dealerHand.getCard(1).flip();
 			}
-			dealerHandValue = dealerHand.getCards()[0].value;
+			dealerHandValue = dealerHand.getCard(0).value;
 		} else {
 			//flip it back
 			if (dealerHand.getCard(1).isFrontsideUp === false) {
