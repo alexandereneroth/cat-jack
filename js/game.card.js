@@ -70,7 +70,7 @@ game.getCard = function (rank, suit) {
 		} else {
 			// Shows the string (which is throwed) as an  
 			// error message if this line is ever reached
-			throw 'invalid suit identifier';
+			throw 'game.getCard > getSuitSymbol > invalid suit!';
 		}
 	}
 
@@ -151,7 +151,7 @@ game.getCard = function (rank, suit) {
 		return that.name;
 	};
 
-	// Returns the backside or the upside, depending on how the card is flipped.
+	// Returns the backside or the frontside, depending on how the card is flipped.
 	that.getPictureArray = function () {
 		if (that.isFrontsideUp) {
 			return that.frontside;
