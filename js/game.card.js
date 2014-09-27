@@ -16,7 +16,7 @@ game.getCard = function (rank, suit) {
 			return 10;
 		}
 		return value; // 2 3 4 5 6 7 8 9
-	};
+	}
 
 	// Returns different special unicode pictogram suit symbols,
 	// depending on what suit the card is of.
@@ -34,53 +34,54 @@ game.getCard = function (rank, suit) {
 			// error message if this line is ever reached
 			throw 'invalid suit identifier';
 		}
-	};
+	}
 
-	// returns top row part of the ASCII art card picture
-	function getPictureTopRow(rank) {
-		var row = '';
-		row += '|';
+	// @returns The top row part of the ASCII-art card picture
+	function getPictureTopRow() {
+		var row = '|';
+		// 'J' looks better if it is indented 1 space into the card
+		if (rank === 'J') {
+			row += ' ';
+
+		}
 		// Tens have two symbols in their rank, and thus require less spaces
-		if (rank === 'T') {
-			row += '10   ' + getSuitSymbol();
-			// 'J' looks better if it is indented 1 space into the card
-		} else if (rank === 'J') {
-			row += ' ' + rank + '     ' + getSuitSymbol();
+		if (rank === '10') {
+			row += rank + getSpaces(3);
 
-			// 'J' and the spades symbol take up far less vertical space  
-			// than other characters so more spaces are needed.
-		} else if (rank === 'J' && suit === 'S') {
-			row += ' ' + rank + '      ' + getSuitSymbol();
 		} else {
-			row += rank + '     ' + getSuitSymbol();
+			row += rank + getSpaces(5);
 		}
 
-		row += '|';
+		return row + getSuitSymbol() + '|';
+	}
 
-		return row;
-	};
-
-	// returns bottom row part of the ASCII art card picture 
+	// @returns The bottom row part of the ASCII-art card picture 
 	// (reversed order of the top row)
-	function getPictureBottomRow(rank) {
-		var row = '';
-		row += '|';
+	function getPictureBottomRow() {
+		var row = '|' + getSuitSymbol();
+		if (rank === '10') {
 
-		if (rank === 'T') {
-			row += getSuitSymbol() + '   10';
-		} else if (rank === 'J') {
-			row += getSuitSymbol() + '     ' + rank + ' ';
+			row += getSpaces(3) + rank;
 
-		} else if (rank === 'J' && suit === 'S') {
-			row += getSuitSymbol() + '      ' + rank + ' ';
 		} else {
-			row += getSuitSymbol() + '     ' + rank;
+
+			row += getSpaces(5) + rank;
+		}
+		if (rank === 'J') {
+			row += ' ';
 		}
 
-		row += '|';
+		return row + '|';
+	}
 
-		return row;
-	};
+	function getSpaces(amount) {
+		var spaces = '';
+		while (amount-- > 0) {
+			spaces += ' ';
+		}
+		return spaces;
+	}
+
 	//    ______________________
 	//___/        PUBLIC        \___
 
@@ -135,7 +136,7 @@ game.getCard = function (rank, suit) {
 	};
 
 	that.flip = function () {
-		// sets the bool to its opposite value
+		// sets the bool 'isFrontsideUp' to its opposite value
 		that.isFrontsideUp = !that.isFrontsideUp;
 	};
 
