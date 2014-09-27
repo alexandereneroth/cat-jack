@@ -13,37 +13,30 @@ game.getCard = function (rank, suit) {
 		var rankWord = '';
 		var suitWord = '';
 
-		if (isNaN(Number(rank))) {
-			switch (rank) {
-			case 'A':
-				rankWord = 'Ace';
-				break;
-			case 'J':
-				rankWord = 'Jack';
-				break;
-			case 'Q':
-				rankWord = 'Queen';
-				break;
-			case 'K':
-				rankWord = 'King';
-			}
-		} else {
+		if (isNaN(Number(rank)) === false) {
 			rankWord = numberRankWords[Number(rank) - 2];
+		} else {
+			if (rank === 'A') {
+				rankWord = 'Ace';
+			} else if (rank === 'J') {
+				rankWord = 'Jack';
+			} else if (rank === 'Q') {
+				rankWord = 'Queen';
+			} else if (rank === 'K') {
+				rankWord = 'King';
+			} else {
+				throw 'game.getCard > getName > invalid rank!';
+			}
 		}
-		switch (suit) {
-		case 'H':
+		if (suit === 'H') {
 			suitWord = 'Hearts';
-			break;
-		case 'S':
+		} else if (suit === 'S') {
 			suitWord = 'Spades';
-			break;
-		case 'C':
+		} else if (suit === 'C') {
 			suitWord = 'Clubs';
-			break;
-		case 'D':
+		} else if (suit === 'D') {
 			suitWord = 'Diamonds';
-			break;
-		default:
+		} else {
 			throw 'game.getCard > getName > invalid suit!';
 		}
 
