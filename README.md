@@ -1,4 +1,4 @@
-twenty_one
+Cat Jack
 ==========
 
-A javascript game.
+A javascript game in the style of Black Jack.
