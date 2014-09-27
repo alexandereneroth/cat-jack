@@ -5,6 +5,49 @@ game.getCard = function (rank, suit) {
 	//    ______________________
 	//___/       PRIVATE        \___
 
+	// Returns a simple text representation of the card
+	function getName() {
+		var rankWord = '';
+		var suitWord = '';
+		if (rank === '2')
+			rankWord = 'two';
+		if (rank === '3')
+			rankWord = 'three';
+		if (rank === '4')
+			rankWord = 'four';
+		if (rank === '5')
+			rankWord = 'fice';
+		if (rank === '6')
+			rankWord = 'six';
+		if (rank === '7')
+			rankWord = 'seven';
+		if (rank === '8')
+			rankWord = 'eight';
+		if (rank === '9')
+			rankWord = 'nine';
+		if (rank === '10')
+			rankWord = 'ten';
+		if (rank === 'A')
+			rankWord = 'ace';
+		if (rank === 'J')
+			rankWord = 'jack';
+		if (rank === 'Q')
+			rankWord = 'queen';
+		if (rank === 'K')
+			rankWord = 'king';
+
+		if (suit === 'H')
+			suitWord = 'hearts';
+		if (suit === 'S')
+			suitWord = 'spades';
+		if (suit === 'C')
+			suitWord = 'clubs';
+		if (suit === 'D')
+			suitWord = 'diamonds';
+
+		return rankWord + ' of ' + suitWord;
+	}
+
 	// Returns the value of the card (in numbers)
 	function getValue() {
 		var value = Number(rank);
@@ -12,10 +55,10 @@ game.getCard = function (rank, suit) {
 		if (rank === 'A') { // A
 			return 11;
 		}
-		if (isNaN(value)) { // T J Q K
+		if (isNaN(value)) { // J Q K
 			return 10;
 		}
-		return value; // 2 3 4 5 6 7 8 9
+		return value; // 2 3 4 5 6 7 8 9 10
 	}
 
 	// Returns different special unicode pictogram suit symbols,
@@ -85,12 +128,10 @@ game.getCard = function (rank, suit) {
 	//    ______________________
 	//___/        PUBLIC        \___
 
-	// Used when the old format for representing cards is needed 
-	// (2H,TC,AS,4D, etc)
-	that.id = rank + suit;
 	that.rank = rank;
 	that.suit = suit;
 	that.value = (getValue());
+	that.name = (getName());
 	that.isFrontsideUp = true; // used for representing flipping of the card
 
 	that.frontside = [
@@ -110,6 +151,10 @@ game.getCard = function (rank, suit) {
 		' .  .  . .   ',
 		''
 	];
+
+	that.toString = function () {
+		return that.name;
+	};
 
 	// Returns the backside or the upside, depending on how the card is flipped.
 	that.getPictureArray = function () {
