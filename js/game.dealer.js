@@ -40,7 +40,9 @@ game.createDealer = function (dealerName) {
 
 	that.dealCardTo = function (hand, numberOfCards) {
 		for (var x = 0; x < numberOfCards; x++) {
-			hand.addCard(deck.pop());
+			var drawnCard = deck.pop();
+
+			hand.addCard(drawnCard);
 		}
 	};
 
@@ -99,21 +101,12 @@ game.createDealer = function (dealerName) {
 		var message = '';
 		if (winnerNames.length > 1) {
 			for (var x = 0; x < winnerNames.length; x++) {
-				message = message + winnerNames[x] + '\n';
+				message = message + winnerNames[x] + ', tied!\n';
 			}
-			message = message + 'Tied, with a hand value of ' + winningHandValue + '!\n';
 		} else if (winnerNames.length === 1) {
-			message = winnerNames[0] + ' won with ' + winningHandValue + '!';
+			message = winnerNames[0] + ' wins!';
 		} else {
 			message = 'Everyone busted!';
-		}
-
-		var gameOverMsg = '';
-		if (winnerNames[0] === game.player.getName() ||
-			winnerNames[1] === game.player.getName()) {
-			gameOverMsg = 'You Win!';
-		} else {
-			gameOverMsg = 'You Lose!';
 		}
 		alert(game.getGameStatusMessage(message));
 	};
