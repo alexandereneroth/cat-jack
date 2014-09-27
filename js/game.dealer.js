@@ -14,7 +14,7 @@ game.createDealer = function (dealerName) {
 	};
 
 	that.setNumberOfCardDecks = function (numberOfDecks) {
-		deck = game.getDeck(4);
+		deck = game.getDeck(numberOfDecks);
 	};
 
 	that.shuffleDeck = function () {

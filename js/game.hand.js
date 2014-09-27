@@ -14,7 +14,7 @@ game.createHand = function () {
 	};
 	that.getCard = function (index) {
 		return cards[index];
-	}
+	};
 
 	// Returns a string that contains an ASCII art representation of all 
 	// the cards in the hand, together.

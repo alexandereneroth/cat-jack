@@ -13,7 +13,7 @@ var game = {
 		game.isFirstRound = true;
 
 		// Main game function calls
-		game.dealer.setNumberOfCardDecks(4)
+		game.dealer.setNumberOfCardDecks(4);
 		game.dealer.shuffleDeck();
 
 		game.dealer.dealFirstHand(game.player);
@@ -111,7 +111,7 @@ var game = {
 			dealerHandValue = dealerHand.getCards()[0].value;
 		} else {
 			//flip it back
-			if (dealerHand.getCard(1).isFrontsideUp == false) {
+			if (dealerHand.getCard(1).isFrontsideUp === false) {
 				dealerHand.getCard(1).flip();
 			}
 		}
