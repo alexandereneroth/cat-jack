@@ -2,6 +2,55 @@
 game.getCard = function (rank, suit) {
 	var that = {};
 
+	//    ______________________
+	//___/       PRIVATE        \___
+
+	// Returns a simple text representation of the card
+	function getName() {
+		var rankWord = '';
+		var suitWord = '';
+
+		if (!isNaN(Number(rank))) { // 2 3 4 5 6 7 8 9 10
+			rankWord = rank;
+		} else if (rank === 'A') {
+			rankWord = 'Ace';
+		} else if (rank === 'J') {
+			rankWord = 'Jack';
+		} else if (rank === 'Q') {
+			rankWord = 'Queen';
+		} else if (rank === 'K') {
+			rankWord = 'King';
+		} else {
+			throw 'game.getCard > getName > invalid rank!';
+		}
+		if (suit === 'H') {
+			suitWord = 'Hearts';
+		} else if (suit === 'S') {
+			suitWord = 'Spades';
+		} else if (suit === 'C') {
+			suitWord = 'Clubs';
+		} else if (suit === 'D') {
+			suitWord = 'Diamonds';
+		} else {
+			throw 'game.getCard > getName > invalid suit!';
+		}
+
+		return rankWord + ' of ' + suitWord;
+	}
+
+	// Returns the value of the card (in numbers)
+	function getValue() {
+		var value = Number(rank);
+
+		if (rank === 'A') { // A
+			return 11;
+		}
+		if (isNaN(value)) { // J Q K
+			return 10;
+		}
+		return value; // 2 3 4 5 6 7 8 9 10
+	}
+
 	// Returns different special unicode pictogram suit symbols,
 	// depending on what suit the card is of.
 	function getSuitSymbol() {
@@ -16,79 +65,112 @@ game.getCard = function (rank, suit) {
 		} else {
 			// Shows the string (which is throwed) as an  
 			// error message if this line is ever reached
-			throw 'invalid suit identifier';
+			throw 'game.getCard > getSuitSymbol > invalid suit!';
 		}
-	};
+	}
 
-	// returns top row part of the ASCII art card picture
-	function getCardTopRow(rank) {
-		var row = '';
-		row += '|';
+	// @returns The top row part of the ASCII-art card picture
+	function getPictureTopRow() {
+		var row = '|';
+		// 'J' looks better if it is indented 1 space into the card
+		if (rank === 'J') {
+			row += ' ';
+
+		}
 		// Tens have two symbols in their rank, and thus require less spaces
-		if (rank === 'T') {
-			row += '10   ' + getSuitSymbol();
-			// 'J' looks better if it is indented 1 space into the card
-		} else if (rank === 'J') {
-			row += ' ' + rank + '     ' + getSuitSymbol();
+		if (rank === '10') {
+			row += rank + getSpaces(3);
 
-			// 'J' and the spades symbol take up far less vertical space  
-			// than other characters so more spaces are needed.
-		} else if (rank === 'J' && suit === 'S') {
-			row += ' ' + rank + '      ' + getSuitSymbol();
 		} else {
-			row += rank + '     ' + getSuitSymbol();
+			row += rank + getSpaces(5);
 		}
 
-		row += '|';
+		return row + getSuitSymbol() + '|';
+	}
 
-		return row;
-	};
-
-	// returns bottom row part of the ASCII art card picture 
+	// @returns The bottom row part of the ASCII-art card picture 
 	// (reversed order of the top row)
-	function getCardBottomRow(rank) {
-		var row = '';
-		row += '|';
+	function getPictureBottomRow() {
+		var row = '|' + getSuitSymbol();
+		if (rank === '10') {
 
-		if (rank === 'T') {
-			row += getSuitSymbol() + '   10';
-		} else if (rank === 'J') {
-			row += getSuitSymbol() + '     ' + rank + ' ';
+			row += getSpaces(3) + rank;
 
-		} else if (rank === 'J' && suit === 'S') {
-			row += getSuitSymbol() + '      ' + rank + ' ';
 		} else {
-			row += getSuitSymbol() + '     ' + rank;
+
+			row += getSpaces(5) + rank;
+		}
+		if (rank === 'J') {
+			row += ' ';
 		}
 
-		row += '|';
+		return row + '|';
+	}
 
-		return row;
-	};
-	// Used when the old format for representing cards is needed 
-	// (2H,TC,AS,4D, etc)
-	that.id = rank + suit;
+	function getSpaces(amount) {
+		var spaces = '';
+		while (amount-- > 0) {
+			spaces += ' ';
+		}
+		return spaces;
+	}
+
+	//    ______________________
+	//___/        PUBLIC        \___
+
 	that.rank = rank;
 	that.suit = suit;
+	that.value = (getValue());
+	that.name = (getName());
+	that.isFrontsideUp = true; // used for representing flipping of the card
 
-	that.picture = [
+	// It's important that frontside and backside have the same amount of rows
+	// so that methods iterating over both of them (for example) can treat  
+	// them as interchangable.
+	that.frontside = [
 		' ______ ',
-		getCardTopRow(rank),
+		getPictureTopRow(rank),
 		'|         |',
 		'|         |',
-		getCardBottomRow(rank),
-		' \uFFE3\uFFE3\uFFE3 ' //code for the special character ¯. (FULLWIDTH MACRON)
+		getPictureBottomRow(rank),
+		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
-	// remove? it is only used for testing purposes atm
-	that.getPictureWithNewlines = function () {
-		var pictureWithNewlines = '';
-		for (var i = 0; i < that.picture.length; ++i) {
-			pictureWithNewlines += that.picture[i] + '\n';
-		}
-		return pictureWithNewlines;
-	};
+
+	that.backside = [
+		' ______ ',
+		'|\u262F   \u262F|',
+		'|         |',
+		'|         |',
+		'|\u262F   \u262F|',
+		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
+	];
+
 	that.toString = function () {
-		return that.id;
+		return that.name;
+	};
+
+	// Returns the backside or the frontside, depending on how the card is flipped.
+	that.getPictureArray = function () {
+		if (that.isFrontsideUp) {
+			return that.frontside;
+		} else {
+			return that.backside;
+		}
+	};
+
+	that.getPictureString = function () {
+		var upside = that.getPictureArray();
+
+		var pictureString = '';
+		for (var i = 0; i < upside.length; ++i) {
+			pictureString += upside[i] + '\n';
+		}
+		return pictureString;
+	};
+
+	that.flip = function () {
+		// sets the bool 'isFrontsideUp' to its opposite value
+		that.isFrontsideUp = !that.isFrontsideUp;
 	};
 
 	return that;
