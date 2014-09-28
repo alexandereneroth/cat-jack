@@ -9,24 +9,9 @@ game.getCard = function (rank, suit) {
 	function getName() {
 		var rankWord = '';
 		var suitWord = '';
-		if (rank === '2') {
-			rankWord = 'Tow';
-		} else if (rank === '3') {
-			rankWord = 'Three';
-		} else if (rank === '4') {
-			rankWord = 'Four';
-		} else if (rank === '5') {
-			rankWord = 'Five';
-		} else if (rank === '6') {
-			rankWord = 'Six';
-		} else if (rank === '7') {
-			rankWord = 'Seven';
-		} else if (rank === '8') {
-			rankWord = 'Eight';
-		} else if (rank === '9') {
-			rankWord = 'Nine';
-		} else if (rank === '10') {
-			rankWord = 'Ten';
+
+		if (!isNaN(Number(rank))) { // 2 3 4 5 6 7 8 9 10
+			rankWord = rank;
 		} else if (rank === 'A') {
 			rankWord = 'Ace';
 		} else if (rank === 'J') {
@@ -153,10 +138,10 @@ game.getCard = function (rank, suit) {
 
 	that.backside = [
 		' ______ ',
+		'|\u262F   \u262F|',
 		'|         |',
 		'|         |',
-		'|         |',
-		'|         |',
+		'|\u262F   \u262F|',
 		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
 
