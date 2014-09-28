@@ -152,12 +152,12 @@ game.getCard = function (rank, suit) {
 	];
 
 	that.backside = [
-		'  .  .  .  ',
-		'.         .',
-		'.         .',
-		'.         .',
-		' .  .  . .   ',
-		''
+		' ______ ',
+		'|         |',
+		'|         |',
+		'|         |',
+		'|         |',
+		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
 	];
 
 	that.toString = function () {
