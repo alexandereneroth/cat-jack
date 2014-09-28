@@ -7,26 +7,36 @@ game.getCard = function (rank, suit) {
 
 	// Returns a simple text representation of the card
 	function getName() {
-		var numberRankWords = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven',
-			'Eight', 'Nine', 'Ten'
-		];
 		var rankWord = '';
 		var suitWord = '';
-
-		if (isNaN(Number(rank)) === false) {
-			rankWord = numberRankWords[Number(rank) - 2];
+		if (rank === '2') {
+			rankWord = 'Tow';
+		} else if (rank === '3') {
+			rankWord = 'Three';
+		} else if (rank === '4') {
+			rankWord = 'Four';
+		} else if (rank === '5') {
+			rankWord = 'Five';
+		} else if (rank === '6') {
+			rankWord = 'Six';
+		} else if (rank === '7') {
+			rankWord = 'Seven';
+		} else if (rank === '8') {
+			rankWord = 'Eight';
+		} else if (rank === '9') {
+			rankWord = 'Nine';
+		} else if (rank === '10') {
+			rankWord = 'Ten';
+		} else if (rank === 'A') {
+			rankWord = 'Ace';
+		} else if (rank === 'J') {
+			rankWord = 'Jack';
+		} else if (rank === 'Q') {
+			rankWord = 'Queen';
+		} else if (rank === 'K') {
+			rankWord = 'King';
 		} else {
-			if (rank === 'A') {
-				rankWord = 'Ace';
-			} else if (rank === 'J') {
-				rankWord = 'Jack';
-			} else if (rank === 'Q') {
-				rankWord = 'Queen';
-			} else if (rank === 'K') {
-				rankWord = 'King';
-			} else {
-				throw 'game.getCard > getName > invalid rank!';
-			}
+			throw 'game.getCard > getName > invalid rank!';
 		}
 		if (suit === 'H') {
 			suitWord = 'Hearts';
