@@ -2,32 +2,32 @@
 var game = {
 	player: {},
 	dealer: {},
-	name: 'Twenty One BlackJack',
 	gameOver: false,
 	isPlayerRound: true,
-	isFirstRound: true,
 
 	startGame: function () {
 		// Reset game round variables
 		game.isPlayerRound = true;
-		game.isFirstRound = true;
 
 		// Main game function calls
 		game.dealer.setNumberOfCardDecks(4);
 		game.dealer.shuffleDeck();
 
-		game.dealer.dealFirstHand(game.player);
 		game.playerRound();
 		game.dealerRound();
+
+		// declareWinner takes a whole array so we can implement more
+		// players in the future
 		game.dealer.declareWinner([game.player]);
 	},
 
 	playerRound: function () {
-		var isFirstRound = true;
 		var roundOver = false;
 		var message = '';
 		var focusMessage = 'a) Hit    b) Stand';
 		var choice;
+
+		// Welcome Cat AlertBox
 		alert(
 			'         --------------------------------  \n' +
 			'       (   Welcome to a new game of CatJack!   )\n' +
@@ -47,11 +47,16 @@ var game = {
 			'       )  )\n' +
 			'      (_(');
 
+
+		// Prepare player to start the game
+		alert(game.getEmptyGameStatus('Press OK to start the game..'));
+
+		// Deal first hand 
+		game.dealer.dealFirstHand(game.player);
+
+
 		// If round is not over
 		while (!roundOver) {
-			if (isFirstRound) {
-
-			}
 
 			// Check if player is Bust or has BlackJack
 			var totValue = game.player.getHand().getTotalValue();
@@ -92,6 +97,30 @@ var game = {
 		game.dealer.playRound();
 	},
 
+
+	// Returns empty gameStatus string
+	getEmptyGameStatus: function (focusMessage) {
+		var gameStatus = '';
+
+		// Create empty gameStatus
+		gameStatus += game.dealer.getName() + '\'s hand:\n';
+		gameStatus += '\n\n\n\n' + 'Value: 0\n\n';
+
+		gameStatus += '\n';
+
+		gameStatus += game.player.getName() + '\'s hand:\n';
+		gameStatus += gameStatus += '\n\n\n\n' + 'Value: 0\n\n';
+
+		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
+		gameStatus += '\n';
+		gameStatus += focusMessage + '\n';
+		gameStatus += '\n';
+		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
+
+		return gameStatus;
+	},
+
+
 	// Creates and returns string with game status
 	getGameStatusMessage: function (focusMessage) {
 		var gameStatus = '';
@@ -105,15 +134,9 @@ var game = {
 		// If it is the players round, show one card backside up,
 		// and only one cards value.
 		if (game.isPlayerRound) {
-			if (dealerHand.getCard(1).isFrontsideUp) {
-				dealerHand.getCard(1).flip();
-			}
 			dealerHandValue = dealerHand.getCard(0).value;
 		} else {
-			//flip it back
-			if (dealerHand.getCard(1).isFrontsideUp === false) {
-				dealerHand.getCard(1).flip();
-			}
+			dealerHandValue = dealerHand.getTotalValue();
 		}
 
 		// Add cards and special alert to message
@@ -136,7 +159,8 @@ var game = {
 		return gameStatus;
 	},
 
-	// Trims and checks user choice, returns 0 if choice is invalid or -1 if user has canceled
+	// Trims and checks user choice, returns 0 if choice is invalid
+	// or -1 if user has canceled.
 	checkChoice: function (choice) {
 		if (choice !== null) {
 			choice = choice.toLowerCase().trim();
