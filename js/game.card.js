@@ -129,6 +129,9 @@ game.getCard = function (rank, suit) {
 	that.name = (getName());
 	that.isFrontsideUp = true; // used for representing flipping of the card
 
+	// It's important that frontside and backside have the same amount of rows
+	// so that methods iterating over both of them (for example) can treat  
+	// them as interchangable.
 	that.frontside = [
 		' ______ ',
 		getPictureTopRow(rank),
@@ -161,18 +164,13 @@ game.getCard = function (rank, suit) {
 	};
 
 	that.getPictureString = function () {
-		var upside;
-		if (that.isFrontsideUp) {
-			upside = that.frontside;
-		} else {
-			upside = that.backside;
-		}
+		var upside = that.getPictureArray();
 
-		var picture = '';
+		var pictureString = '';
 		for (var i = 0; i < upside.length; ++i) {
-			picture += upside[i] + '\n';
+			pictureString += upside[i] + '\n';
 		}
-		return picture;
+		return pictureString;
 	};
 
 	that.flip = function () {
