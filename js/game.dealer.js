@@ -63,21 +63,26 @@ game.createDealer = function (dealerName) {
 
 		// Reveal hidden card before drawing
 		hand.getCard(1).flip();
+		that.updateAlert();
 		alert(game.getGameStatusMessage('Dealer reveals: ' + hand.getCards()[1] + '.'));
 
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
 
-			if (hand.getTotalValue > 21) {
-				game.dealerAlert = ' - Bust!';
-			} else if (hand.getTotalValue === 21) {
-				game.dealerAlert = ' - CatJack!';
-			} else if (hand.getTotalValue > 16) {
-				game.dealerAlert = ' - Stand';
-			}
+			that.updateAlert();
 
 			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard + '.'));
+		}
+	};
+
+	that.updateAlert = function () {
+		if (hand.getTotalValue > 21) {
+			game.dealerAlert = ' - Bust!';
+		} else if (hand.getTotalValue === 21) {
+			game.dealerAlert = ' - CatJack!';
+		} else if (hand.getTotalValue > 16) {
+			game.dealerAlert = ' - Stand';
 		}
 	};
 
