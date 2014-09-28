@@ -109,7 +109,7 @@ var game = {
 		gameStatus += '\n';
 
 		gameStatus += game.player.getName() + '\'s hand:\n';
-		gameStatus += gameStatus += '\n\n\n\n' + 'Value: 0\n\n';
+		gameStatus += '\n\n\n\n' + 'Value: 0\n\n';
 
 		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
 		gameStatus += '\n';
