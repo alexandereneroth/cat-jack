@@ -69,6 +69,14 @@ game.createDealer = function (dealerName) {
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
 
+			if (hand.getTotalValue > 21) {
+				game.dealerAlert = ' - Bust!';
+			} else if (hand.getTotalValue === 21) {
+				game.dealerAlert = ' - CatJack!';
+			} else if (hand.getTotalValue > 16) {
+				game.dealerAlert = ' - Stand';
+			}
+
 			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard + '.'));
 		}
 	};
