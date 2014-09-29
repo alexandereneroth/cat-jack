@@ -91,12 +91,20 @@ game.createDealer = function (dealerName) {
 		// Determine the winner(s).
 		var winningHandValue = 0;
 		var winnerNames = [];
+		var dealerHasStood = false;
+		var dealerHasBusted = false;
 
 		// if the dealer has a possibility of winning
 		if (hand.getTotalValue() < 22) {
 			// initialize with the dealer as the winner.
 			winningHandValue = hand.getTotalValue();
 			winnerNames = [name];
+			if (game.dealerAlert === ' - Stand') {
+				dealerHasStood = true;
+			} else if (game.dealerAlert === ' - Bust!') {
+				dealerHasBusted = true;
+			}
+			game.dealerAlert = ' - Winner!';
 		}
 
 		for (var i = 0; i < playerArray.length; i++) {
@@ -108,10 +116,21 @@ game.createDealer = function (dealerName) {
 				winningHandValue = playerHandValue;
 				winnerNames = []; //empties the array
 				winnerNames.push(playerArray[i].getName());
+				game.playerAlert = ' - Winner!';
+
+				// Reset dealerAlert if player has the winning hand.
+				if (dealerHasBusted) {
+					game.dealerAlert = ' - Bust!';
+				} else if (dealerHasStood) {
+					game.dealerAlert = ' - Stand';
+				}
+
 				// Or if this player has the same as the best hand value so far
 			} else if (playerHandValue === winningHandValue) {
 				//add it to the list of winnerNames
 				winnerNames.push(playerArray[i].getName());
+				game.dealerAlert = ' - Tied!';
+				game.playerAlert = ' - Tied!';
 			}
 		}
 		// Print out the winner(s).
