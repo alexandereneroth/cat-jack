@@ -4,6 +4,8 @@ var game = {
 	dealer: {},
 	gameOver: false,
 	isPlayerRound: true,
+	playerAlert: '',
+	dealerAlert: '',
 
 	startGame: function () {
 		// Reset game round variables
@@ -61,14 +63,16 @@ var game = {
 			// Check if player is Bust or has BlackJack
 			var totValue = game.player.getHand().getTotalValue();
 			if (totValue === 21) {
-				focusMessage = 'BlackJack!';
+				focusMessage = 'CatJack!';
+				game.playerAlert = ' - CatJack!';
 				roundOver = true;
 			} else if (totValue > 21) {
 				focusMessage = 'Bust!';
+				game.playerAlert = ' - Bust!';
 				roundOver = true;
 			}
 
-			message = game.getGameStatusMessage(focusMessage);
+			message = game.getGameStatusMessage(focusMessage, game.dealerAlert, game.playerAlert);
 
 			// If this is not the last round
 			if (!roundOver) { // Prompt the player and let him hit or stand
@@ -77,6 +81,7 @@ var game = {
 					game.dealer.dealCardTo(game.player.getHand(), 1);
 				} else if (choice === 'stand') {
 					roundOver = true;
+					game.playerAlert = ' - Stand';
 				} else if (choice === 0) {
 					focusMessage = 'Incorrect input!\na) Hit    b) Stand';
 				} else if (choice === -1) {
@@ -142,13 +147,13 @@ var game = {
 		// Add cards and special alert to message
 		gameStatus += game.dealer.getName() + '\'s hand:\n';
 		gameStatus += dealerHand.getCardString() + 'Value: ' +
-			dealerHandValue + '\n\n';
+			dealerHandValue + game.dealerAlert + '\n\n';
 
 		gameStatus += '\n';
 
 		gameStatus += game.player.getName() + '\'s hand:\n';
 		gameStatus += game.player.getHand().getCardString() + 'Value: ' +
-			game.player.getHand().getTotalValue() + '\n\n';
+			game.player.getHand().getTotalValue() + game.playerAlert + '\n\n';
 
 		gameStatus += '- - - - - - - - - - - - - - - - - -' + '\n';
 		gameStatus += '\n';
