@@ -69,7 +69,6 @@ game.createDealer = function (dealerName) {
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
-
 			that.updateAlert();
 
 			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard + '.'));
