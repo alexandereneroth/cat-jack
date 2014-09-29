@@ -57,6 +57,16 @@ game.createDealer = function (dealerName) {
 	};
 
 
+	that.updateAlert = function () {
+		if (hand.getTotalValue() > 21) {
+			game.dealerAlert = ' - Bust!';
+		} else if (hand.getTotalValue() === 21) {
+			game.dealerAlert = ' - CatJack!';
+		} else if (hand.getTotalValue() > 16) {
+			game.dealerAlert = ' - Stand';
+		}
+	};
+
 	// Draw cards until the hands value is 17 or above, and under 22.
 	that.playRound = function () {
 		var drawnCard;
@@ -73,16 +83,7 @@ game.createDealer = function (dealerName) {
 
 			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard + '.'));
 		}
-	};
-
-	that.updateAlert = function () {
-		if (hand.getTotalValue > 21) {
-			game.dealerAlert = ' - Bust!';
-		} else if (hand.getTotalValue === 21) {
-			game.dealerAlert = ' - CatJack!';
-		} else if (hand.getTotalValue > 16) {
-			game.dealerAlert = ' - Stand';
-		}
+		that.updateAlert();
 	};
 
 
