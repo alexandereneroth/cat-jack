@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset='utf-8'/>
+		<title></title>
+		<!-- <script src='js/script.js'></script> -->
+		<link rel='stylesheet' type='text/css' href='normalize.css'/>
+		<style>
+			
+			#window {
+				padding: 66px;
+			}
+			#table  {
+				background-color: green;
+				max-width: 1250px;
+				min-width: 956px;
+				height: 1200px;
+				margin-left: auto;
+				margin-right: auto;
+				border: 2px solid black;
+			}
+			.card-area {
+				height: 300px;
+			}
+			#dealer {
+				/*background-color: black;*/
+				border: 2px solid white;
+				width: 85%;
+				float: left;
+			}
+			#deck {
+				background-color: yellow;
+				width: 13%;
+				height: 300px;
+				float: right;
+			}
+			#deck img{
+				position: static;
+				float: right;
+				margin: 20px;
+
+			}
+			.clear-fix {
+				clear: both;
+			}
+			#scoreboard {
+				text-align: center;
+				/*background-color: red;*/
+				width: 100%;
+				height: 80px;
+
+			}
+			#scoreboard h2 {
+				
+				padding-top: 10px;
+			}
+			#player {
+				/*background-color: black;*/
+				border: 2px solid white;
+				width: 85%;
+				float: left;
+			}
+				
+			#buttons {
+
+				/*background-color: purple;*/
+				width: 100%;
+				height: 100px;
+				text-align: center;
+
+			}
+			#buttons li {
+				display: inline;
+				width: 80px;
+				height: 30px;
+
+				background-color: #ff8;
+				border: 1px solid black;
+				border-radius: 10px;
+				padding: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			#buttons li:hover{
+				background-color: #ffe;
+			}
+			h1 {
+				width: 100%;
+				text-align: center;
+				font-style: italic;
+			}
+			ul {
+				margin: 0px;
+				padding: 35px;
+				list-style-type: none;
+			}
+			img {
+				height: 180px;
+				position: relative;
+				top: 0px;
+				left: 0px;
+				margin: 20px;
+				margin-top: 60px;
+				margin-right: 0px;
+			}
+			dl {
+				margin: 0px;
+			}
+
+
+		</style>
+	</head>
+	<body>
+	
+	<div id='window'>
+		<div id='table'>
+			<h1>Welcome to CatJack!</h1>
+			
+			<div id='dealer' class='card-area'>
+				<img src='queen_of_clubs.svg'/>
+				<img src='queen_of_clubs.svg'/>
+				<img src='queen_of_clubs.svg'/>
+				<img src='queen_of_clubs.svg'/>
+			</div>
+			<div id='deck'>
+				<img src='queen_of_clubs.svg'/>
+			</div>
+			<div class='clear-fix'></div>
+			<div id='scoreboard'>
+				<dl>
+					<dt>Dealer</dt>
+					<dd>Value</dd>
+					<dt>Player</dt>
+					<dd>Value</dd>
+				</dl>
+			</div>
+			
+			<div id='player' class='card-area'>
+			<img src='queen_of_clubs.svg'/>
+			<img src='queen_of_clubs.svg'/>
+			<img src='queen_of_clubs.svg'/>
+			<img src='queen_of_clubs.svg'/>
+			<img src='queen_of_clubs.svg'/>
+			<img src='queen_of_clubs.svg'/>
+			</div>
+			<div class='clear-fix'></div>
+			<div id='buttons'>
+			<ul>
+				<li>Hit</li>
+				<li>Stand</li>
+			</ul>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	</body>
+</html>
