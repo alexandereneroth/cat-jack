@@ -120,9 +120,12 @@ game.getCard = function (rank, suit) {
 
 	that.rank = rank;
 	that.suit = suit;
-	that.value = (getValue());
-	that.name = (getName());
+	that.value = getValue();
+	that.name = getName();
 	that.isFrontsideUp = true; // used for representing flipping of the card
+	// that.imgUrl = getUrl();
+
+	// that.getUrl =
 
 	// It's important that frontside and backside have the same amount of rows
 	// so that methods iterating over both of them (for example) can treat  
