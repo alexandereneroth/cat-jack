@@ -39,16 +39,16 @@ game.createDealer = function (dealerName) {
 	};
 
 	that.dealCardTo = function (hand, numberOfCards) {
-		function makeCard(card) {
+		function makeCardImgTag(card) {
 			var cardImg = document.createElement('img');
 			cardImg.src = card.url;
 			cardImg.style.height = '111px';
 			return cardImg;
 		}
-		var cardDiv = document.querySelector('.card');
+		var cardDiv = document.querySelector('.card-area');
 		for (var x = 0; x < numberOfCards; x++) {
 			var drawnCard = deck.pop();
-			cardDiv.appendChild(makeCard(drawnCard));
+			cardDiv.appendChild(makeCardImgTag(drawnCard));
 			hand.addCard(drawnCard);
 		}
 	};

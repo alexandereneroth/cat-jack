@@ -1,78 +1,54 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Cat Jack</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
-</head>
-<body>
-<div class="card"></div>
+<html lang='en'>
+	<head>
+		<meta charset='utf-8'/>
+		<title>CatJack</title>
+		<link rel='stylesheet' type='text/css' href='css/normalize.css'/>
+		<link rel='stylesheet' type='text/css' href='css/main.css'/>
+	</head>
+	<body>
+	
+	<div id='window'>
+		<div id='table'>
+			<h1>Welcome to CatJack!</h1>
+			
+			<div id='dealer' class='card-area'>
+			</div>
+			<div id='deck'>
+			</div>
+			<div class='clear-fix'></div>
+			<div id='scoreboard'>
+				<dl>
+					<dt>Dealer</dt>
+					<dd>Value</dd>
+					<dt>Player</dt>
+					<dd>Value</dd>
+				</dl>
+			</div>
+			
+			<div id='player' class='card-area'>
+			</div>
+			
+			<div class='clear-fix'></div>
+			<div id='buttons'>
+			<ul>
+				<li>Hit</li>
+				<li>Stand</li>
+			</ul>
 
-<script>
-	// 'use strict';
-	// function getUrl(rank, suit) {
-	// 	switch (suit) {
-	// 		case 'H':
-	// 			suit = 'hearts';
-	// 			break;
-	// 		case 'D':
-	// 			suit = 'diamonds';
-	// 			break;
-	// 		case 'C':
-	// 			suit = 'clubs';
-	// 			break;
-	// 		case 'S':
-	// 			suit = 'spades';
-	// 			break;
-	// 	}
-
-	// 	switch (rank) {
-	// 		case 'J':
-	// 			rank = 'jack';
-	// 			break;
-	// 		case 'Q':
-	// 			rank = 'queen';
-	// 			break;
-	// 		case 'K':
-	// 			rank = 'king';
-	// 			break;
-	// 		case 'A':
-	// 			rank = 'ace';
-	// 			break;
-	// 	}
-	// 	return 'img/cards/' + rank +'_of_' + suit + '.svg';
-	// }
-
-	// function makeCard(rank, suit) {
-	// 	var cardImg = document.createElement('img');
-	// 	cardImg.src = getUrl(rank, suit);
-	// 	cardImg.style.height = '111px';
-	// 	return cardImg;
-	// }
-
-	// var cardDiv = document.querySelector('.card');
-
-	// var ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-	// var suits = ['H', 'S', 'C', 'D'];
-
-	// for (var j = 0; j < ranks.length; j++) {
-	// 	for (var k = 0; k < suits.length; k++) {
-	// 		cardDiv.appendChild(makeCard(ranks[j], suits[k]));
-	// 	}
-	// }
-
-</script>
+			</div>
+		</div>
+	</div>
 
 
-<!-- <script src="js/main.js"></script> -->
+	<!-- Load JavaScript Files -->
+	<script src="js/game.js"></script>
+	<script src="js/game.card.js"></script>
+	<script src="js/game.deck.js"></script>
+	<script src="js/game.hand.js"></script>
+	<script src="js/game.dealer.js"></script>
+	<script src="js/game.player.js"></script>
+	<script src="js/game.play.js"></script>
 
-<script src="js/game.js"></script>
-<script src="js/game.card.js"></script>
-<script src="js/game.deck.js"></script>
-<script src="js/game.hand.js"></script>
-<script src="js/game.dealer.js"></script>
-<script src="js/game.player.js"></script>
-<script src="js/game.play.js"></script>
-</body>
+	</body>
 </html>
-
-
