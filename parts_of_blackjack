@@ -1,8 +1,0 @@
-player turn
-	choses to hit
-	player choses to stay
-
-players finished
-	a player is under 22
-		house draws cards until the outcome of the game is determined
-game over

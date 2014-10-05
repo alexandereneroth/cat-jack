@@ -6,5 +6,3 @@ game.play = function () {
 	game.dealer = game.createDealer('Joe the Dealer');
 	game.startGame();
 };
-
-game.play();

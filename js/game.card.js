@@ -115,13 +115,49 @@ game.getCard = function (rank, suit) {
 		return spaces;
 	}
 
+	function makeUrl(rank, suit) {
+		switch (suit) {
+		case 'H':
+			suit = 'hearts';
+			break;
+		case 'D':
+			suit = 'diamonds';
+			break;
+		case 'C':
+			suit = 'clubs';
+			break;
+		case 'S':
+			suit = 'spades';
+			break;
+		}
+
+		switch (rank) {
+		case 'J':
+			rank = 'jack';
+			break;
+		case 'Q':
+			rank = 'queen';
+			break;
+		case 'K':
+			rank = 'king';
+			break;
+		case 'A':
+			rank = 'ace';
+			break;
+		}
+		var url = 'img/cards/' + rank + '_of_' + suit + '.svg';
+		console.log(url);
+		return url;
+	}
+
 	//    ______________________
 	//___/        PUBLIC        \___
 
 	that.rank = rank;
 	that.suit = suit;
-	that.value = (getValue());
-	that.name = (getName());
+	that.value = getValue();
+	that.name = getName();
+	that.url = makeUrl(rank, suit);
 	that.isFrontsideUp = true; // used for representing flipping of the card
 
 	// It's important that frontside and backside have the same amount of rows
