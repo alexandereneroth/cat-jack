@@ -82,7 +82,6 @@ game.getCard = function (rank, suit) {
 			break;
 		}
 		var url = 'img/cards/' + rank + '_of_' + suit + '.svg';
-		console.log(url);
 		return url;
 	}
 

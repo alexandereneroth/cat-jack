@@ -1,3 +1,5 @@
+/*globals game:true */
+
 'use strict';
 var game = {
 	player: {},
@@ -14,6 +16,7 @@ var game = {
 		// Main game function calls
 		game.dealer.setNumberOfCardDecks(4);
 		game.dealer.shuffleDeck();
+
 
 		game.playerRound();
 		game.dealerRound();
@@ -70,6 +73,14 @@ var game = {
 				alert(message);
 			}
 		}
+	},
+
+	hit: function () {
+		console.log('hit');
+	},
+
+	stand: function () {
+		console.log('stand');
 	},
 
 	dealerRound: function () {

@@ -23,6 +23,7 @@
       "prompt": false,
       "alert": false,
       "game": false,
-      "_": false
+      "_": false,
+      "$": false
   }
 }

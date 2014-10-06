@@ -1,6 +1,6 @@
 'use strict';
 
-game.ui = function () {
+game.ui = (function () {
 	var that = {
 		makeCardImgTag: function (card) {
 			var cardImg = document.createElement('img');
@@ -11,4 +11,4 @@ game.ui = function () {
 	};
 
 	return that;
-};
+})();
