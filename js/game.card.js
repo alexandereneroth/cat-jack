@@ -51,70 +51,6 @@ game.getCard = function (rank, suit) {
 		return value; // 2 3 4 5 6 7 8 9 10
 	}
 
-	// Returns different special unicode pictogram suit symbols,
-	// depending on what suit the card is of.
-	function getSuitSymbol() {
-		if (suit === 'H') {
-			return '\u2665';
-		} else if (suit === 'S') {
-			return '\u2660';
-		} else if (suit === 'C') {
-			return '\u2663';
-		} else if (suit === 'D') {
-			return '\u2666';
-		} else {
-			// Shows the string (which is throwed) as an  
-			// error message if this line is ever reached
-			throw 'game.getCard > getSuitSymbol > invalid suit!';
-		}
-	}
-
-	// @returns The top row part of the ASCII-art card picture
-	function getPictureTopRow() {
-		var row = '|';
-		// 'J' looks better if it is indented 1 space into the card
-		if (rank === 'J') {
-			row += ' ';
-
-		}
-		// Tens have two symbols in their rank, and thus require less spaces
-		if (rank === '10') {
-			row += rank + getSpaces(3);
-
-		} else {
-			row += rank + getSpaces(5);
-		}
-
-		return row + getSuitSymbol() + '|';
-	}
-
-	// @returns The bottom row part of the ASCII-art card picture 
-	// (reversed order of the top row)
-	function getPictureBottomRow() {
-		var row = '|' + getSuitSymbol();
-		if (rank === '10') {
-
-			row += getSpaces(3) + rank;
-
-		} else {
-
-			row += getSpaces(5) + rank;
-		}
-		if (rank === 'J') {
-			row += ' ';
-		}
-
-		return row + '|';
-	}
-
-	function getSpaces(amount) {
-		var spaces = '';
-		while (amount-- > 0) {
-			spaces += ' ';
-		}
-		return spaces;
-	}
-
 	function makeUrl(rank, suit) {
 		switch (suit) {
 		case 'H':
@@ -160,48 +96,9 @@ game.getCard = function (rank, suit) {
 	that.url = makeUrl(rank, suit);
 	that.isFrontsideUp = true; // used for representing flipping of the card
 
-	// It's important that frontside and backside have the same amount of rows
-	// so that methods iterating over both of them (for example) can treat  
-	// them as interchangable.
-	that.frontside = [
-		' ______ ',
-		getPictureTopRow(rank),
-		'|         |',
-		'|         |',
-		getPictureBottomRow(rank),
-		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
-	];
-
-	that.backside = [
-		' ______ ',
-		'|\u262F   \u262F|',
-		'|         |',
-		'|         |',
-		'|\u262F   \u262F|',
-		' \uFFE3\uFFE3\uFFE3 ' //code for the special character 'FULLWIDTH MACRON'.
-	];
 
 	that.toString = function () {
 		return that.name;
-	};
-
-	// Returns the backside or the frontside, depending on how the card is flipped.
-	that.getPictureArray = function () {
-		if (that.isFrontsideUp) {
-			return that.frontside;
-		} else {
-			return that.backside;
-		}
-	};
-
-	that.getPictureString = function () {
-		var upside = that.getPictureArray();
-
-		var pictureString = '';
-		for (var i = 0; i < upside.length; ++i) {
-			pictureString += upside[i] + '\n';
-		}
-		return pictureString;
 	};
 
 	that.flip = function () {
