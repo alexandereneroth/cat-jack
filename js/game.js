@@ -17,23 +17,20 @@ var game = {
 		game.dealer.setNumberOfCardDecks(4);
 		game.dealer.shuffleDeck();
 
-
-		game.playerRound();
-		game.dealerRound();
-
+		game.dealer.dealFirstHand(game.player);
 		// declareWinner takes a whole array so we can implement more
 		// players in the future
-		game.dealer.declareWinner([game.player]);
+		// game.dealer.declareWinner([game.player]);
 	},
 
 	playerRound: function () {
-
-
 		// Deal first hand 
 		game.dealer.dealFirstHand(game.player);
 	},
 
 	hit: function () {
+		game.dealer.dealFirstHand(game.player);
+		game.playerRound();
 		console.log('hit');
 	},
 

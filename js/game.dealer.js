@@ -53,6 +53,8 @@ game.createDealer = function (dealerName) {
 
 		// Hide the second dealer card until dealer.playRound() is called
 		hand.getCard(1).flip();
+		game.ui.showCards('player', game.player.getHand().getCards());
+		game.ui.showCards('dealer', hand.getCards());
 	};
 
 

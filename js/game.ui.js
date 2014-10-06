@@ -9,7 +9,7 @@ game.ui = (function () {
 			return cardImg;
 		},
 		showCards: function (playerType, cardsToShow) {
-			if (playerType === 'player' || playerType === 'computer') {
+			if (playerType === 'player' || playerType === 'dealer') {
 
 				var cardElements = [];
 				var cardImgTag;

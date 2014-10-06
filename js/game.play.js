@@ -1,6 +1,6 @@
 'use strict';
 
-game.play = function () {
+$(function () {
 	// game.player = game.createPlayer(prompt('Please enter your name:'));
 	game.player = game.createPlayer('Player');
 	game.dealer = game.createDealer('Joe the Dealer');
@@ -15,4 +15,4 @@ game.play = function () {
 	});
 
 
-};
+});
