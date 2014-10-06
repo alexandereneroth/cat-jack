@@ -17,11 +17,15 @@ game.ui = (function () {
 					cardImgTag = that.makeCardImgTag(cardsToShow[i]);
 					cardElements.push(cardImgTag);
 				}
-				$('#player').append(cardElements);
+				if (playerType === 'player') {
+					$('#player').append(cardElements);
+				} else {
+					$('#dealer').append(cardElements);
+				}
 
 
 			} else {
-				throw 'playerType has to be either "computer" or "player"';
+				throw 'playerType has to be either "dealer" or "player"';
 			}
 		}
 	};
