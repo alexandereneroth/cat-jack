@@ -39,11 +39,8 @@ game.createDealer = function (dealerName) {
 	};
 
 	that.dealCardTo = function (hand, numberOfCards) {
-
-		var cardDiv = document.querySelector('.card-area');
 		for (var x = 0; x < numberOfCards; x++) {
 			var drawnCard = deck.pop();
-			cardDiv.appendChild(makeCardImgTag(drawnCard));
 			hand.addCard(drawnCard);
 		}
 	};
