@@ -1,61 +1,45 @@
 #window {
-	padding: 66px;
+	padding: 33px;
+	background-color: #557F2C;
 }
+
 #table  {
-	background-color: green;
-	max-width: 1250px;
-	min-width: 956px;
-	height: 1200px;
+	background-color: #7FBF42;
+	width: 777px;
+	height: 650px;
 	margin-left: auto;
 	margin-right: auto;
 	border: 2px solid black;
+	box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.73);
 }
+
 .card-area {
-	height: 300px;
-}
-#dealer {
-	/*background-color: black;*/
-	border: 2px solid white;
-	width: 85%;
+	margin-left: 50px;
+	height: 130px;
+	border: 2px solid black;
+	width: 90%;
 	float: left;
 }
-#deck {
-	background-color: yellow;
-	width: 13%;
-	height: 300px;
-	float: right;
-}
-#deck img{
-	position: static;
-	float: right;
-	margin: 20px;
 
-}
-.clear-fix {
-	clear: both;
+#middle-box {
+	width: 100%;
+	overflow: hidden;
+	margin: 33px;
 }
 #scoreboard {
-	text-align: center;
-	/*background-color: red;*/
-	width: 100%;
+	text-align: left;
+	width: 222px;
 	height: 80px;
-
-}
-#scoreboard h2 {
-	
-	padding-top: 10px;
-}
-#player {
-	/*background-color: black;*/
-	border: 2px solid white;
-	width: 85%;
 	float: left;
+	margin: 20px;
 }
+
 #message-area {
-	width: 13%;
-	height: 300px;
-	float:right;
-	background-color: #f3e;
+	width: 300px;
+	height: 100px;
+	float: left;
+	border: 1px solid #2A4016;
+
 }
 #message-area p{
 	padding: 10px;
@@ -92,7 +76,7 @@ h1 {
 }
 ul {
 	margin: 0px;
-	padding: 35px;
+	padding: 0px;
 	list-style-type: none;
 }
 img {
@@ -101,9 +85,9 @@ img {
 	top: 0px;
 	left: 0px;
 	margin: 20px;
-	margin-top: 60px;
 	margin-right: 0px;
 }
-dl {
-	margin: 0px;
+
+.clear-fix {
+	clear: both;
 }

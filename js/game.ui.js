@@ -5,7 +5,7 @@ game.ui = (function () {
 		makeCardImgTag: function (card) {
 			var cardImg = document.createElement('img');
 			cardImg.src = card.url;
-			cardImg.style.height = '111px';
+			cardImg.style.height = '100px';
 			return cardImg;
 		},
 		showCards: function (playerType, cardsToShow) {
@@ -18,8 +18,10 @@ game.ui = (function () {
 					cardElements.push(cardImgTag);
 				}
 				if (playerType === 'player') {
+					$('#player').empty();
 					$('#player').append(cardElements);
 				} else {
+					$('#dealer').empty();
 					$('#dealer').append(cardElements);
 				}
 

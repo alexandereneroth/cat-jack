@@ -23,14 +23,11 @@ var game = {
 		// game.dealer.declareWinner([game.player]);
 	},
 
-	playerRound: function () {
-		// Deal first hand 
-		game.dealer.dealFirstHand(game.player);
-	},
+	playerRound: function () {},
 
 	hit: function () {
-		game.dealer.dealFirstHand(game.player);
-		game.playerRound();
+		game.dealer.dealCardTo(game.player.getHand(), 1);
+		game.dealer.dealCardTo(game.dealer.getHand(), 1);
 		console.log('hit');
 	},
 
@@ -42,4 +39,6 @@ var game = {
 		game.isPlayerRound = false;
 		game.dealer.playRound();
 	},
+
+
 };
