@@ -28,7 +28,6 @@ var game = {
 
 	playerRound: function () {
 		var roundOver = false;
-		var message = '';
 		var focusMessage = 'a) Hit    b) Stand';
 		var choice;
 
@@ -54,7 +53,6 @@ var game = {
 
 			// If this is not the last round
 			if (!roundOver) { // Prompt the player and let him hit or stand
-				choice = game.checkChoice(prompt(message));
 				if (choice === 'hit') {
 					game.dealer.dealCardTo(game.player.getHand(), 1);
 				} else if (choice === 'stand') {
@@ -70,7 +68,6 @@ var game = {
 				}
 			} else { // Else just display an alert with info
 				focusMessage = '';
-				alert(message);
 			}
 		}
 	},

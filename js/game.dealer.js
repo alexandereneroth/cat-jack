@@ -72,17 +72,11 @@ game.createDealer = function (dealerName) {
 
 		// Reveal hidden card before drawing
 		hand.getCard(1).flip();
-		that.updateAlert();
-		alert(game.getGameStatusMessage('Dealer reveals: ' + hand.getCards()[1] + '.'));
 
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
-			that.updateAlert();
-
-			alert(game.getGameStatusMessage('Dealer drew: ' + drawnCard + '.'));
 		}
-		that.updateAlert();
 	};
 
 
@@ -143,7 +137,6 @@ game.createDealer = function (dealerName) {
 		} else {
 			message = 'Everyone busted!';
 		}
-		alert(game.getGameStatusMessage(message));
 	};
 
 	that.getHand = function () {
