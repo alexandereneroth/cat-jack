@@ -51,6 +51,16 @@
 	width: 85%;
 	float: left;
 }
+#message-area {
+	width: 13%;
+	height: 300px;
+	float:right;
+	background-color: #f3e;
+}
+#message-area p{
+	padding: 10px;
+	padding-bottom: 0px;
+}
 	
 #buttons {
 
