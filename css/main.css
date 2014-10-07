@@ -170,12 +170,28 @@ dl dd {
 
 	/*Copy pasted code from http://lea.verou.me/css3patterns/*/
 
-	background-color: #f88;
+	/*background-color: #f88;
 	background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
 	linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
 	linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
 	linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
-	background-size: 6px, 19px, 17px, 35px;
+	background-size: 6px, 19px, 17px, 35px;*/
+	background:
+	linear-gradient(324deg, #5f5 4%,   transparent 4%) -68px 60px,
+	linear-gradient( 36deg, #5f5 4%,   transparent 4%) 32px 60px,
+	linear-gradient( 72deg, #fff 8.5%, transparent 8.5%) 32px 60px,
+	linear-gradient(288deg, #fff 8.5%, transparent 8.5%) -68px 60px,
+	linear-gradient(216deg, #fff 7.5%, transparent 7.5%) -68px 40px,
+	linear-gradient(144deg, #fff 7.5%, transparent 7.5%) 32px 40px,
+
+	linear-gradient(324deg, #5f5 4%,   transparent 4%) -20px 93px,
+	linear-gradient( 36deg, #5f5 4%,   transparent 4%) 80px 93px,
+	linear-gradient( 72deg, #fff 8.5%, transparent 8.5%) 80px 93px,
+	linear-gradient(288deg, #fff 8.5%, transparent 8.5%) -20px 93px,
+	linear-gradient(216deg, #fff 7.5%, transparent 7.5%) -20px 73px,
+	linear-gradient(144deg, #fff 7.5%, transparent 7.5%) 80px 73px;
+	background-color: #5f5;
+	background-size: 100px 100px;
 }
 
 .clear-fix {
