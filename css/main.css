@@ -151,13 +151,31 @@ dl dd {
 	margin-left: 10px;
 	float: left;
 }
-img {
-	height: 180px;
+
+.card { 
+	height: 100px;
 	position: relative;
 	top: 0px;
 	left: 0px;
 	margin: 20px;
 	margin-right: 0px;
+}
+.card-back{
+	display: inline-block;
+	width: 64px;
+	height: 94px;
+
+	border: 3px solid white;
+	border-radius: 3px;
+
+	/*Copy pasted code from http://lea.verou.me/css3patterns/*/
+
+	background-color: #f88;
+	background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+	linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+	linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+	linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+	background-size: 6px, 19px, 17px, 35px;
 }
 
 .clear-fix {

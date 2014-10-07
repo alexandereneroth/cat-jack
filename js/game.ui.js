@@ -17,8 +17,16 @@ game.ui = (function () {
 		makeCardImgTag: function (card) {
 			var cardImg = document.createElement('img');
 			cardImg.src = card.url;
-			cardImg.style.height = '100px';
+			cardImg.className = 'card'; //Jag föreslår att vi bara ändrar stil i css filen som tom sa
+			/*cardImg.style.height = '100px';*/
 			return cardImg;
+		},
+		makeCardEl: function (card) {
+			if (card.isFrontsideUp) {
+				return that.makeCardImgTag(card);
+			} else {
+				return $('<div>').addClass('card card-back');
+			}
 		},
 		showMessage: function (message) {
 			$('#message-area p').text(message);
@@ -29,7 +37,7 @@ game.ui = (function () {
 				var cardElements = [];
 				var cardImgTag;
 				for (var i = 0; i < cardsToShow.length; i++) {
-					cardImgTag = that.makeCardImgTag(cardsToShow[i]);
+					cardImgTag = that.makeCardEl(cardsToShow[i]);
 					cardElements.push(cardImgTag);
 				}
 				if (playerType === 'player') {
