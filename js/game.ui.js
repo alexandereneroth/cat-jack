@@ -8,6 +8,9 @@ game.ui = (function () {
 			cardImg.style.height = '100px';
 			return cardImg;
 		},
+		showMessage: function (message) {
+			$('#message-area p').text(message);
+		},
 		showCards: function (playerType, cardsToShow) {
 			if (playerType === 'player' || playerType === 'dealer') {
 
