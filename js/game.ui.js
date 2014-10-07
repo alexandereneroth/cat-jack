@@ -9,6 +9,11 @@ game.ui = (function () {
 			// Suggestion: have it take the gs.playerCards and gs.dealerCards array
 			// and update them both, no need to check who is being updated.
 		},
+		// TODO: implement updateAlerts()
+		// Suggestion: have it take gs.dealerAlert and gs.playerAlert and update the alertBoxes
+		// in html. OBS. They have not been added yet so you need to do this as well. I suggest
+		// we put them next to the score like before.
+
 		makeCardImgTag: function (card) {
 			var cardImg = document.createElement('img');
 			cardImg.src = card.url;
