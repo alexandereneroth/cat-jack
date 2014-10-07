@@ -102,6 +102,17 @@ ul {
 	padding: 0px;
 	list-style-type: none;
 }
+dl dd, dl dt {
+	display: inline;
+}
+dl dt {
+	clear:left;
+	float: left;
+}
+dl dd {
+	margin-left: 10px;
+	float: left;
+}
 img {
 	height: 180px;
 	position: relative;
