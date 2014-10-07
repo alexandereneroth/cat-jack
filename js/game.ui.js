@@ -32,6 +32,10 @@ game.ui = (function () {
 			} else {
 				throw 'playerType has to be either "dealer" or "player"';
 			}
+		},
+		showScore: function (dealerScore, playerScore) {
+			$('#dealer-score').text(dealerScore);
+			$('#player-score').text(playerScore);
 		}
 	};
 
