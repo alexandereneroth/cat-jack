@@ -2,6 +2,13 @@
 
 game.ui = (function () {
 	var that = {
+		updateBoard: function (gs) {
+			showMessage(gs.focusMessage);
+			showScore(gs.dealerScore, gs.playerScore);
+			// TODO: Implement showCards
+			// Suggestion: have it take the gs.playerCards and gs.dealerCards array
+			// and update them both, no need to check who is being updated.
+		},
 		makeCardImgTag: function (card) {
 			var cardImg = document.createElement('img');
 			cardImg.src = card.url;

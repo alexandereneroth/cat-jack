@@ -4,14 +4,19 @@
 var game = {
 	player: {},
 	dealer: {},
-	gameOver: false,
-	isPlayerRound: true,
 	playerAlert: '',
 	dealerAlert: '',
+	gameState: { // Object to store ui relevant variables for easy access
+		playerScore: 0,
+		dealerScore: 0,
+		dealerCards: [],
+		playerCards: [],
+		dealerAlert: '',
+		playerAlert: '',
+		focusMessage: ''
+	},
 
 	startGame: function () {
-		// Reset game round variables
-		game.isPlayerRound = true;
 
 		// Main game function calls
 		game.dealer.setNumberOfCardDecks(4);
@@ -27,7 +32,9 @@ var game = {
 
 	hit: function () {
 		game.dealer.dealCardTo(game.player.getHand(), 1);
-		game.dealer.dealCardTo(game.dealer.getHand(), 1);
+		if (game.player.getHand().getTotalValue() > 21) {
+
+		}
 		console.log('hit');
 	},
 
