@@ -9,8 +9,12 @@ game.createHand = function () {
 		var card = cards[cardId];
 		if (card.isFrontsideUp) {
 			card.isFrontsideUp = false;
+			// Remove value of card from totalValue when it is hidden
+			totalValue -= card.value;
 		} else {
 			card.isFrontsideUp = true;
+			// Add value of card from totalValue when it is revealed
+			totalValue += card.value;
 		}
 	};
 
