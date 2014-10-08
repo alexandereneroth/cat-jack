@@ -38,10 +38,10 @@ game.createDealer = function (dealerName) {
 		return cards;
 	};
 
-	that.dealCardTo = function (hand, numberOfCards) {
+	that.dealCardTo = function (player, numberOfCards) {
 		for (var x = 0; x < numberOfCards; x++) {
 			var drawnCard = deck.pop();
-			hand.addCard(drawnCard);
+			player.getHand().addCard(drawnCard);
 		}
 		game.updateGameState('');
 		game.ui.updateBoard(game.gameState);
@@ -50,11 +50,11 @@ game.createDealer = function (dealerName) {
 	that.dealFirstHand = function () {
 
 		// House and player gets two cards each.
-		that.dealCardTo(game.player.getHand(), 2);
-		that.dealCardTo(hand, 2);
+		that.dealCardTo(game.player, 2);
+		that.dealCardTo(this, 2);
 
 		// Hide the second dealer card until dealer.playRound() is called
-		hand.getCard(1).flip();
+		hand.flip(1);
 		game.updateGameState('Welcome to a new game!');
 		game.ui.updateBoard(game.gameState);
 	};
@@ -75,7 +75,7 @@ game.createDealer = function (dealerName) {
 		var drawnCard;
 
 		// Reveal hidden card before drawing
-		hand.getCard(1).flip();
+		hand.flip(1);
 
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			drawnCard = deck.pop();

@@ -35,11 +35,12 @@ var game = {
 	playerRound: function () {},
 
 	hit: function () {
-		game.dealer.dealCardTo(game.player.getHand(), 1);
+		console.log('hit');
+
+		game.dealer.dealCardTo(game.player, 1);
 		if (game.player.getHand().getTotalValue() > 21) {
 
 		}
-		console.log('hit');
 	},
 
 	stand: function () {

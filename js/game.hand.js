@@ -5,6 +5,15 @@ game.createHand = function () {
 		numberOfAces = 0,
 		totalValue = 0;
 
+	that.flip = function (cardId) {
+		var card = cards[cardId];
+		if (card.isFrontsideUp) {
+			card.isFrontsideUp = false;
+		} else {
+			card.isFrontsideUp = true;
+		}
+	};
+
 	that.getTotalValue = function () {
 		return totalValue;
 	};

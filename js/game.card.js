@@ -100,13 +100,5 @@ game.getCard = function (rank, suit) {
 		return that.name;
 	};
 
-	that.flip = function () {
-		if (that.isFrontsideUp) {
-			that.isFrontsideUp = false;
-		} else {
-			that.isFrontsideUp = true;
-		}
-	};
-
 	return that;
 };
