@@ -43,7 +43,7 @@ var game = {
 		console.log('hit');
 
 		game.dealer.dealCardTo(game.player, 1);
-		if (game.player.getHand().getTotalValue() > 21) {
+		if (game.playerScore > 21) {
 
 		}
 	},

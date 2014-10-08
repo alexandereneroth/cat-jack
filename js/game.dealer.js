@@ -38,20 +38,20 @@ game.createDealer = function (dealerName) {
 		return cards;
 	};
 
-	that.dealCardTo = function (player, numberOfCards) {
-		for (var x = 0; x < numberOfCards; x++) {
-			var drawnCard = deck.pop();
-			player.getHand().addCard(drawnCard);
-		}
-		game.updateGameState('');
+	that.dealCardTo = function (player) {
+		var drawnCard = deck.pop();
+		player.getHand().addCard(drawnCard);
+		game.updateGameState(player.getName() + ' has received ' + drawnCard);
 		game.ui.updateBoard(game.gameState);
 	};
 
 	that.dealFirstHand = function () {
 
 		// House and player gets two cards each.
-		that.dealCardTo(game.player, 2);
-		that.dealCardTo(this, 2);
+		that.dealCardTo(game.player);
+		that.dealCardTo(game.player);
+		that.dealCardTo(this);
+		that.dealCardTo(this);
 
 		// Hide the second dealer card until dealer.playRound() is called
 		hand.flip(1);
