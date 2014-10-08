@@ -111,7 +111,7 @@ game.getCard = function (rank, suit) {
 		return value;
 	}
 	that.toString = function () {
-		return that.name;
+		return name;
 	};
 
 	return that;
