@@ -43,7 +43,7 @@ game.createDealer = function (dealerName) {
 			var drawnCard = deck.pop();
 			hand.addCard(drawnCard);
 		}
-		game.updateGameState('Dealing cards..');
+		game.updateGameState('');
 		game.ui.updateBoard(game.gameState);
 	};
 
@@ -55,8 +55,8 @@ game.createDealer = function (dealerName) {
 
 		// Hide the second dealer card until dealer.playRound() is called
 		hand.getCard(1).flip();
-		game.ui.showCards('player', game.player.getHand().getCards());
-		game.ui.showCards('dealer', hand.getCards());
+		game.updateGameState('Welcome to a new game!');
+		game.ui.updateBoard(game.gameState);
 	};
 
 
