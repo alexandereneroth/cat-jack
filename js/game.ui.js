@@ -7,7 +7,6 @@ game.ui = (function () {
 			showMessage(gs.focusMessage);
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);
-
 		}
 	};
 
