@@ -5,8 +5,16 @@ game.getCard = function (rank, suit) {
 	//    ______________________
 	//___/       PRIVATE        \___
 
+	var rank = rank;
+	var suit = suit;
+	var value = makeValue();
+	var name = makeName();
+	var isRevealed = true;
+	var url = makeUrl(rank, suit);
+
 	// Returns a simple text representation of the card
-	function getName() {
+	function makeName() {
+
 		var rankWord = '';
 		var suitWord = '';
 
@@ -39,7 +47,7 @@ game.getCard = function (rank, suit) {
 	}
 
 	// Returns the value of the card (in numbers)
-	function getValue() {
+	function makeValue() {
 		var value = Number(rank);
 
 		if (rank === 'A') { // A
@@ -88,14 +96,20 @@ game.getCard = function (rank, suit) {
 	//    ______________________
 	//___/        PUBLIC        \___
 
-	that.rank = rank;
-	that.suit = suit;
-	that.value = getValue();
-	that.name = getName();
-	that.url = makeUrl(rank, suit);
-	that.isFrontsideUp = true; // used for representing flipping of the card
-
-
+	// Mutators
+	that.flip = function () {
+		isRevealed = !isRevealed;
+	};
+	// Accessors
+	that.isRevealed = function () {
+		return isRevealed;
+	};
+	that.getUrl = function () {
+		return url;
+	};
+	that.getValue = function () {
+		return value;
+	}
 	that.toString = function () {
 		return that.name;
 	};

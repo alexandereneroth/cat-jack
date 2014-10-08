@@ -5,16 +5,16 @@ game.createHand = function () {
 		numberOfAces = 0,
 		totalValue = 0;
 
-	that.flip = function (cardId) {
-		var card = cards[cardId];
-		if (card.isFrontsideUp) {
-			card.isFrontsideUp = false;
-			// Remove value of card from totalValue when it is hidden
-			totalValue -= card.value;
-		} else {
-			card.isFrontsideUp = true;
+	that.flip = function (cardIdx) {
+		var card = cards[cardIdx];
+		card.flip();
+
+		if (card.isRevealed()) {
 			// Add value of card from totalValue when it is revealed
-			totalValue += card.value;
+			totalValue += card.getValue();
+		} else {
+			// Remove value of card from totalValue when it is hidden
+			totalValue -= card.getValue();
 		}
 	};
 
@@ -31,10 +31,10 @@ game.createHand = function () {
 
 	that.addCard = function (card) {
 		cards.push(card);
-		totalValue += card.value;
+		totalValue += card.getValue();
 
 		// Ace management
-		if (card.value === 11) { // If the card that was added is an ace
+		if (card.getValue() === 11) { // If the card that was added is an ace
 			numberOfAces++;
 		}
 		if (totalValue > 21) { // If the value of the hand is over 21
