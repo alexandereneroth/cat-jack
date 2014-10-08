@@ -92,9 +92,7 @@ game.getCard = function (rank, suit) {
 	that.suit = suit;
 	that.value = getValue();
 	that.name = getName();
-	that.frontsideUrl = makeUrl(rank, suit);
-	that.backsideUrl = 'img/cards/red_joker.svg';
-	that.url = that.frontsideUrl;
+	that.url = makeUrl(rank, suit);
 	that.isFrontsideUp = true; // used for representing flipping of the card
 
 
@@ -105,10 +103,8 @@ game.getCard = function (rank, suit) {
 	that.flip = function () {
 		if (that.isFrontsideUp) {
 			that.isFrontsideUp = false;
-			that.url = that.backsideUrl;
 		} else {
 			that.isFrontsideUp = true;
-			that.url = that.frontsideUrl;
 		}
 	};
 
