@@ -37,16 +37,16 @@ game.ui = (function () {
 
 	var makeCardImgTag = function (card) {
 		var cardImg = document.createElement('img');
-		cardImg.src = card.url;
+		cardImg.src = card.getUrl();
 		cardImg.className = 'card';
 		return cardImg;
 	};
 
 	var makeCardEl = function (card) {
-		if (card.isFrontsideUp) {
-			return makeCardImgTag(card);
+		if (card.isRevealed()) {
+			return makeCardImgTag(card); //return card frontside
 		} else {
-			return $('<div>').addClass('card card-back');
+			return $('<div>').addClass('card card-back'); //return card backside 
 		}
 	};
 
