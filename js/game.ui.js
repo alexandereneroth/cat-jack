@@ -1,61 +1,53 @@
 'use strict';
 
 game.ui = (function () {
+	// Public function to update UI
 	var that = {
 		updateBoard: function (gs) {
 			showMessage(gs.focusMessage);
-			showScore(gs.dealerScore, gs.playerScore);
-			// TODO: Implement showCards
-			// Suggestion: have it take the gs.playerCards and gs.dealerCards array
-			// and update them both, no need to check who is being updated.
-		},
-		// TODO: implement updateAlerts()
-		// Suggestion: have it take gs.dealerAlert and gs.playerAlert and update the alertBoxes
-		// in html. OBS. They have not been added yet so you need to do this as well. I suggest
-		// we put them next to the score like before.
+			showScore(gs.playerScore, gs.dealerScore);
+			showCards(gs.playerCards, gs.dealerCards);
 
-		makeCardImgTag: function (card) {
-			var cardImg = document.createElement('img');
-			cardImg.src = card.url;
-			cardImg.className = 'card'; //Jag föreslår att vi bara ändrar stil i css filen som tom sa
-			/*cardImg.style.height = '100px';*/
-			return cardImg;
-		},
-		makeCardEl: function (card) {
-			if (card.isFrontsideUp) {
-				return that.makeCardImgTag(card);
-			} else {
-				return $('<div>').addClass('card card-back');
-			}
-		},
-		showMessage: function (message) {
-			$('#message-area p').text(message);
-		},
-		showCards: function (playerType, cardsToShow) {
-			if (playerType === 'player' || playerType === 'dealer') {
+		}
+	};
 
-				var cardElements = [];
-				var cardImgTag;
-				for (var i = 0; i < cardsToShow.length; i++) {
-					cardImgTag = that.makeCardEl(cardsToShow[i]);
-					cardElements.push(cardImgTag);
-				}
-				if (playerType === 'player') {
-					$('#player').empty();
-					$('#player').append(cardElements);
-				} else {
-					$('#dealer').empty();
-					$('#dealer').append(cardElements);
-				}
+	// Private functions
+	var showMessage = function (message) {
+		$('#message-area p').text(message);
+	};
 
+	var showCards = function (playerCards, dealerCards) {
+		// Empty the board before adding new cards
+		$('#dealer').empty();
+		$('#player').empty();
 
-			} else {
-				throw 'playerType has to be either "dealer" or "player"';
-			}
-		},
-		showScore: function (dealerScore, playerScore) {
-			$('#dealer-score').text(dealerScore);
-			$('#player-score').text(playerScore);
+		// Append player & dealer card elements to the board
+		$.each(playerCards, function (index, val) {
+			$('#player').append(makeCardEl(val));
+		});
+		$.each(dealerCards, function (index, val) {
+			$('#dealer').append(makeCardEl(val));
+		});
+
+	};
+
+	var showScore = function (playerScore, dealerScore) {
+		$('#dealer-score').text(dealerScore);
+		$('#player-score').text(playerScore);
+	};
+
+	var makeCardImgTag = function (card) {
+		var cardImg = document.createElement('img');
+		cardImg.src = card.url;
+		cardImg.className = 'card';
+		return cardImg;
+	};
+
+	var makeCardEl = function (card) {
+		if (card.isFrontsideUp) {
+			return makeCardImgTag(card);
+		} else {
+			return $('<div>').addClass('card card-back');
 		}
 	};
 

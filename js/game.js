@@ -4,16 +4,20 @@
 var game = {
 	player: {},
 	dealer: {},
-	playerAlert: '',
-	dealerAlert: '',
 	gameState: { // Object to store ui relevant variables for easy access
 		playerScore: 0,
 		dealerScore: 0,
 		dealerCards: [],
 		playerCards: [],
-		dealerAlert: '',
-		playerAlert: '',
 		focusMessage: ''
+	},
+
+	updateGameState: function (focusMessage) {
+		game.gameState.playerCards = game.player.getHand().getCards();
+		game.gameState.dealerCards = game.dealer.getHand().getCards();
+		game.gameState.playerScore = game.player.getHand().getTotalValue();
+		game.gameState.dealerScore = game.dealer.getHand().getTotalValue();
+		game.gameState.focusMessage = focusMessage;
 	},
 
 	startGame: function () {

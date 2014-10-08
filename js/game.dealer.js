@@ -43,8 +43,8 @@ game.createDealer = function (dealerName) {
 			var drawnCard = deck.pop();
 			hand.addCard(drawnCard);
 		}
-		game.ui.showCards('player', game.player.getHand().getCards());
-		game.ui.showCards('dealer', hand.getCards());
+		game.updateGameState('Dealing cards..');
+		game.ui.updateBoard(game.gameState);
 	};
 
 	that.dealFirstHand = function () {
