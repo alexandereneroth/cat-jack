@@ -18,7 +18,7 @@ game.getCard = function (rank, suit) {
 		var rankWord = '';
 		var suitWord = '';
 
-		if (!isNaN(Number(rank))) { // 2 3 4 5 6 7 8 9 10
+		if (isNumber(rank)) { // 2 3 4 5 6 7 8 9 10
 			rankWord = rank;
 		} else if (rank === 'A') {
 			rankWord = 'Ace';
@@ -111,7 +111,7 @@ game.getCard = function (rank, suit) {
 		return value;
 	}
 	that.toString = function () {
-		return that.name;
+		return name;
 	};
 
 	return that;

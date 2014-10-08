@@ -1,6 +1,11 @@
 /*globals game:true */
 
 'use strict';
+
+function isNumber(strValue) {
+	return !isNaN(Number(strValue));
+}
+
 var game = {
 	player: {},
 	dealer: {},
