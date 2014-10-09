@@ -40,13 +40,15 @@ var game = {
 		console.log('hit');
 
 		game.dealer.dealCardTo(game.player, 1);
-		if (game.playerScore > 21) {
-
+		if (game.gameState.playerScore > 21) {
+			game.updateGameState('Player Bust!');
+			game.ui.updateBoard(game.gameState);
 		}
 	},
 
 	stand: function () {
 		console.log('stand');
+		game.dealerRound();
 	},
 
 	dealerRound: function () {
