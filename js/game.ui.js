@@ -8,7 +8,9 @@ game.ui = (function () {
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);
 			// TODO: Write function to take gs.resultMessage and display correct message, 
-			// ie no message, win message, lose message or tie message
+			// ie. no message, win message, lose message or tie message. Chose what kind of 
+			// parameters you want to take, maybe strings for 'win', 'lose' and 'tie', 
+			// if anything else no message
 		}
 	};
 
