@@ -2,10 +2,6 @@
 
 'use strict';
 
-function isNumber(strValue) {
-	return !isNaN(Number(strValue));
-}
-
 var game = {
 	player: {},
 	dealer: {},
@@ -17,12 +13,13 @@ var game = {
 		focusMessage: ''
 	},
 
-	updateGameState: function (focusMessage) {
+	updateGameState: function (focusMessage, resultMessage) {
 		game.gameState.playerCards = game.player.getHand().getCards();
 		game.gameState.dealerCards = game.dealer.getHand().getCards();
 		game.gameState.playerScore = game.player.getHand().getTotalValue();
 		game.gameState.dealerScore = game.dealer.getHand().getTotalValue();
 		game.gameState.focusMessage = focusMessage;
+		game.gameState.resultMessage = resultMessage;
 	},
 
 	startGame: function () {

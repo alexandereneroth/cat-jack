@@ -7,6 +7,8 @@ game.ui = (function () {
 			showMessage(gs.focusMessage);
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);
+			// TODO: Write function to take gs.resultMessage and display correct message, 
+			// ie no message, win message, lose message or tie message
 		}
 	};
 
