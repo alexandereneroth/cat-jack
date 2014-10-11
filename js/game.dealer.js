@@ -75,22 +75,20 @@ game.createDealer = function (dealerName) {
 	that.playRound = function () {
 		var drawnCard;
 		var cardQueue = [];
-		// var makeGameStateFunc = function () {
-		// 	var returnThis = function () {
-		// 		var gs = game.gameState;
-		// 		return gs;
-		// 	};
-		// 	return returnThis;
-		// };
+
 		var getDealerCard = function () {
+			var savedGameState;
 			console.log('getDealerCard() running');
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
+
 			game.updateGameState('Dealer draws ' + drawnCard);
 			game.ui.updateBoard(game.gameState);
-			cardQueue.push(game.gameState);
-			console.dir(cardQueue);
+
+			savedGameState = $.extend(savedGameState, game.gameState);
+			cardQueue.push(savedGameState);
 		};
+
 		// var playTurn = function () {
 		// 	game.upda
 		// };
@@ -103,7 +101,7 @@ game.createDealer = function (dealerName) {
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			getDealerCard();
 		}
-
+		console.dir(cardQueue);
 		// Replay the gameround with delay
 		// for (var i = 0; i < cardQueue.length; i++) {
 		// 	setTimeout(cardQueue[i]
