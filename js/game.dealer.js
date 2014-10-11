@@ -106,15 +106,15 @@ game.createDealer = function (dealerName) {
 
 		// Replay the gameround with delay
 		for (var i = 0; i < cardQueue.length; i++) {
-			var copy = {
-				dealerScore: cardQueue[i].dealerScore,
-				dealerCards: cardQueue[i].dealerCards,
-				playerCards: cardQueue[i].playerCards,
-				focusMessage: cardQueue[i].focusMessage,
-				resultMessage: cardQueue[i].resultMessage
-			};
 
 			(function (n) {
+				var copy = {
+					dealerScore: cardQueue[i].dealerScore,
+					dealerCards: cardQueue[i].dealerCards,
+					playerCards: cardQueue[i].playerCards,
+					focusMessage: cardQueue[i].focusMessage,
+					resultMessage: cardQueue[i].resultMessage
+				};
 
 				setTimeout(function () {
 					console.dir(copy);
