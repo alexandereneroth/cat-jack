@@ -45,7 +45,6 @@ var game = {
 			game.dealer.dealCardTo(game.player, 1);
 			if (game.gameState.playerScore > 21) {
 				game.updateGameState('Player Bust!');
-				game.ui.updateBoard(game.gameState);
 				game.isPlayerRound = false;
 				game.dealerRound();
 			}

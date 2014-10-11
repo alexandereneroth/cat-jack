@@ -42,7 +42,6 @@ game.createDealer = function (dealerName) {
 		var drawnCard = deck.pop();
 		player.getHand().addCard(drawnCard);
 		game.updateGameState(player.getName() + ' has received ' + drawnCard);
-		game.ui.updateBoard(game.gameState);
 	};
 
 	that.dealFirstHand = function () {
@@ -84,7 +83,7 @@ game.createDealer = function (dealerName) {
 		game.updateGameState('Dealer reveals ' + hand.getCard(1));
 
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
-			setTimeout(getDealerCard(), 3000);
+			getDealerCard();
 		}
 	};
 
