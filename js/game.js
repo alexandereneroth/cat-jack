@@ -22,7 +22,6 @@ var game = {
 		game.gameState.dealerScore = game.dealer.getHand().getTotalValue();
 		game.gameState.focusMessage = focusMessage;
 		game.gameState.resultMessage = resultMessage;
-		game.ui.updateBoard(game.gameState);
 	},
 
 	startGame: function () {
@@ -41,10 +40,11 @@ var game = {
 
 	hit: function () {
 		console.log('hit');
-		if (game.isPlayerRound) {
+		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			game.dealer.dealCardTo(game.player, 1);
 			if (game.gameState.playerScore > 21) {
 				game.updateGameState('Player Bust!');
+				game.ui.updateBoard(game.gameState);
 				game.isPlayerRound = false;
 				game.dealerRound();
 			}
@@ -53,7 +53,7 @@ var game = {
 
 	stand: function () {
 		console.log('stand');
-		if (game.isPlayerRound) {
+		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			game.isPlayerRound = false;
 			game.dealerRound();
 		}
