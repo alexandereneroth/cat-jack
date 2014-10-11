@@ -5,7 +5,7 @@ game.createDealer = function (dealerName) {
 	//___/        PRIVATE       \___
 	var name = dealerName;
 	var hand = game.createHand();
-	var deck = game.getDeck(1);
+	var deck;
 
 	//    ______________________
 	//___/        PUBLIC        \___
@@ -56,7 +56,6 @@ game.createDealer = function (dealerName) {
 		// Hide the second dealer card until dealer.playRound() is called
 		hand.flip(1);
 		game.updateGameState('Welcome to a new game!');
-		game.ui.updateBoard(game.gameState);
 	};
 
 
@@ -73,13 +72,19 @@ game.createDealer = function (dealerName) {
 	// Draw cards until the hands value is 17 or above, and under 22.
 	that.playRound = function () {
 		var drawnCard;
+		var getDealerCard = function () {
+			console.log('getDealerCard() running');
+			drawnCard = deck.pop();
+			hand.addCard(drawnCard);
+			game.updateGameState('Dealer draws ' + drawnCard);
+		};
 
 		// Reveal hidden card before drawing
 		hand.flip(1);
+		game.updateGameState('Dealer reveals ' + hand.getCard(1));
 
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
-			drawnCard = deck.pop();
-			hand.addCard(drawnCard);
+			setTimeout(getDealerCard(), 3000);
 		}
 	};
 

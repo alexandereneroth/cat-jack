@@ -12,7 +12,9 @@ var game = {
 		playerCards: [],
 		focusMessage: ''
 	},
+	isPlayerRound: true,
 
+	// Updates gamestate and sends it to the ui to be displayed.
 	updateGameState: function (focusMessage, resultMessage) {
 		game.gameState.playerCards = game.player.getHand().getCards();
 		game.gameState.dealerCards = game.dealer.getHand().getCards();
@@ -20,6 +22,7 @@ var game = {
 		game.gameState.dealerScore = game.dealer.getHand().getTotalValue();
 		game.gameState.focusMessage = focusMessage;
 		game.gameState.resultMessage = resultMessage;
+		game.ui.updateBoard(game.gameState);
 	},
 
 	startGame: function () {
@@ -38,21 +41,26 @@ var game = {
 
 	hit: function () {
 		console.log('hit');
-
-		game.dealer.dealCardTo(game.player, 1);
-		if (game.gameState.playerScore > 21) {
-			game.updateGameState('Player Bust!');
-			game.ui.updateBoard(game.gameState);
+		if (game.isPlayerRound) {
+			game.dealer.dealCardTo(game.player, 1);
+			if (game.gameState.playerScore > 21) {
+				game.updateGameState('Player Bust!');
+				game.ui.updateBoard(game.gameState);
+				game.isPlayerRound = false;
+				game.dealerRound();
+			}
 		}
 	},
 
 	stand: function () {
 		console.log('stand');
-		game.dealerRound();
+		if (game.isPlayerRound) {
+			game.isPlayerRound = false;
+			game.dealerRound();
+		}
 	},
 
 	dealerRound: function () {
-		game.isPlayerRound = false;
 		game.dealer.playRound();
 	},
 
