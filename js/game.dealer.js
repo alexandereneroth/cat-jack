@@ -78,15 +78,15 @@ game.createDealer = function (dealerName) {
 
 		var getDealerCard = function () {
 			var savedGameState;
-			console.log('getDealerCard() running');
+			console.log('getDealerCard() running.');
 			drawnCard = deck.pop();
 			hand.addCard(drawnCard);
 
 			game.updateGameState('Dealer draws ' + drawnCard);
-			game.ui.updateBoard(game.gameState);
 
 			savedGameState = $.extend(savedGameState, game.gameState);
 			cardQueue.push(savedGameState);
+
 		};
 
 		// var playTurn = function () {
@@ -96,16 +96,36 @@ game.createDealer = function (dealerName) {
 		// Reveal hidden card
 		hand.flip(1);
 		game.updateGameState('Dealer reveals ' + hand.getCard(1));
+		game.ui.updateBoard(game.gameState);
 
 		// Finish the whole round and store drawn cards for replay with delay
-		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
+		while (hand.getTotalValue() < 40 /*17 && hand.getTotalValue() !== 21*/ ) { // <--- TODO RESET
 			getDealerCard();
 		}
 		console.dir(cardQueue);
+
 		// Replay the gameround with delay
-		// for (var i = 0; i < cardQueue.length; i++) {
-		// 	setTimeout(cardQueue[i]
-		// 	}
+		for (var i = 0; i < cardQueue.length; i++) {
+			var copy = {
+				dealerScore: cardQueue[i].dealerScore,
+				dealerCards: cardQueue[i].dealerCards,
+				playerCards: cardQueue[i].playerCards,
+				focusMessage: cardQueue[i].focusMessage,
+				resultMessage: cardQueue[i].resultMessage
+			};
+
+			(function (n) {
+
+				setTimeout(function () {
+					console.dir(copy);
+					game.ui.updateBoard(copy);
+
+					alert(n); // <----- it alerts from here 
+
+				}, 1000 * n);
+
+			}(i));
+		}
 	};
 
 
