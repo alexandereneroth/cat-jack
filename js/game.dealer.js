@@ -108,19 +108,11 @@ game.createDealer = function (dealerName) {
 		for (var i = 0; i < cardQueue.length; i++) {
 
 			(function (n) {
-				var copy = {
-					dealerScore: cardQueue[i].dealerScore,
-					dealerCards: cardQueue[i].dealerCards,
-					playerCards: cardQueue[i].playerCards,
-					focusMessage: cardQueue[i].focusMessage,
-					resultMessage: cardQueue[i].resultMessage
-				};
+				var gameStateI = cardQueue[i];
 
 				setTimeout(function () {
-					console.dir(copy);
-					game.ui.updateBoard(copy);
-
-					alert(n); // <----- it alerts from here 
+					console.dir(gameStateI);
+					game.ui.updateBoard(gameStateI);
 
 				}, 1000 * n);
 
