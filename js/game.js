@@ -10,18 +10,25 @@ var game = {
 		dealerScore: 0,
 		dealerCards: [],
 		playerCards: [],
-		focusMessage: ''
+		focusMessage: '',
+		resultMessage: ''
 	},
 	isPlayerRound: true,
 
 	// Updates gamestate and sends it to the ui to be displayed.
 	updateGameState: function (focusMessage, resultMessage) {
-		game.gameState.playerCards = game.player.getHand().getCards();
-		game.gameState.dealerCards = game.dealer.getHand().getCards();
-		game.gameState.playerScore = game.player.getHand().getTotalValue();
-		game.gameState.dealerScore = game.dealer.getHand().getTotalValue();
-		game.gameState.focusMessage = focusMessage;
-		game.gameState.resultMessage = resultMessage;
+
+		// Storing variables for shorter reference below
+		var gameState = game.gameState;
+		var playerHand = game.player.getHand();
+		var dealerHand = game.dealer.getHand();
+
+		gameState.playerCards = playerHand.getCards();
+		gameState.dealerCards = dealerHand.getCards();
+		gameState.playerScore = playerHand.getTotalValue();
+		gameState.dealerScore = dealerHand.getTotalValue();
+		gameState.focusMessage = focusMessage;
+		gameState.resultMessage = resultMessage;
 	},
 
 	startGame: function () {
