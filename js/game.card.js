@@ -59,6 +59,8 @@ game.getCard = function (rank, suit) {
 		return value; // 2 3 4 5 6 7 8 9 10
 	}
 
+	// TODO: makeUrl can use name / makeName to get correct url instead 
+	// current solution
 	function makeUrl(rank, suit) {
 		switch (suit) {
 		case 'H':
@@ -109,7 +111,7 @@ game.getCard = function (rank, suit) {
 	};
 	that.getValue = function () {
 		return value;
-	}
+	};
 	that.toString = function () {
 		return name;
 	};
