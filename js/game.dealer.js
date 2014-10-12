@@ -95,7 +95,7 @@ game.createDealer = function (dealerName) {
 					console.dir(gameStateI);
 					game.ui.updateBoard(gameStateI);
 
-				}, 1000 * n);
+				}, game.globalTimeout * n);
 
 			}(i));
 		}

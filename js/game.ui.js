@@ -23,7 +23,7 @@ game.ui = (function () {
 						showMessage('You tied!');
 					}
 
-				}, 1000);
+				}, game.globalTimeout);
 
 			}
 		}
@@ -57,7 +57,7 @@ game.ui = (function () {
 			}
 			if (score === 21) {
 				score += ' - CATJACK';
-				element.addClass('catjack-anim')
+				element.addClass('catjack-anim');
 			}
 			element.text(score);
 		}

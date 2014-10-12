@@ -6,6 +6,7 @@ var game = {
 	player: {},
 	dealer: {},
 	isPlayerRound: true,
+	globalTimeout: 1800,
 
 	// Updates gamestate which is sent to the ui for easy game board update.
 	updateGameState: function (focusMessage, resultMessage) {
