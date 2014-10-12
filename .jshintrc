@@ -24,6 +24,7 @@
       "alert": false,
       "game": false,
       "_": false,
-      "$": false
+      "$": false,
+      "cjTools": false
   }
 }
