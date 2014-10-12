@@ -8,7 +8,6 @@ game.gameState = {
 	playerCards: [],
 	focusMessage: '',
 	resultMessage: '',
-	history: [],
 
 	update: function (focusMessage, gameOver) {
 
@@ -54,7 +53,7 @@ game.gameState = {
 			dealerScore: gs.dealerScore,
 			focusMessage: gs.focusMessage,
 			gameOver: gs.gameOver
-		}
+		};
 		for (var i = 0; i < gs.playerCards.length; ++i) {
 			copy.playerCards.push(gs.playerCards[i]);
 		}

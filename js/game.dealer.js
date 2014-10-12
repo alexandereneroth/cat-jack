@@ -74,8 +74,6 @@ game.createDealer = function (dealerName) {
 		// Reveal hidden card
 		hand.flip(1);
 		game.gameState.update('Dealer reveals ' + hand.getCard(1), false);
-		game.ui.updateBoard(game.gameState);
-
 		gameStateHistory.push(game.gameState.getCopy());
 
 		// Finish the whole round and store drawn cards for replay with delay
