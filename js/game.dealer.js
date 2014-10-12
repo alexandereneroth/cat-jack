@@ -84,7 +84,7 @@ game.createDealer = function (dealerName) {
 
 			game.updateGameState('Dealer draws ' + drawnCard);
 
-			savedGameState = $.extend(savedGameState, game.gameState);
+			savedGameState = game.getGameStateCopy(); /*$.extend(savedGameState, game.gameState);*/
 			cardQueue.push(savedGameState);
 
 		};

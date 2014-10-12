@@ -32,6 +32,27 @@ var game = {
 		gameState.resultMessage = resultMessage;
 	},
 
+	getGameStateCopy: function () {
+		var gs = game.gameState;
+
+		var copy = {
+			playerCards: [],
+			dealerCards: [],
+			playerScore: gs.playerScore,
+			dealerScore: gs.dealerScore,
+			focusMessage: gs.focusMessage,
+			resultMessage: gs.resultMessage
+		}
+		for (var i = 0; i < gs.playerCards.length; ++i) {
+			copy.playerCards.push(gs.playerCards[i]);
+		}
+
+		for (var j = 0; j < gs.dealerCards.length; ++j) {
+			copy.dealerCards.push(gs.dealerCards[j]);
+		}
+		return copy;
+	},
+
 	startGame: function () {
 
 		// Main game function calls
