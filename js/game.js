@@ -5,74 +5,74 @@
 var game = {
 	player: {},
 	dealer: {},
-	gameState: { // Object to store ui relevant variables for easy access
-		playerScore: 0,
-		dealerScore: 0,
-		dealerCards: [],
-		playerCards: [],
-		focusMessage: '',
-		resultMessage: '',
-		history: []
-	},
-	isPlayerRound: true,
+	// gameState: { // Object to store ui relevant variables for easy access
+	// 	playerScore: 0,
+	// 	dealerScore: 0,
+	// 	dealerCards: [],
+	// 	playerCards: [],
+	// 	focusMessage: '',
+	// 	resultMessage: '',
+	// 	history: []
+	// },
+	// isPlayerRound: true,
 
-	// Updates gamestate which is sent to the ui for easy game board update
-	updateGameState: function (focusMessage, resultMessage, gameOver) {
+	// // Updates gamestate which is sent to the ui for easy game board update
+	// updateGameState: function (focusMessage, resultMessage, gameOver) {
 
-		// Storing variables for shorter reference below
-		var gameState = game.gameState;
-		var playerHand = game.player.getHand();
-		var dealerHand = game.dealer.getHand();
+	// 	// Storing variables for shorter reference below
+	// 	var gameState = game.gameState;
+	// 	var playerHand = game.player.getHand();
+	// 	var dealerHand = game.dealer.getHand();
 
-		gameState.playerCards = playerHand.getCards();
-		gameState.dealerCards = dealerHand.getCards();
-		gameState.playerScore = playerHand.getTotalValue();
-		gameState.dealerScore = dealerHand.getTotalValue();
-		gameState.focusMessage = focusMessage;
-		gameState.resultMessage = resultMessage;
-		gameState.gameOver = gameOver;
-	},
+	// 	gameState.playerCards = playerHand.getCards();
+	// 	gameState.dealerCards = dealerHand.getCards();
+	// 	gameState.playerScore = playerHand.getTotalValue();
+	// 	gameState.dealerScore = dealerHand.getTotalValue();
+	// 	gameState.focusMessage = focusMessage;
+	// 	gameState.resultMessage = resultMessage;
+	// 	gameState.gameOver = gameOver;
+	// },
 
-	//returns 0 for tie, negative for loss, and positive for win
-	getWinState: function () {
+	// //returns 0 for tie, negative for loss, and positive for win
+	// getWinState: function () {
 
-		// Storing variables for shorter reference below
-		var playerScore = game.gameState.playerScore;
-		var dealerScore = game.gameState.dealerScore;
+	// 	// Storing variables for shorter reference below
+	// 	var playerScore = game.gameState.playerScore;
+	// 	var dealerScore = game.gameState.dealerScore;
 
-		if (playerScore > 21 && dealerScore > 21) {
-			return 0;
-		}
-		if (playerScore > 21) {
-			return -1;
-		}
-		if (dealerScore > 21) {
-			return 1;
-		}
-		return playerScore - dealerScore;
-	},
+	// 	if (playerScore > 21 && dealerScore > 21) {
+	// 		return 0;
+	// 	}
+	// 	if (playerScore > 21) {
+	// 		return -1;
+	// 	}
+	// 	if (dealerScore > 21) {
+	// 		return 1;
+	// 	}
+	// 	return playerScore - dealerScore;
+	// },
 
-	getGameStateCopy: function () {
-		var gs = game.gameState;
+	// getGameStateCopy: function () {
+	// 	var gs = game.gameState;
 
-		var copy = {
-			playerCards: [],
-			dealerCards: [],
-			playerScore: gs.playerScore,
-			dealerScore: gs.dealerScore,
-			focusMessage: gs.focusMessage,
-			resultMessage: gs.resultMessage,
-			gameOver: gs.gameOver
-		}
-		for (var i = 0; i < gs.playerCards.length; ++i) {
-			copy.playerCards.push(gs.playerCards[i]);
-		}
+	// 	var copy = {
+	// 		playerCards: [],
+	// 		dealerCards: [],
+	// 		playerScore: gs.playerScore,
+	// 		dealerScore: gs.dealerScore,
+	// 		focusMessage: gs.focusMessage,
+	// 		resultMessage: gs.resultMessage,
+	// 		gameOver: gs.gameOver
+	// 	}
+	// 	for (var i = 0; i < gs.playerCards.length; ++i) {
+	// 		copy.playerCards.push(gs.playerCards[i]);
+	// 	}
 
-		for (var j = 0; j < gs.dealerCards.length; ++j) {
-			copy.dealerCards.push(gs.dealerCards[j]);
-		}
-		return copy;
-	},
+	// 	for (var j = 0; j < gs.dealerCards.length; ++j) {
+	// 		copy.dealerCards.push(gs.dealerCards[j]);
+	// 	}
+	// 	return copy;
+	// },
 
 	startGame: function () {
 

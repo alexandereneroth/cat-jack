@@ -13,23 +13,19 @@ game.ui = (function () {
 
 				setTimeout(function () {
 
-					if (game.getWinState() > 0) { // WIN
+					if (game.gameState.getWinState() > 0) { // WIN
 						showMessage('YOU WON!');
 						$('.smiling-cat').addClass('spin-anim');
-					} else if (game.getWinState() < 0) { //LOSE
+					} else if (game.getWinState() < 0) { // LOSE
 						showMessage('YOU LOST!');
 						$('.smiling-cat').addClass('tilt-grayscale-anim');
-					} else { //TIE
+					} else { // TIE
 						showMessage('You tied!');
 					}
 
 				}, 1000);
 
 			}
-			// TODO: Write function to take gs.resultMessage and display correct message, 
-			// ie. no message, win message, lose message or tie message. Chose what kind of 
-			// parameters you want to take, maybe strings for 'win', 'lose' and 'tie', 
-			// if anything else no message
 		}
 	};
 
