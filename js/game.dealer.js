@@ -73,42 +73,33 @@ game.createDealer = function (dealerName) {
 
 	// Draw cards until the hands value is 17 or above, and under 22.
 	that.playRound = function () {
-		var drawnCard;
-		var cardQueue = [];
+		var gameStateHistory = [];
 
 		var getDealerCard = function () {
-			var savedGameState;
-			console.log('getDealerCard() running.');
-			drawnCard = deck.pop();
+			var drawnCard = deck.pop();
 			hand.addCard(drawnCard);
-
 			game.updateGameState('Dealer draws ' + drawnCard);
 
-			savedGameState = game.getGameStateCopy(); /*$.extend(savedGameState, game.gameState);*/
-			cardQueue.push(savedGameState);
-
 		};
-
-		// var playTurn = function () {
-		// 	game.upda
-		// };
 
 		// Reveal hidden card
 		hand.flip(1);
 		game.updateGameState('Dealer reveals ' + hand.getCard(1));
 		game.ui.updateBoard(game.gameState);
 
+		gameStateHistory.push(game.getGameStateCopy());
+
 		// Finish the whole round and store drawn cards for replay with delay
-		while (hand.getTotalValue() < 40 /*17 && hand.getTotalValue() !== 21*/ ) { // <--- TODO RESET
+		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			getDealerCard();
+			gameStateHistory.push(game.getGameStateCopy());
 		}
-		console.dir(cardQueue);
 
 		// Replay the gameround with delay
-		for (var i = 0; i < cardQueue.length; i++) {
+		for (var i = 0; i < gameStateHistory.length; i++) {
 
 			(function (n) {
-				var gameStateI = cardQueue[i];
+				var gameStateI = gameStateHistory[i];
 
 				setTimeout(function () {
 					console.dir(gameStateI);
