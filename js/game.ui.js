@@ -54,8 +54,19 @@ game.ui = (function () {
 	};
 
 	var showScore = function (playerScore, dealerScore) {
-		$('#dealer-score').text(dealerScore);
-		$('#player-score').text(playerScore);
+		function styleScoreEl(element, score) {
+			if (score > 21) {
+				score += ' - BUST';
+				element.addClass('bust-anim');
+			}
+			if (score === 21) {
+				score += ' - CATJACK';
+				element.addClass('catjack-anim')
+			}
+			element.text(score);
+		}
+		styleScoreEl($('#dealer-score'), dealerScore);
+		styleScoreEl($('#player-score'), playerScore);
 	};
 
 	var makeCardImgTag = function (card) {
