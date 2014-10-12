@@ -43,7 +43,7 @@ var game = {
 				game.gameState.update('Player Bust!');
 				game.ui.updateBoard(game.gameState);
 				game.isPlayerRound = false;
-				game.dealerRound();
+				setTimeout(game.dealerRound, game.globalTimeout);
 			}
 		}
 	},
