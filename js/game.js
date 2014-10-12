@@ -16,7 +16,7 @@ var game = {
 	},
 	isPlayerRound: true,
 
-	// Updates gamestate which is sent to the ui for easy game board update
+	// Updates gamestate which is sent to the ui for easy game board update.
 	updateGameState: function (focusMessage, resultMessage) {
 
 		// Storing variables for shorter reference below
