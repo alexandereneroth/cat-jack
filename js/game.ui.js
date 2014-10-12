@@ -7,8 +7,25 @@ game.ui = (function () {
 			showMessage(gs.focusMessage);
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);
-			console.log('game.ui.updateBoard:');
-			console.dir(gs);
+
+			if (gs.gameOver) {
+				console.log('GAME OVER');
+
+				setTimeout(function () {
+
+					if (game.getWinState() > 0) { // WIN
+						showMessage('YOU WON!');
+						$('.smiling-cat').addClass('spin-anim');
+					} else if (game.getWinState() < 0) { //LOSE
+						showMessage('YOU LOST!');
+						$('.smiling-cat').addClass('tilt-grayscale-anim');
+					} else { //TIE
+						showMessage('You tied!');
+					}
+
+				}, 1000);
+
+			}
 			// TODO: Write function to take gs.resultMessage and display correct message, 
 			// ie. no message, win message, lose message or tie message. Chose what kind of 
 			// parameters you want to take, maybe strings for 'win', 'lose' and 'tie', 

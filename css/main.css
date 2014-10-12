@@ -101,6 +101,63 @@ button {
   text-shadow: 0 1px 6px rgba(181,0,0,0.9) ;
 }
 
+.smiling-cat {
+	display: none;
+	position: relative;
+	left: 150px;
+	top: -55px;
+}
+
+.tilt-grayscale-anim {
+	display: inline-block;
+	-webkit-animation: tilt-grayscale 1s 1 forwards;
+	        animation: tilt-grayscale 1s 1 forwards;
+}
+@-webkit-keyframes tilt-grayscale{
+	0%{
+	-webkit-transform: 	rotate(0deg);
+		-ms-transform: 	rotate(0deg);
+		 	transform:	rotate(0deg);
+	-webkit-filter: grayscale(0%);
+	        filter: grayscale(0%);
+	}
+	40%{
+	-webkit-transform: 	rotate(0deg);
+		-ms-transform: 	rotate(0deg);
+		 	transform:	rotate(0deg);
+	-webkit-filter: grayscale(0%);
+	        filter: grayscale(0%);
+	}
+	75%{
+	-webkit-filter: grayscale(100%);
+	        filter: grayscale(100%);
+	}
+	100%{
+	-webkit-transform: 	rotate(90deg);
+		-ms-transform: 	rotate(90deg);
+		 	transform:	rotate(90deg);
+	-webkit-filter: grayscale(100%);
+	        filter: grayscale(100%);
+	}
+}
+.spin-anim {
+	display: inline-block;
+	-webkit-animation: spin 5s linear infinite;
+	        animation: spin 5s linear infinite;
+}
+@-webkit-keyframes spin{
+	0%{
+	-webkit-transform: 	rotate(0deg);
+		-ms-transform: 	rotate(0deg);
+		 	transform:	rotate(0deg);
+	}
+	100%{
+	-webkit-transform: 	rotate(360deg);
+		-ms-transform: 	rotate(360deg);
+		 	transform:	rotate(360deg);
+	}
+}
+
 #game-over-message {
 	display: none;
 	background-color: rgba(0,0,0,0.5);

@@ -78,13 +78,13 @@ game.createDealer = function (dealerName) {
 		var getDealerCard = function () {
 			var drawnCard = deck.pop();
 			hand.addCard(drawnCard);
-			game.updateGameState('Dealer draws ' + drawnCard);
+			game.updateGameState('Dealer draws ' + drawnCard, 'hej', false);
 
 		};
 
 		// Reveal hidden card
 		hand.flip(1);
-		game.updateGameState('Dealer reveals ' + hand.getCard(1));
+		game.updateGameState('Dealer reveals ' + hand.getCard(1), 'hej', false);
 		game.ui.updateBoard(game.gameState);
 
 		gameStateHistory.push(game.getGameStateCopy());
@@ -94,6 +94,7 @@ game.createDealer = function (dealerName) {
 			getDealerCard();
 			gameStateHistory.push(game.getGameStateCopy());
 		}
+		gameStateHistory[gameStateHistory.length - 1].gameOver = true;
 
 		// Replay the gameround with delay
 		for (var i = 0; i < gameStateHistory.length; i++) {

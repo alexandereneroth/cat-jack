@@ -17,7 +17,7 @@ var game = {
 	isPlayerRound: true,
 
 	// Updates gamestate which is sent to the ui for easy game board update
-	updateGameState: function (focusMessage, resultMessage) {
+	updateGameState: function (focusMessage, resultMessage, gameOver) {
 
 		// Storing variables for shorter reference below
 		var gameState = game.gameState;
@@ -30,6 +30,26 @@ var game = {
 		gameState.dealerScore = dealerHand.getTotalValue();
 		gameState.focusMessage = focusMessage;
 		gameState.resultMessage = resultMessage;
+		gameState.gameOver = gameOver;
+	},
+
+	//returns 0 for tie, negative for loss, and positive for win
+	getWinState: function () {
+
+		// Storing variables for shorter reference below
+		var playerScore = game.gameState.playerScore;
+		var dealerScore = game.gameState.dealerScore;
+
+		if (playerScore > 21 && dealerScore > 21) {
+			return 0;
+		}
+		if (playerScore > 21) {
+			return -1;
+		}
+		if (dealerScore > 21) {
+			return 1;
+		}
+		return playerScore - dealerScore;
 	},
 
 	getGameStateCopy: function () {
@@ -41,7 +61,8 @@ var game = {
 			playerScore: gs.playerScore,
 			dealerScore: gs.dealerScore,
 			focusMessage: gs.focusMessage,
-			resultMessage: gs.resultMessage
+			resultMessage: gs.resultMessage,
+			gameOver: gs.gameOver
 		}
 		for (var i = 0; i < gs.playerCards.length; ++i) {
 			copy.playerCards.push(gs.playerCards[i]);
