@@ -11,11 +11,12 @@ var game = {
 		dealerCards: [],
 		playerCards: [],
 		focusMessage: '',
-		resultMessage: ''
+		resultMessage: '',
+		history: []
 	},
 	isPlayerRound: true,
 
-	// Updates gamestate and sends it to the ui to be displayed.
+	// Updates gamestate which is sent to the ui for easy game board update
 	updateGameState: function (focusMessage, resultMessage) {
 
 		// Storing variables for shorter reference below
