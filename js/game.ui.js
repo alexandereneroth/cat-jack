@@ -7,12 +7,25 @@ game.ui = (function () {
 			showMessage(gs.focusMessage);
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);
-			console.log('game.ui.updateBoard:');
-			console.dir(gs);
-			// TODO: Write function to take gs.resultMessage and display correct message, 
-			// ie. no message, win message, lose message or tie message. Chose what kind of 
-			// parameters you want to take, maybe strings for 'win', 'lose' and 'tie', 
-			// if anything else no message
+
+			if (gs.gameOver) {
+				console.log('GAME OVER');
+
+				setTimeout(function () {
+
+					if (game.gameState.getWinState() > 0) { // WIN
+						showMessage('YOU WON!');
+						$('.smiling-cat').addClass('spin-anim');
+					} else if (game.gameState.getWinState() < 0) { // LOSE
+						showMessage('YOU LOST!');
+						$('.smiling-cat').addClass('tilt-grayscale-anim');
+					} else { // TIE
+						showMessage('You tied!');
+					}
+
+				}, 1000);
+
+			}
 		}
 	};
 
@@ -37,8 +50,19 @@ game.ui = (function () {
 	};
 
 	var showScore = function (playerScore, dealerScore) {
-		$('#dealer-score').text(dealerScore);
-		$('#player-score').text(playerScore);
+		function styleScoreEl(element, score) {
+			if (score > 21) {
+				score += ' - BUST';
+				element.addClass('bust-anim');
+			}
+			if (score === 21) {
+				score += ' - CATJACK';
+				element.addClass('catjack-anim')
+			}
+			element.text(score);
+		}
+		styleScoreEl($('#dealer-score'), dealerScore);
+		styleScoreEl($('#player-score'), playerScore);
 	};
 
 	var makeCardImgTag = function (card) {

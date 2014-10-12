@@ -101,44 +101,98 @@ button {
   text-shadow: 0 1px 6px rgba(181,0,0,0.9) ;
 }
 
-#game-over-message {
+/* The cat picture that is inside message-area */
+.smiling-cat {
 	display: none;
-	background-color: rgba(0,0,0,0.5);
-	position: absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
+	position: relative;
+	left: 150px;
+	top: -55px;
 }
-#game-over-message div{
-	background-color: #5f5;
-	border: 5px solid green;
-	border-radius: 5px;
-	margin-top:15%;
-	margin-left: auto;
-	margin-right: auto;
-	width:600px;
-	height:200px;
+
+/* Rotate 90 deg and fade to grayscale animation */
+.tilt-grayscale-anim {
+	display: inline-block;
+	-webkit-animation: tilt-grayscale 1s 1 forwards;
+	        animation: tilt-grayscale 1s 1 forwards;
 }
-#game-over-message div h1{
-	margin-top: 60px;
-	overflow: hidden;
-	border: none;
-	font: normal 60px/1 Arial Black, Gadget, sans-serif;
-	color: rgba(216,255,0,1);
-	text-align: center;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis; 
-	text-shadow: 1px 1px 1px rgba(255,227,150,1) ;
+@-webkit-keyframes tilt-grayscale{
+	0%{
+	-webkit-transform: 	rotate(0deg);
+		-ms-transform: 	rotate(0deg);
+		 	transform:	rotate(0deg);
+	-webkit-filter: grayscale(0%);
+	        filter: grayscale(0%);
+	}
+	40%{
+	-webkit-transform: 	rotate(0deg);
+		-ms-transform: 	rotate(0deg);
+		 	transform:	rotate(0deg);
+	-webkit-filter: grayscale(0%);
+	        filter: grayscale(0%);
+	}
+	75%{
+	-webkit-filter: grayscale(100%);
+	        filter: grayscale(100%);
+	}
+	100%{
+	-webkit-transform: 	rotate(90deg);
+		-ms-transform: 	rotate(90deg);
+		 	transform:	rotate(90deg);
+	-webkit-filter: grayscale(100%);
+	        filter: grayscale(100%);
+	}
 }
-#win-message {
-	display: none;
+
+/* 360deg spinning animation */
+.spin-anim {
+	display: inline-block;
+	-webkit-animation: spin 5s linear infinite;
+	        animation: spin 5s linear infinite;
 }
-#lose-message {
-	display: none;
+@-webkit-keyframes spin{
+	0%{
+	-webkit-transform: 	rotate(0deg);
+		-ms-transform: 	rotate(0deg);
+		 	transform:	rotate(0deg);
+	}
+	100%{
+	-webkit-transform: 	rotate(360deg);
+		-ms-transform: 	rotate(360deg);
+		 	transform:	rotate(360deg);
+	}
 }
-#tie-message {
-	display: none;
+
+/* Fade from red to black text animation */
+.bust-anim {
+	-webkit-animation: bust 2s linear 1;
+	        animation: bust 2s linear 1;
+}
+
+@-webkit-keyframes bust{
+	0%{
+		color: #f00;
+	}
+	100%{
+		color: #000;
+	}
+}
+
+/* Flashing black-white-black text animation */
+.catjack-anim {
+	-webkit-animation: catjack 0.5s ease-in-out 3;
+	        animation: catjack 0.5s ease-in-out 3;
+}
+
+@-webkit-keyframes catjack{
+	0%{
+		color: #000;
+	}
+	50%{
+		color: #fff;
+	}
+	100%{
+		color: #000;
+	}
 }
 
 h1 {
@@ -181,14 +235,6 @@ dl dd {
 	border: 3px solid black;
 	border-radius: 3px;
 
-	/*Copy pasted code from http://lea.verou.me/css3patterns/*/
-
-	/*background-color: #f88;
-	background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
-	linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
-	linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
-	linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
-	background-size: 6px, 19px, 17px, 35px;*/
 	background:
 	linear-gradient(324deg, #FFCF6A 4%,   transparent 4%) -68px 60px,
 	linear-gradient( 36deg, #FFCF6A 4%,   transparent 4%) 32px 60px,
