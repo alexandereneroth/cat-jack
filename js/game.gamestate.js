@@ -1,3 +1,5 @@
+'use strict';
+
 game.gameState = {
 
 	playerScore: 0,
