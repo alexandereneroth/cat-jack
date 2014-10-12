@@ -16,7 +16,7 @@ game.ui = (function () {
 					if (game.gameState.getWinState() > 0) { // WIN
 						showMessage('YOU WON!');
 						$('.smiling-cat').addClass('spin-anim');
-					} else if (game.getWinState() < 0) { // LOSE
+					} else if (game.gameState.getWinState() < 0) { // LOSE
 						showMessage('YOU LOST!');
 						$('.smiling-cat').addClass('tilt-grayscale-anim');
 					} else { // TIE

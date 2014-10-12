@@ -8,7 +8,7 @@ game.gameState = {
 	resultMessage: '',
 	history: [],
 
-	update: function (focusMessage, resultMessage, gameOver) {
+	update: function (focusMessage, gameOver) {
 
 		// Storing variables for shorter reference below
 		var gameState = game.gameState;
@@ -20,7 +20,6 @@ game.gameState = {
 		gameState.playerScore = playerHand.getTotalValue();
 		gameState.dealerScore = dealerHand.getTotalValue();
 		gameState.focusMessage = focusMessage;
-		gameState.resultMessage = resultMessage;
 		gameState.gameOver = gameOver;
 	},
 
@@ -52,7 +51,6 @@ game.gameState = {
 			playerScore: gs.playerScore,
 			dealerScore: gs.dealerScore,
 			focusMessage: gs.focusMessage,
-			resultMessage: gs.resultMessage,
 			gameOver: gs.gameOver
 		}
 		for (var i = 0; i < gs.playerCards.length; ++i) {
