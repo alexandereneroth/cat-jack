@@ -50,6 +50,9 @@ game.ui = (function () {
 	};
 
 	var showScore = function (playerScore, dealerScore) {
+		console.log('DS' + dealerScore);
+		console.log('PS' + playerScore);
+
 		function styleScoreEl(element, score) {
 			if (score > 21) {
 				score += ' - BUST';

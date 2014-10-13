@@ -42,7 +42,6 @@ game.createDealer = function (dealerName) {
 		var drawnCard = deck.pop();
 		player.getHand().addCard(drawnCard);
 		game.gameState.update(player.getName() + ' has received ' + drawnCard);
-		game.ui.updateBoard(game.gameState);
 	};
 
 	that.dealFirstHand = function () {
