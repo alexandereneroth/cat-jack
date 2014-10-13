@@ -12,12 +12,11 @@ game.getCard = function (rank, suit) {
 	var url = makeUrl();
 	var isRevealed = true;
 
-	var rankWord;
-	var suitWord;
 
-	// Sets rankWord and suitWord with text representation of 
-	// card for use with makeName and makeUrl.
 	function getCardText() {
+		var rankWord = '';
+		var suitWord = '';
+
 		if (cjTools.isNumber(rank)) { // 2 3 4 5 6 7 8 9 10
 			rankWord = rank;
 		} else if (rank === 'A') {
@@ -42,17 +41,18 @@ game.getCard = function (rank, suit) {
 		} else {
 			throw 'game.getCard > getName > invalid suit!';
 		}
+
+		return [rankWord, suitWord];
 	}
 
 	// Set text representation of cards and url
 	function makeName() {
-		return rankWord + ' of ' + suitWord;
+		return getCardText()[0] + ' of ' + getCardText()[1];
 	}
 
 	function makeUrl() {
-		return 'img/cards/' + rankWord.toLowerCase() + '_of_' + suitWord.toLowerCase() + '.svg';
+		return 'img/cards/' + getCardText()[0].toLowerCase() + '_of_' + getCardText()[1].toLowerCase() + '.svg';
 	}
-
 	// Returns the value of the card (in numbers)
 	function makeValue() {
 		var value = Number(rank);
