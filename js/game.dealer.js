@@ -1,16 +1,18 @@
 'use strict';
 game.createDealer = function (dealerName) {
-	var that = {};
+	var that = game.createPlayer(dealerName);
 	//    ______________________
 	//___/        PRIVATE       \___
-	var name = dealerName;
-	var hand = game.createHand();
 	var deck;
 
 	//    ______________________
 	//___/        PUBLIC        \___
 	that.getName = function () {
-		return name;
+		return that.name;
+	};
+
+	that.getHand = function () {
+		return that.hand;
 	};
 
 	that.setNumberOfCardDecks = function (numberOfDecks) {
@@ -53,7 +55,7 @@ game.createDealer = function (dealerName) {
 		that.dealCardTo(this);
 
 		// Hide the second dealer card until dealer.playRound() is called
-		hand.flip(1);
+		that.hand.flip(1);
 		game.gameState.update('Welcome to a new game!');
 		game.ui.updateBoard(game.gameState);
 
@@ -65,18 +67,18 @@ game.createDealer = function (dealerName) {
 
 		var getDealerCard = function () {
 			var drawnCard = deck.pop();
-			hand.addCard(drawnCard);
+			that.hand.addCard(drawnCard);
 			game.gameState.update('Dealer draws ' + drawnCard, false);
 
 		};
 
 		// Reveal hidden card
-		hand.flip(1);
-		game.gameState.update('Dealer reveals ' + hand.getCard(1), false);
+		that.hand.flip(1);
+		game.gameState.update('Dealer reveals ' + that.hand.getCard(1), false);
 		gameStateHistory.push(game.gameState.getCopy());
 
 		// Finish the whole round and store drawn cards for replay with delay
-		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
+		while (that.hand.getTotalValue() < 17 && that.hand.getTotalValue() !== 21) {
 			getDealerCard();
 			gameStateHistory.push(game.gameState.getCopy());
 		}
@@ -96,10 +98,6 @@ game.createDealer = function (dealerName) {
 
 			}(i));
 		}
-	};
-
-	that.getHand = function () {
-		return hand;
 	};
 
 	return that;

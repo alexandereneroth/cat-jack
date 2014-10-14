@@ -1,20 +1,16 @@
 'use strict';
 game.createPlayer = function (playerName) {
 	var that = {};
-	var name = playerName;
-	var bank = 100;
-	var hand = game.createHand();
+
+	that.name = playerName;
+	that.hand = game.createHand();
 
 	that.getHand = function () {
-		return hand;
+		return that.hand;
 	};
 
 	that.getName = function () {
-		return name;
-	};
-
-	that.getBank = function () {
-		return bank;
+		return that.name;
 	};
 
 	return that;
