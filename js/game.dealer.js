@@ -20,7 +20,6 @@ game.dealer = (function () {
 
 	// Button functions
 	that.hit = function () {
-		console.log('hit');
 		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			dealCardTo(playerHand);
 			game.updateGameState('Player received ' + playerHand.getLastCard());
@@ -29,13 +28,12 @@ game.dealer = (function () {
 				game.updateGameState('Player Bust!');
 				game.ui.updateBoard();
 				game.isPlayerRound = false;
-				setTimeout(game.dealer.playRound(), game.globalTimeout);
+				setTimeout(game.dealer.playRound, game.globalTimeout);
 			}
 		}
 	};
 
 	that.stand = function () {
-		console.log('stand');
 		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			game.isPlayerRound = false;
 			game.dealer.playRound(); // Playe dealer round

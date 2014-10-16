@@ -17,8 +17,6 @@ game.ui = (function () {
 			showCards(gs.playerCards, gs.dealerCards);
 
 			if (gs.gameOver === true) {
-				console.log('GAME OVER');
-
 				setTimeout(function () {
 					var winner = game.dealer.getWinner();
 					if (winner > 0) { // WIN
@@ -30,9 +28,7 @@ game.ui = (function () {
 					} else { // TIE
 						showMessage('You tied!');
 					}
-
 				}, game.globalTimeout);
-
 			}
 		}
 	};
