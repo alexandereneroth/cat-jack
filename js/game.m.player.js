@@ -2,7 +2,6 @@
 game.m.createPlayer = function (playerName) {
 	var that = {};
 	var name = playerName;
-	var bank = 100;
 	var hand = game.m.createHand();
 
 	that.getHand = function () {
@@ -11,10 +10,6 @@ game.m.createPlayer = function (playerName) {
 
 	that.getName = function () {
 		return name;
-	};
-
-	that.getBank = function () {
-		return bank;
 	};
 
 	return that;

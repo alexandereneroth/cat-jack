@@ -25,10 +25,11 @@ game.m.state = {
 
 	//returns 0 for tie, negative for loss, and positive for win
 	getWinState: function () {
+		console.log('test');
 
 		// Storing variables for shorter reference below
-		var playerScore = game.m.state.playerScore;
-		var dealerScore = game.m.state.dealerScore;
+		var playerScore = this.playerScore;
+		var dealerScore = this.dealerScore;
 
 		if (playerScore > 21 && dealerScore > 21) {
 			return 0;
@@ -43,22 +44,23 @@ game.m.state = {
 	},
 
 	getCopy: function () {
-		var gs = game.m.state;
-
 		var copy = {
 			playerCards: [],
 			dealerCards: [],
-			playerScore: gs.playerScore,
-			dealerScore: gs.dealerScore,
-			focusMessage: gs.focusMessage,
-			gameOver: gs.gameOver
+			playerScore: this.playerScore,
+			dealerScore: this.dealerScore,
+			focusMessage: this.focusMessage,
+			gameOver: this.gameOver,
+			update: this.update,
+			getWinState: this.getWinState,
+			getCopy: this.getCopy
 		};
-		for (var i = 0; i < gs.playerCards.length; ++i) {
-			copy.playerCards.push(gs.playerCards[i]);
+		for (var i = 0; i < this.playerCards.length; ++i) {
+			copy.playerCards.push(this.playerCards[i]);
 		}
 
-		for (var j = 0; j < gs.dealerCards.length; ++j) {
-			copy.dealerCards.push(gs.dealerCards[j]);
+		for (var j = 0; j < this.dealerCards.length; ++j) {
+			copy.dealerCards.push(this.dealerCards[j]);
 		}
 		return copy;
 	}

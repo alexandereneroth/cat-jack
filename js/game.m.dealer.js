@@ -3,9 +3,13 @@ game.m.createDealer = function (dealerName) {
 	var that = {};
 	//    ______________________
 	//___/        PRIVATE       \___
-	var name = dealerName;
-	var hand = game.m.createHand();
+
+	var player = game.m.createPlayer(dealerName);
 	var deck;
+
+	function getHand() {
+		return player.getHand();
+	}
 
 	//    ______________________
 	//___/        PUBLIC        \___
@@ -17,31 +21,14 @@ game.m.createDealer = function (dealerName) {
 		deck = game.m.getDeck(numberOfDecks);
 	};
 
-	that.shuffleDeck = function () {
-		var cards = deck.cards;
-
-		var currentIndex = cards.length,
-			temporaryValue, randomIndex;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = cards[currentIndex];
-			cards[currentIndex] = cards[randomIndex];
-			cards[randomIndex] = temporaryValue;
-		}
-
-		return cards;
+	that.dealCardTo = function (plr) {
+		var drawnCard = deck.pop();
+		plr.getHand().addCard(drawnCard);
+		game.m.state.update(player.getName() + ' has received ' + drawnCard);
 	};
 
-	that.dealCardTo = function (player) {
-		var drawnCard = deck.pop();
-		player.getHand().addCard(drawnCard);
-		game.m.state.update(player.getName() + ' has received ' + drawnCard);
+	that.shuffleDeck = function () {
+		deck.shuffle();
 	};
 
 	that.dealFirstHand = function () {
@@ -53,7 +40,7 @@ game.m.createDealer = function (dealerName) {
 		that.dealCardTo(this);
 
 		// Hide the second dealer card until dealer.playRound() is called
-		hand.flip(1);
+		getHand().flip(1);
 		game.m.state.update('Welcome to a new game!');
 		game.c.updateBoard(game.m.state);
 
@@ -65,18 +52,18 @@ game.m.createDealer = function (dealerName) {
 
 		var getDealerCard = function () {
 			var drawnCard = deck.pop();
-			hand.addCard(drawnCard);
+			getHand().addCard(drawnCard);
 			game.m.state.update('Dealer draws ' + drawnCard, false);
 
 		};
 
 		// Reveal hidden card
-		hand.flip(1);
-		game.m.state.update('Dealer reveals ' + hand.getCard(1), false);
+		getHand().flip(1);
+		game.m.state.update('Dealer reveals ' + getHand().getCard(1), false);
 		stateHistory.push(game.m.state.getCopy());
 
 		// Finish the whole round and store drawn cards for replay with delay
-		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
+		while (getHand().getTotalValue() < 17) {
 			getDealerCard();
 			stateHistory.push(game.m.state.getCopy());
 		}
@@ -99,7 +86,7 @@ game.m.createDealer = function (dealerName) {
 	};
 
 	that.getHand = function () {
-		return hand;
+		return getHand();
 	};
 
 	return that;

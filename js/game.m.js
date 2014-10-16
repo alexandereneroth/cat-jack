@@ -1,7 +1,10 @@
 /*globals game:true */
 
 'use strict';
-
+/**
+ **	The Model that contains the game logic, and is decoupled from the view
+ **	and controller.
+ **/
 game.m = {
 	player: {},
 	dealer: {},

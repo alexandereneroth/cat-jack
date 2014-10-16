@@ -1,9 +1,14 @@
 'use strict';
+/**
+ **	The main object that is used to interact with the game.
+ **/
 var game = {
 
 	m: {}, // model
 	c: {}, // controller
+	config: {
 
+	},
 	start: function () {
 
 		// Bind key listeners

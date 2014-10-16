@@ -7,13 +7,13 @@ game.m.getCard = function (rank, suit) {
 
 	var rank = rank;
 	var suit = suit;
-	var value = makeValue();
-	var name = makeName();
-	var url = makeUrl();
+	var value = buildValue();
+	var name = buildName();
+	var url = buildUrl();
 	var isRevealed = true;
 
-	//used in makeName and makeValue
-	function makeCardStrings() {
+	//used in buildName and buildValue
+	function buildCardStrings() {
 		var rankWord = '';
 		var suitWord = '';
 
@@ -28,7 +28,7 @@ game.m.getCard = function (rank, suit) {
 		} else if (rank === 'K') {
 			rankWord = 'King';
 		} else {
-			throw 'game.m.getCard > makeCardStrings > invalid rank!';
+			throw 'game.m.getCard > buildCardStrings > invalid rank!';
 		}
 		if (suit === 'H') {
 			suitWord = 'Hearts';
@@ -39,23 +39,23 @@ game.m.getCard = function (rank, suit) {
 		} else if (suit === 'D') {
 			suitWord = 'Diamonds';
 		} else {
-			throw 'game.m.getCard > makeCardStrings > invalid suit!';
+			throw 'game.m.getCard > buildCardStrings > invalid suit!';
 		}
 
 		return [rankWord, suitWord];
 	}
 
 	// Set text representation of cards and url
-	function makeName() {
-		return makeCardStrings()[0] + ' of ' + makeCardStrings()[1];
+	function buildName() {
+		return buildCardStrings()[0] + ' of ' + buildCardStrings()[1];
 	}
 
-	function makeUrl() {
-		return 'img/cards/' + makeCardStrings()[0].toLowerCase() +
-			'_of_' + makeCardStrings()[1].toLowerCase() + '.svg';
+	function buildUrl() {
+		return 'img/cards/' + buildCardStrings()[0].toLowerCase() +
+			'_of_' + buildCardStrings()[1].toLowerCase() + '.svg';
 	}
 	// Returns the value of the card (in numbers)
-	function makeValue() {
+	function buildValue() {
 		var value = Number(rank);
 
 		if (rank === 'A') { // A
