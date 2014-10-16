@@ -50,8 +50,6 @@ game.dealer = (function () {
 		return dealerHand;
 	};
 
-
-
 	that.dealFirstHand = function () {
 		// House and player gets two cards each.
 		dealCardTo(playerHand);
@@ -95,7 +93,6 @@ game.dealer = (function () {
 				var gameStateI = gameStateHistory[i];
 
 				setTimeout(function () {
-					console.dir(gameStateI);
 					game.ui.updateBoard(gameStateI);
 
 				}, game.globalTimeout * n);
@@ -121,26 +118,5 @@ game.dealer = (function () {
 		}
 		return playerScore - dealerScore;
 	};
-
-	that.shuffleDeck = function () {
-		var cards = deck.cards;
-
-		var currentIndex = cards.length,
-			temporaryValue, randomIndex;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = cards[currentIndex];
-			cards[currentIndex] = cards[randomIndex];
-			cards[randomIndex] = temporaryValue;
-		}
-		return cards;
-	};
-
 	return that;
 })();

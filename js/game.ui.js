@@ -12,8 +12,6 @@ game.ui = (function () {
 				focusMessage: game.focusMessage,
 				gameOver: game.gameOver
 			};
-			console.log('updateBoard(), gs = ');
-			console.dir(gs);
 			showMessage(gs.focusMessage);
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);

@@ -21,7 +21,6 @@ var game = {
 
 	startGame: function () {
 		// Main game function calls
-		game.dealer.shuffleDeck();
 		game.dealer.dealFirstHand();
 	},
 
@@ -39,13 +38,16 @@ var game = {
 	},
 
 	getCopy: function () {
-		return {
+		var copy = {
 			playerScore: game.playerScore,
 			dealerScore: game.dealerScore,
-			playerCards: game.playerCards,
-			dealerCards: game.dealerCards,
+			playerCards: {},
+			dealerCards: {},
 			focusMessage: game.focusMessage,
 			gameOver: game.gameOver
 		};
+		$.extend(true, copy.playerCards, game.playerCards);
+		$.extend(true, copy.dealerCards, game.dealerCards);
+		return copy;
 	}
 };
