@@ -1,6 +1,8 @@
 'use strict';
 game.createDealer = function (dealerName) {
+	// Inherit from player
 	var that = game.createPlayer(dealerName);
+
 	//    ______________________
 	//___/        PRIVATE       \___
 	var deck;

@@ -17,7 +17,7 @@ game.getCard = function (rank, suit) {
 		var rankWord = '';
 		var suitWord = '';
 
-		if (cjTools.isNumber(rank)) { // 2 3 4 5 6 7 8 9 10
+		if ($.isNumeric(rank)) { // 2 3 4 5 6 7 8 9 10
 			rankWord = rank;
 		} else if (rank === 'A') {
 			rankWord = 'Ace';

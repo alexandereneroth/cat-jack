@@ -6,7 +6,7 @@ var game = {
 	player: {},
 	dealer: {},
 	isPlayerRound: true,
-	globalTimeout: 1800,
+	globalTimeout: 1111,
 
 	startGame: function () {
 

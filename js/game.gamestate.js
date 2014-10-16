@@ -1,5 +1,7 @@
 'use strict';
 
+// gameState object tracks ui relevant variables
+
 game.gameState = {
 
 	playerScore: 0,
@@ -44,23 +46,8 @@ game.gameState = {
 	},
 
 	getCopy: function () {
-		var gs = game.gameState;
-
-		var copy = {
-			playerCards: [],
-			dealerCards: [],
-			playerScore: gs.playerScore,
-			dealerScore: gs.dealerScore,
-			focusMessage: gs.focusMessage,
-			gameOver: gs.gameOver
-		};
-		for (var i = 0; i < gs.playerCards.length; ++i) {
-			copy.playerCards.push(gs.playerCards[i]);
-		}
-
-		for (var j = 0; j < gs.dealerCards.length; ++j) {
-			copy.dealerCards.push(gs.dealerCards[j]);
-		}
+		var copy = {};
+		$.extend(true, copy, game.gameState);
 		return copy;
 	}
 };
