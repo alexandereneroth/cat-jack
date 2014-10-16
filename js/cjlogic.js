@@ -2,7 +2,7 @@
 
 'use strict';
 
-var cjLogic = {
+game.m = {
 	player: {},
 	dealer: {},
 	isPlayerRound: true,
@@ -11,37 +11,37 @@ var cjLogic = {
 	startGame: function () {
 
 		// Main game function calls
-		cjLogic.dealer.setNumberOfCardDecks(4);
-		cjLogic.dealer.shuffleDeck();
+		game.m.dealer.setNumberOfCardDecks(4);
+		game.m.dealer.shuffleDeck();
 
-		cjLogic.dealer.dealFirstHand(cjLogic.player);
+		game.m.dealer.dealFirstHand(game.m.player);
 	},
 
 	playerRound: function () {},
 
 	dealerRound: function () {
-		cjLogic.dealer.playRound();
+		game.m.dealer.playRound();
 	},
 
 	hit: function () {
 		console.log('hit');
-		if (cjLogic.isPlayerRound) { // Will disable button if it's not the playersround
-			cjLogic.dealer.dealCardTo(cjLogic.player, 1);
-			cjController.updateBoard(cjLogic.state);
-			if (cjLogic.state.playerScore > 21) {
-				cjLogic.state.update('Player Bust!');
-				cjController.updateBoard(cjLogic.state);
-				cjLogic.isPlayerRound = false;
-				setTimeout(cjLogic.dealerRound, cjLogic.globalTimeout);
+		if (game.m.isPlayerRound) { // Will disable button if it's not the playersround
+			game.m.dealer.dealCardTo(game.m.player, 1);
+			game.c.updateBoard(game.m.state);
+			if (game.m.state.playerScore > 21) {
+				game.m.state.update('Player Bust!');
+				game.c.updateBoard(game.m.state);
+				game.m.isPlayerRound = false;
+				setTimeout(game.m.dealerRound, game.m.globalTimeout);
 			}
 		}
 	},
 
 	stand: function () {
 		console.log('stand');
-		if (cjLogic.isPlayerRound) { // Will disable button if it's not the playersround
-			cjLogic.isPlayerRound = false;
-			cjLogic.dealerRound();
+		if (game.m.isPlayerRound) { // Will disable button if it's not the playersround
+			game.m.isPlayerRound = false;
+			game.m.dealerRound();
 		}
 	},
 

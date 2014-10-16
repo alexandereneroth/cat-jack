@@ -1,10 +1,10 @@
 'use strict';
-cjLogic.createDealer = function (dealerName) {
+game.m.createDealer = function (dealerName) {
 	var that = {};
 	//    ______________________
 	//___/        PRIVATE       \___
 	var name = dealerName;
-	var hand = cjLogic.createHand();
+	var hand = game.m.createHand();
 	var deck;
 
 	//    ______________________
@@ -14,7 +14,7 @@ cjLogic.createDealer = function (dealerName) {
 	};
 
 	that.setNumberOfCardDecks = function (numberOfDecks) {
-		deck = cjLogic.getDeck(numberOfDecks);
+		deck = game.m.getDeck(numberOfDecks);
 	};
 
 	that.shuffleDeck = function () {
@@ -41,21 +41,21 @@ cjLogic.createDealer = function (dealerName) {
 	that.dealCardTo = function (player) {
 		var drawnCard = deck.pop();
 		player.getHand().addCard(drawnCard);
-		cjLogic.state.update(player.getName() + ' has received ' + drawnCard);
+		game.m.state.update(player.getName() + ' has received ' + drawnCard);
 	};
 
 	that.dealFirstHand = function () {
 
 		// House and player gets two cards each.
-		that.dealCardTo(cjLogic.player);
-		that.dealCardTo(cjLogic.player);
+		that.dealCardTo(game.m.player);
+		that.dealCardTo(game.m.player);
 		that.dealCardTo(this);
 		that.dealCardTo(this);
 
 		// Hide the second dealer card until dealer.playRound() is called
 		hand.flip(1);
-		cjLogic.state.update('Welcome to a new game!');
-		cjController.updateBoard(cjLogic.state);
+		game.m.state.update('Welcome to a new game!');
+		game.c.updateBoard(game.m.state);
 
 	};
 
@@ -66,19 +66,19 @@ cjLogic.createDealer = function (dealerName) {
 		var getDealerCard = function () {
 			var drawnCard = deck.pop();
 			hand.addCard(drawnCard);
-			cjLogic.state.update('Dealer draws ' + drawnCard, false);
+			game.m.state.update('Dealer draws ' + drawnCard, false);
 
 		};
 
 		// Reveal hidden card
 		hand.flip(1);
-		cjLogic.state.update('Dealer reveals ' + hand.getCard(1), false);
-		stateHistory.push(cjLogic.state.getCopy());
+		game.m.state.update('Dealer reveals ' + hand.getCard(1), false);
+		stateHistory.push(game.m.state.getCopy());
 
 		// Finish the whole round and store drawn cards for replay with delay
 		while (hand.getTotalValue() < 17 && hand.getTotalValue() !== 21) {
 			getDealerCard();
-			stateHistory.push(cjLogic.state.getCopy());
+			stateHistory.push(game.m.state.getCopy());
 		}
 		stateHistory[stateHistory.length - 1].gameOver = true;
 
@@ -90,9 +90,9 @@ cjLogic.createDealer = function (dealerName) {
 
 				setTimeout(function () {
 					console.dir(stateI);
-					cjController.updateBoard(stateI);
+					game.c.updateBoard(stateI);
 
-				}, cjLogic.globalTimeout * n);
+				}, game.m.globalTimeout * n);
 
 			}(i));
 		}

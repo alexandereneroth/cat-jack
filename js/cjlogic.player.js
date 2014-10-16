@@ -1,9 +1,9 @@
 'use strict';
-cjLogic.createPlayer = function (playerName) {
+game.m.createPlayer = function (playerName) {
 	var that = {};
 	var name = playerName;
 	var bank = 100;
-	var hand = cjLogic.createHand();
+	var hand = game.m.createHand();
 
 	that.getHand = function () {
 		return hand;

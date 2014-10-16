@@ -1,5 +1,5 @@
 'use strict';
-cjLogic.getDeck = function (numberOfDecks) {
+game.m.getDeck = function (numberOfDecks) {
 	var that = {};
 	that.cards = [];
 
@@ -16,7 +16,7 @@ cjLogic.getDeck = function (numberOfDecks) {
 	for (var i = 0; i < numberOfDecks; ++i) {
 		for (var j = 0; j < ranks.length; j++) {
 			for (var k = 0; k < suits.length; k++) {
-				that.cards.push(cjLogic.getCard(ranks[j], suits[k]));
+				that.cards.push(game.m.getCard(ranks[j], suits[k]));
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 'use strict';
-cjLogic.createHand = function () {
+game.m.createHand = function () {
 	var that = {},
 		cards = [],
 		numberOfAces = 0,

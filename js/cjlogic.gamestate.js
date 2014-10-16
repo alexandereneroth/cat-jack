@@ -1,5 +1,5 @@
 'use strict';
-cjLogic.state = {
+game.m.state = {
 
 	playerScore: 0,
 	dealerScore: 0,
@@ -11,9 +11,9 @@ cjLogic.state = {
 	update: function (focusMessage, gameOver) {
 
 		// Storing variables for shorter reference below
-		var state = cjLogic.state;
-		var playerHand = cjLogic.player.getHand();
-		var dealerHand = cjLogic.dealer.getHand();
+		var state = game.m.state;
+		var playerHand = game.m.player.getHand();
+		var dealerHand = game.m.dealer.getHand();
 
 		state.playerCards = playerHand.getCards();
 		state.dealerCards = dealerHand.getCards();
@@ -27,8 +27,8 @@ cjLogic.state = {
 	getWinState: function () {
 
 		// Storing variables for shorter reference below
-		var playerScore = cjLogic.state.playerScore;
-		var dealerScore = cjLogic.state.dealerScore;
+		var playerScore = game.m.state.playerScore;
+		var dealerScore = game.m.state.dealerScore;
 
 		if (playerScore > 21 && dealerScore > 21) {
 			return 0;
@@ -43,7 +43,7 @@ cjLogic.state = {
 	},
 
 	getCopy: function () {
-		var gs = cjLogic.state;
+		var gs = game.m.state;
 
 		var copy = {
 			playerCards: [],

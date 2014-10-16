@@ -1,5 +1,5 @@
 'use strict';
-cjLogic.getCard = function (rank, suit) {
+game.m.getCard = function (rank, suit) {
 	var that = {};
 
 	//    _____________________
@@ -28,7 +28,7 @@ cjLogic.getCard = function (rank, suit) {
 		} else if (rank === 'K') {
 			rankWord = 'King';
 		} else {
-			throw 'cjLogic.getCard > makeCardStrings > invalid rank!';
+			throw 'game.m.getCard > makeCardStrings > invalid rank!';
 		}
 		if (suit === 'H') {
 			suitWord = 'Hearts';
@@ -39,7 +39,7 @@ cjLogic.getCard = function (rank, suit) {
 		} else if (suit === 'D') {
 			suitWord = 'Diamonds';
 		} else {
-			throw 'cjLogic.getCard > makeCardStrings > invalid suit!';
+			throw 'game.m.getCard > makeCardStrings > invalid suit!';
 		}
 
 		return [rankWord, suitWord];

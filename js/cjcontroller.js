@@ -1,6 +1,6 @@
 'use strict';
 
-var cjController = (function () {
+game.c = (function () {
 	var that = {};
 
 	//    _____________________
@@ -72,17 +72,17 @@ var cjController = (function () {
 
 			setTimeout(function () {
 
-				if (cjLogic.state.getWinState() > 0) { // WIN
+				if (game.m.state.getWinState() > 0) { // WIN
 					showMessage('YOU WON!');
 					$('.smiling-cat').addClass('spin-anim');
-				} else if (cjLogic.state.getWinState() < 0) { // LOSE
+				} else if (game.m.state.getWinState() < 0) { // LOSE
 					showMessage('YOU LOST!');
 					$('.smiling-cat').addClass('tilt-grayscale-anim');
 				} else { // TIE
 					showMessage('You tied!');
 				}
 
-			}, cjLogic.globalTimeout);
+			}, game.m.globalTimeout);
 
 		}
 	};
