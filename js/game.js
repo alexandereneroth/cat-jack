@@ -3,47 +3,49 @@
 'use strict';
 
 var game = {
-	player: {},
-	dealer: {},
+	// These variables are stored in hand.js but are duplicated here
+	// for short notation access 
+	// (game.playerScore instead of game.dealer.getHand().getTotalValue())
+	playerScore: 0,
+	dealerScore: 0,
+	dealerCards: [],
+	playerCards: [],
+
+	// Global Settings
+	numberOfDecks: 4,
+	globalTimeout: 1111, // timeout in ms between board updates
+
 	isPlayerRound: true,
-	globalTimeout: 1111,
+	gameOver: false,
+	focusMessage: '',
 
 	startGame: function () {
-
 		// Main game function calls
-		game.dealer.setNumberOfCardDecks(4);
 		game.dealer.shuffleDeck();
-
-		game.dealer.dealFirstHand(game.player);
+		game.dealer.dealFirstHand();
 	},
 
-	playerRound: function () {},
+	updateGameState: function (focusMessage, gameOver) {
+		// Storing variables for shorter reference below
+		var playerHand = game.dealer.getPlayerHand();
+		var dealerHand = game.dealer.getDealerHand();
 
-	hit: function () {
-		console.log('hit');
-		if (game.isPlayerRound) { // Will disable button if it's not the playersround
-			game.dealer.dealCardTo(game.player, 1);
-			game.ui.updateBoard(game.gameState);
-			if (game.gameState.playerScore > 21) {
-				game.gameState.update('Player Bust!');
-				game.ui.updateBoard(game.gameState);
-				game.isPlayerRound = false;
-				setTimeout(game.dealerRound, game.globalTimeout);
-			}
-		}
+		game.playerCards = playerHand.getCards();
+		game.dealerCards = dealerHand.getCards();
+		game.playerScore = playerHand.getTotalValue();
+		game.dealerScore = dealerHand.getTotalValue();
+		game.focusMessage = focusMessage;
+		game.gameOver = gameOver;
 	},
 
-	stand: function () {
-		console.log('stand');
-		if (game.isPlayerRound) { // Will disable button if it's not the playersround
-			game.isPlayerRound = false;
-			game.dealerRound();
-		}
-	},
-
-	dealerRound: function () {
-		game.dealer.playRound();
-	},
-
-
+	getCopy: function () {
+		return {
+			playerScore: game.playerScore,
+			dealerScore: game.dealerScore,
+			playerCards: game.playerCards,
+			dealerCards: game.dealerCards,
+			focusMessage: game.focusMessage,
+			gameOver: game.gameOver
+		};
+	}
 };

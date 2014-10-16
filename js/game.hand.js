@@ -3,7 +3,8 @@ game.createHand = function () {
 	var that = {},
 		cards = [],
 		numberOfAces = 0,
-		totalValue = 0;
+		totalValue = 0,
+		lastCard = [];
 
 	that.flip = function (cardIdx) {
 		var card = cards[cardIdx];
@@ -31,6 +32,7 @@ game.createHand = function () {
 
 	that.addCard = function (card) {
 		cards.push(card);
+		lastCard = card;
 		totalValue += card.getValue();
 
 		// Ace management
@@ -43,6 +45,10 @@ game.createHand = function () {
 				numberOfAces--;
 			}
 		}
+	};
+
+	that.getLastCard = function () {
+		return lastCard;
 	};
 
 	return that;

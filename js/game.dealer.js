@@ -1,24 +1,125 @@
 'use strict';
-game.createDealer = function (dealerName) {
-	// Inherit from player
-	var that = game.createPlayer(dealerName);
+
+// Main logic object
+game.dealer = (function () {
+	var that = {};
 
 	//    ______________________
 	//___/        PRIVATE       \___
-	var deck;
+	var deck = game.getDeck(game.numberOfDecks);
+	var dealerHand = game.createHand();
+	var playerHand = game.createHand();
+
+	var dealCardTo = function (hand) {
+		var drawnCard = deck.pop();
+		hand.addCard(drawnCard);
+	};
 
 	//    ______________________
 	//___/        PUBLIC        \___
-	that.getName = function () {
-		return that.name;
+
+	// Button functions
+	that.hit = function () {
+		console.log('hit');
+		if (game.isPlayerRound) { // Will disable button if it's not the playersround
+			dealCardTo(playerHand);
+			game.updateGameState('Player received ' + playerHand.getLastCard());
+			game.ui.updateBoard();
+			if (game.playerScore > 21) {
+				game.updateGameState('Player Bust!');
+				game.ui.updateBoard();
+				game.isPlayerRound = false;
+				setTimeout(game.dealer.playRound(), game.globalTimeout);
+			}
+		}
 	};
 
-	that.getHand = function () {
-		return that.hand;
+	that.stand = function () {
+		console.log('stand');
+		if (game.isPlayerRound) { // Will disable button if it's not the playersround
+			game.isPlayerRound = false;
+			game.dealer.playRound(); // Playe dealer round
+		}
 	};
 
-	that.setNumberOfCardDecks = function (numberOfDecks) {
-		deck = game.getDeck(numberOfDecks);
+	that.getPlayerHand = function () {
+		return playerHand;
+	};
+
+	that.getDealerHand = function () {
+		return dealerHand;
+	};
+
+
+
+	that.dealFirstHand = function () {
+		// House and player gets two cards each.
+		dealCardTo(playerHand);
+		dealCardTo(playerHand);
+		dealCardTo(dealerHand);
+		dealCardTo(dealerHand);
+
+		// Hide the second dealer card until dealer.playRound() is called
+		dealerHand.flip(1);
+		game.updateGameState('Welcome to a new game!');
+		game.ui.updateBoard();
+	};
+
+	// Draw cards until the hands value is 17 or above, and under 22.
+	that.playRound = function () {
+		var gameStateHistory = [];
+
+		var getDealerCard = function () {
+			var drawnCard = deck.pop();
+			dealerHand.addCard(drawnCard);
+			game.updateGameState('Dealer draws ' + drawnCard);
+		};
+
+		// Reveal hidden card
+		dealerHand.flip(1);
+		game.updateGameState('Dealer reveals ' + dealerHand.getCard(1));
+		gameStateHistory.push(game.getCopy());
+
+		// Finish the whole round and store drawn cards for replay with delay
+		while (dealerHand.getTotalValue() < 17 && dealerHand.getTotalValue() !== 21) {
+			getDealerCard();
+			gameStateHistory.push(game.getCopy());
+		}
+		// Set gameover = true for the last gamestate
+		gameStateHistory[gameStateHistory.length - 1].gameOver = true;
+
+		// Replay the gameround with delay
+		for (var i = 0; i < gameStateHistory.length; i++) {
+
+			(function (n) {
+				var gameStateI = gameStateHistory[i];
+
+				setTimeout(function () {
+					console.dir(gameStateI);
+					game.ui.updateBoard(gameStateI);
+
+				}, game.globalTimeout * n);
+			}(i));
+		}
+	};
+
+	//returns 0 for tie, negative for loss, and positive for win
+	that.getWinner = function () {
+
+		// Storing variables for shorter reference below
+		var playerScore = game.playerScore;
+		var dealerScore = game.dealerScore;
+
+		if (playerScore > 21 && dealerScore > 21) {
+			return 0;
+		}
+		if (playerScore > 21) {
+			return -1;
+		}
+		if (dealerScore > 21) {
+			return 1;
+		}
+		return playerScore - dealerScore;
 	};
 
 	that.shuffleDeck = function () {
@@ -38,69 +139,8 @@ game.createDealer = function (dealerName) {
 			cards[currentIndex] = cards[randomIndex];
 			cards[randomIndex] = temporaryValue;
 		}
-
 		return cards;
 	};
 
-	that.dealCardTo = function (player) {
-		var drawnCard = deck.pop();
-		player.getHand().addCard(drawnCard);
-		game.gameState.update(player.getName() + ' has received ' + drawnCard);
-	};
-
-	that.dealFirstHand = function () {
-
-		// House and player gets two cards each.
-		that.dealCardTo(game.player);
-		that.dealCardTo(game.player);
-		that.dealCardTo(this);
-		that.dealCardTo(this);
-
-		// Hide the second dealer card until dealer.playRound() is called
-		that.hand.flip(1);
-		game.gameState.update('Welcome to a new game!');
-		game.ui.updateBoard(game.gameState);
-
-	};
-
-	// Draw cards until the hands value is 17 or above, and under 22.
-	that.playRound = function () {
-		var gameStateHistory = [];
-
-		var getDealerCard = function () {
-			var drawnCard = deck.pop();
-			that.hand.addCard(drawnCard);
-			game.gameState.update('Dealer draws ' + drawnCard, false);
-
-		};
-
-		// Reveal hidden card
-		that.hand.flip(1);
-		game.gameState.update('Dealer reveals ' + that.hand.getCard(1), false);
-		gameStateHistory.push(game.gameState.getCopy());
-
-		// Finish the whole round and store drawn cards for replay with delay
-		while (that.hand.getTotalValue() < 17 && that.hand.getTotalValue() !== 21) {
-			getDealerCard();
-			gameStateHistory.push(game.gameState.getCopy());
-		}
-		gameStateHistory[gameStateHistory.length - 1].gameOver = true;
-
-		// Replay the gameround with delay
-		for (var i = 0; i < gameStateHistory.length; i++) {
-
-			(function (n) {
-				var gameStateI = gameStateHistory[i];
-
-				setTimeout(function () {
-					console.dir(gameStateI);
-					game.ui.updateBoard(gameStateI);
-
-				}, game.globalTimeout * n);
-
-			}(i));
-		}
-	};
-
 	return that;
-};
+})();

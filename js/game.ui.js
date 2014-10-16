@@ -4,19 +4,29 @@ game.ui = (function () {
 	// Public function to update UI
 	var that = {
 		updateBoard: function (gs) {
+			gs = typeof gs !== 'undefined' ? gs : {
+				playerScore: game.playerScore,
+				dealerScore: game.dealerScore,
+				playerCards: game.playerCards,
+				dealerCards: game.dealerCards,
+				focusMessage: game.focusMessage,
+				gameOver: game.gameOver
+			};
+			console.log('updateBoard(), gs = ');
+			console.dir(gs);
 			showMessage(gs.focusMessage);
 			showScore(gs.playerScore, gs.dealerScore);
 			showCards(gs.playerCards, gs.dealerCards);
 
-			if (gs.gameOver) {
+			if (gs.gameOver === true) {
 				console.log('GAME OVER');
 
 				setTimeout(function () {
-
-					if (game.gameState.getWinState() > 0) { // WIN
+					var winner = game.dealer.getWinner();
+					if (winner > 0) { // WIN
 						showMessage('YOU WON!');
 						$('.smiling-cat').addClass('spin-anim');
-					} else if (game.gameState.getWinState() < 0) { // LOSE
+					} else if (winner < 0) { // LOSE
 						showMessage('YOU LOST!');
 						$('.smiling-cat').addClass('tilt-grayscale-anim');
 					} else { // TIE
@@ -50,9 +60,6 @@ game.ui = (function () {
 	};
 
 	var showScore = function (playerScore, dealerScore) {
-		console.log('DS' + dealerScore);
-		console.log('PS' + playerScore);
-
 		function styleScoreEl(element, score) {
 			if (score > 21) {
 				score += ' - BUST';
@@ -84,4 +91,4 @@ game.ui = (function () {
 	};
 
 	return that;
-}());
+})();
