@@ -25,7 +25,6 @@ game.m.state = {
 
 	//returns 0 for tie, negative for loss, and positive for win
 	getWinState: function () {
-		console.log('test');
 
 		// Storing variables for shorter reference below
 		var playerScore = this.playerScore;

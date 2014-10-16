@@ -8,7 +8,7 @@
 game.m = {
 	player: {},
 	dealer: {},
-	isPlayerRound: true,
+	isPlayerTurn: true,
 	globalTimeout: 1800,
 
 	startGame: function () {
@@ -20,31 +20,33 @@ game.m = {
 		game.m.dealer.dealFirstHand(game.m.player);
 	},
 
-	playerRound: function () {},
-
-	dealerRound: function () {
-		game.m.dealer.playRound();
-	},
-
 	hit: function () {
 		console.log('hit');
-		if (game.m.isPlayerRound) { // Will disable button if it's not the playersround
+
+		if (game.m.isPlayerTurn) {
 			game.m.dealer.dealCardTo(game.m.player, 1);
 			game.c.updateBoard(game.m.state);
+
 			if (game.m.state.playerScore > 21) {
 				game.m.state.update('Player Bust!');
 				game.c.updateBoard(game.m.state);
-				game.m.isPlayerRound = false;
-				setTimeout(game.m.dealerRound, game.m.globalTimeout);
+
+				// Will disable button if it's not the players turn
+				game.m.isPlayerTurn = false;
+
+				game.m.dealer.playTurn();
 			}
 		}
 	},
 
 	stand: function () {
 		console.log('stand');
-		if (game.m.isPlayerRound) { // Will disable button if it's not the playersround
-			game.m.isPlayerRound = false;
-			game.m.dealerRound();
+
+		if (game.m.isPlayerTurn) {
+			// Will disable button if it's not the players turn
+			game.m.isPlayerTurn = false;
+
+			game.m.dealer.playTurn();
 		}
 	},
 

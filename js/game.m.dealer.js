@@ -24,7 +24,7 @@ game.m.createDealer = function (dealerName) {
 	that.dealCardTo = function (plr) {
 		var drawnCard = deck.pop();
 		plr.getHand().addCard(drawnCard);
-		game.m.state.update(player.getName() + ' has received ' + drawnCard);
+		game.m.state.update(plr.getName() + ' has received ' + drawnCard);
 	};
 
 	that.shuffleDeck = function () {
@@ -47,40 +47,30 @@ game.m.createDealer = function (dealerName) {
 	};
 
 	// Draw cards until the hands value is 17 or above, and under 22.
-	that.playRound = function () {
-		var stateHistory = [];
-
-		var getDealerCard = function () {
-			var drawnCard = deck.pop();
-			getHand().addCard(drawnCard);
-			game.m.state.update('Dealer draws ' + drawnCard, false);
-
-		};
+	that.playTurn = function () {
 
 		// Reveal hidden card
 		getHand().flip(1);
-		game.m.state.update('Dealer reveals ' + getHand().getCard(1), false);
-		stateHistory.push(game.m.state.getCopy());
 
-		// Finish the whole round and store drawn cards for replay with delay
+		// Update the game's state with a message of the flipped card 
+		// and a boolean that tells if the game is over or not
+		game.m.state.update('Dealer reveals ' + getHand().getCard(1), (getHand().getTotalValue() >= 17));
+
+		game.c.updateBoardIn(game.m.state.getCopy(), game.m.globalTimeout);
+
+		// Draw cards until value of hand is over 16, and set timers to update 
+		// the board in timed intervals
+		var i = 2;
 		while (getHand().getTotalValue() < 17) {
-			getDealerCard();
-			stateHistory.push(game.m.state.getCopy());
+
+			var drawnCard = deck.pop();
+			getHand().addCard(drawnCard);
+
+			game.m.state.update('Dealer draws ' + drawnCard, (getHand().getTotalValue() >= 17));
+
+			game.c.updateBoardIn(game.m.state.getCopy(), game.m.globalTimeout * i++);
 		}
-		stateHistory[stateHistory.length - 1].gameOver = true;
 
-		// Replay the gameround with delay
-		for (var i = 0; i < stateHistory.length; i++) {
-
-			(function (n) {
-				setTimeout(function () {
-
-					game.c.updateBoard(stateHistory[n]);
-
-				}, game.m.globalTimeout * n);
-
-			}(i));
-		}
 	};
 
 	that.getHand = function () {

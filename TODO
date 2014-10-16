@@ -2,5 +2,5 @@ TODO Cat Jack:
   
 
 Optional:
- ☐ Play for money
- ☐ Play with multiple players
+ ☐ decouple controller from model in game.m.dealer.playRound
+ ☐ move game flow events from game.dealer etc, to its own file. (game.events)

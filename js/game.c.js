@@ -72,12 +72,12 @@ game.c = (function () {
 		if (gs.gameOver) {
 
 			setTimeout(function () {
-				console.dir(gs);
+				var winState = gs.getWinState();
 
-				if (gs.getWinState() > 0) { // WIN
+				if (winState > 0) { // WIN
 					updateMessage('YOU WON!');
 					$('.smiling-cat').addClass('spin-anim');
-				} else if (gs.getWinState() < 0) { // LOSE
+				} else if (winState < 0) { // LOSE
 					updateMessage('YOU LOST!');
 					$('.smiling-cat').addClass('tilt-grayscale-anim');
 				} else { // TIE
@@ -87,6 +87,13 @@ game.c = (function () {
 			}, game.m.globalTimeout);
 
 		}
+	};
+
+	that.updateBoardIn = function (gs, milliseconds) {
+		console.log('ms: ' + milliseconds, gs);
+		setTimeout(function () {
+			that.updateBoard(gs);
+		}, milliseconds);
 	};
 
 	return that;
