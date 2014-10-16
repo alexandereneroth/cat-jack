@@ -73,11 +73,9 @@ game.m.createDealer = function (dealerName) {
 		for (var i = 0; i < stateHistory.length; i++) {
 
 			(function (n) {
-				var stateI = stateHistory[i];
-
 				setTimeout(function () {
-					console.dir(stateI);
-					game.c.updateBoard(stateI);
+
+					game.c.updateBoard(stateHistory[n]);
 
 				}, game.m.globalTimeout * n);
 
