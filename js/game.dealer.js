@@ -15,7 +15,7 @@ game.dealer = (function () {
 		hand.addCard(drawnCard);
 	};
 
-	// Draw cards until the hands value is 17 or above, and under 22.
+	// Draw cards while dealerHand < 17 and store them for replay.
 	var playDealerRound = function () {
 		var gameStateHistory = [];
 
@@ -28,25 +28,31 @@ game.dealer = (function () {
 		// Reveal hidden card
 		dealerHand.flip(1);
 		game.updateGameState('Dealer reveals ' + dealerHand.getCard(1));
+
+		// Store gameState for timed replay
 		gameStateHistory.push(game.getCopy());
 
-		// Finish the whole round and store gamestates for replay with delay
-		while (dealerHand.getTotalValue() < 17 && dealerHand.getTotalValue() !== 21) {
+		// Finish the whole round and store gamestates for timed replay
+		while (dealerHand.getTotalValue() < 17) {
 			getDealerCard();
 			gameStateHistory.push(game.getCopy());
 		}
+
 		// Set gameover = true for the last gamestate
 		gameStateHistory[gameStateHistory.length - 1].gameOver = true;
 
-		// Replay the gameround with delay
-		for (var i = 0; i < gameStateHistory.length; i++) {
-			(function (n) {
-				var gameStateI = gameStateHistory[i];
-				setTimeout(function () {
-					game.ui.updateBoard(gameStateI);
-				}, game.globalTimeout * n);
-			}(i));
+		function addReplayTimeout(gameState, index) {
+			setTimeout(function () {
+				game.ui.updateBoard(gameState);
+			}, game.globalTimeout * index);
 		}
+
+		// // Replay the gameround with delay
+		// for (var i = 0; i < gameStateHistory.length; i++) {
+		// 	replayTimeout(i);
+		// }
+
+		gameStateHistory.forEach(addReplayTimeout);
 	};
 
 	//    ______________________

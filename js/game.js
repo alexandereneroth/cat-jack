@@ -20,7 +20,7 @@ $(function () {
 	$('#stand-button').click(function () {
 		game.dealer.stand();
 	});
-	game.startGame();
+	game.start();
 });
 
 // Main object to hold the rest of the game
@@ -44,7 +44,7 @@ var game = {
 	// Message for messagebox
 	focusMessage: '',
 
-	startGame: function () {
+	start: function () {
 		game.dealer.dealFirstHand();
 	},
 
