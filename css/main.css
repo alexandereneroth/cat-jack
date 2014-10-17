@@ -1,25 +1,29 @@
 body {
+	color: #dd8;
 	background-color: #557F2C;
+	background-image: url('../img/bg2.png');
+	font-family: 'Gloria Hallelujah', cursive;
+
 }
 #window {
 	padding: 33px;
-	background-color: #557F2C;
 }
 
 #table  {
 	background-color: #7FBF42;
+	background-image: url('../img/bg4.png');
 	width: 777px;
 	height: 555px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 2px solid black;
+	border: 8px groove #a6f;
 	box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.73);
 }
 
 .card-area {
 	margin-left: 50px;
 	height: 130px;
-	border: 2px solid black;
+	border: 2px solid #844;
 	width: 90%;
 	float: left;
 }
@@ -37,10 +41,12 @@ body {
 }
 
 #message-area {
+	background-color: rgba(255,255,255,0.1);
 	width: 300px;
 	height: 100px;
 	float: left;
-	border: 1px solid #2A4016;
+	border: 1px solid #844;
+	border-radius: 10px;
 
 }
 #message-area p{
@@ -56,16 +62,16 @@ button {
   box-sizing: content-box;
   cursor: pointer;
   padding: 10px;
-  border: 1px solid #054916;
+  border: 1px solid #fff/*#054916*/;
   -webkit-border-radius: 6px / 22px;
-  border-radius: 6px / 22px;
+  border-radius: 22px / 22px;
   font: normal normal bold 15px/normal "Lucida Console", Monaco, monospace;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
   -o-text-overflow: clip;
   text-overflow: clip;
   letter-spacing: 1px;
-  background: #286300;
+  background: #ba3/*#286300*/;
   -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
   box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
   text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
@@ -74,8 +80,9 @@ button {
 }
 
 button:hover {
-  -webkit-box-shadow: 0 0 0 3px rgba(0,0,0,1) ;
-  box-shadow: 0 0 0 3px rgba(0,0,0,1) ;
+  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0) ;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0) ;
+  background-color: #cb3;
 }
 
 button:active {
@@ -94,11 +101,11 @@ button {
   box-sizing: content-box;
   border: none;
   font: normal 44px/1 "Allerta Stencil", Helvetica, sans-serif;
-  color: #000000;
+  color: #b1f;
   text-align: center;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  text-shadow: 0 1px 6px rgba(181,0,0,0.9) ;
+  text-shadow: 0px 0px 12px rgba(255,255,181,1) ;
 }
 
 /* The cat picture that is inside message-area */
@@ -220,6 +227,7 @@ dl dd {
 }
 
 .card { 
+	box-shadow: -3px 3px rgba(0,0,0,0.5);
 	height: 100px;
 	position: relative;
 	top: 0px;
