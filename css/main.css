@@ -58,61 +58,64 @@ body {
 #buttons{
 	text-align: center;	
 }
-#buttons li{
-	display: inline;
+#buttons ul{
+	margin-top: 20px;
 }
-
-button {
+#buttons li {
 	width:100px;
-  display: inline;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid #fff/*#054916*/;
-  -webkit-border-radius: 6px / 22px;
-  border-radius: 22px / 22px;
-  font: normal normal bold 15px/normal "Lucida Console", Monaco, monospace;
-  color: #fff;
-  text-align: center;
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  letter-spacing: 1px;
-  background: #9b1/*#286300*/;
-  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
-  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
-  text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
-  -webkit-transform-origin: 0 0 0;
-  transform-origin: 0 0 0;
+	/*TODO Somehow changing display to block or inline-block changes 
+	the elements rotation axis*/
+	display: inline; 
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	cursor: pointer;
+	padding: 10px;
+	border: 1px solid #fff/*#054916*/;
+	-webkit-border-radius: 6px / 22px;
+	border-radius: 22px / 22px;
+	font: normal normal bold 15px/normal "Lucida Console", Monaco, monospace;
+	color: #fff;
+	text-align: center;
+	-o-text-overflow: clip;
+	text-overflow: clip;
+	letter-spacing: 1px;
+	background: #9b1/*#286300*/;
+	-webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+	box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+	text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
+	-webkit-transform-origin: 0 0 0;
+	transform-origin: 0 0 0;
 }
 
-button:hover {
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0) ;
-  box-shadow: 0 0 0 0 rgba(0,0,0,0) ;
-  background-color: #ac2;
+#buttons li:hover {
+	-webkit-box-shadow: 0 0 8px 1px rgba(0,0,0,1) ;
+	box-shadow: 0 0 8px 1px rgba(0,0,0,1) ;
+	background-color: #780;
 }
 
-button:active {
-  -webkit-box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
-  box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
+#buttons li:active {
+	-webkit-box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
+	box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
+	-webkit-animation: spin 0.2s 1;
+			animation: spin 0.2s 1;
 }
 
-button {
+#buttons li {
 	margin: 20px;
 }
 
 .title {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  border: none;
-  font: normal 44px/1 "Allerta Stencil", Helvetica, sans-serif;
-  color: #b1f;
-  text-align: center;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  text-shadow: 0px 0px 12px rgba(255,255,181,1) ;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	border: none;
+	font: normal 44px/1 "Allerta Stencil", Helvetica, sans-serif;
+	color: #b1f;
+	text-align: center;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	text-shadow: 0px 0px 12px rgba(255,255,181,1) ;
 }
 
 /* The cat picture that is inside message-area */
@@ -178,8 +181,9 @@ button {
 
 /* Fade from red to black text animation */
 .bust-anim {
-	-webkit-animation: bust 2s linear 1;
-	        animation: bust 2s linear 1;
+	text-decoration: line-through;
+	-webkit-animation: bust 2s linear 1 forwards;
+	        animation: bust 2s linear 1 forwards;
 }
 
 @-webkit-keyframes bust{
@@ -187,25 +191,25 @@ button {
 		color: #f00;
 	}
 	100%{
-		color: #000;
+		color: #aa5;
 	}
 }
 
 /* Flashing black-white-black text animation */
 .catjack-anim {
-	-webkit-animation: catjack 0.5s ease-in-out 3;
-	        animation: catjack 0.5s ease-in-out 3;
+	-webkit-animation: catjack 0.5s ease-in-out 3 forwards;
+	        animation: catjack 0.5s ease-in-out 3 forwards;
 }
 
 @-webkit-keyframes catjack{
 	0%{
-		color: #000;
+		color: #df8;
 	}
 	50%{
 		color: #fff;
 	}
 	100%{
-		color: #000;
+		color: #df8;
 	}
 }
 
