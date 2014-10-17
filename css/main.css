@@ -127,7 +127,7 @@ h1.title {/*2*/
 	padding-bottom: 0px;
 }
 /* The cat picture that is inside message-area */
-#message-area img.smiling-cat {
+.smiling-cat {
 	display: none;
 	position: relative;
 	left: 150px;
@@ -208,19 +208,19 @@ h1.title {/*2*/
 	-webkit-transform: 	rotate(0deg);
 		-ms-transform: 	rotate(0deg);
 		 	transform:	rotate(0deg);
-	-webkit-filter: grayscale(0%);
-	        filter: grayscale(0%);
+	-webkit-filter: grayscale(0%) opacity(70%);
+	        filter: grayscale(0%) opacity(70%);
 	}
 	75%{
-	-webkit-filter: grayscale(100%);
-	        filter: grayscale(100%);
+	-webkit-filter: grayscale(50%) opacity(70%);
+	        filter: grayscale(50%) opacity(70%);
 	}
 	100%{
 	-webkit-transform: 	rotate(90deg);
 		-ms-transform: 	rotate(90deg);
 		 	transform:	rotate(90deg);
-	-webkit-filter: grayscale(100%);
-	        filter: grayscale(100%);
+	-webkit-filter: grayscale(50%) opacity(70%);
+	        filter: grayscale(50%) opacity(70%);
 	}
 }
 

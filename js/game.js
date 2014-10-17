@@ -2,14 +2,16 @@
 /**
  **	The main object that is used to interact with the game.
  **/
-var game = {
+var game = (function () {
+	var that = {};
 
-	m: {}, // model
-	c: {}, // controller
-	config: {
+	//    ______________________
+	//___/        PUBLIC        \___
 
-	},
-	start: function () {
+	that.m = {}; // model
+	that.c = {}; // controller
+
+	that.start = function () {
 
 		// Bind key listeners
 		$('#hit-button').click(function () {
@@ -24,5 +26,6 @@ var game = {
 		game.m.dealer = game.m.createDealer('Joe the Dealer');
 		game.m.startGame();
 
-	}
-};
+	};
+	return that;
+}());

@@ -1,14 +1,18 @@
 'use strict';
-game.m.state = {
+game.m.state = (function () {
+	var that = {};
 
-	playerScore: 0,
-	dealerScore: 0,
-	dealerCards: [],
-	playerCards: [],
-	focusMessage: '',
-	resultMessage: '',
+	//    ______________________
+	//___/        PUBLIC        \___
 
-	update: function (focusMessage, gameOver) {
+	that.playerScore = 0;
+	that.dealerScore = 0;
+	that.dealerCards = [];
+	that.playerCards = [];
+	that.focusMessage = '';
+	that.resultMessage = '';
+
+	that.update = function (focusMessage, gameOver) {
 
 		// Storing variables for shorter reference below
 		var state = game.m.state;
@@ -21,10 +25,10 @@ game.m.state = {
 		state.dealerScore = dealerHand.getTotalValue();
 		state.focusMessage = focusMessage;
 		state.gameOver = gameOver;
-	},
+	};
 
 	//returns 0 for tie, negative for loss, and positive for win
-	getWinState: function () {
+	that.getWinState = function () {
 
 		// Storing variables for shorter reference below
 		var playerScore = this.playerScore;
@@ -40,9 +44,9 @@ game.m.state = {
 			return 1;
 		}
 		return playerScore - dealerScore;
-	},
+	};
 
-	getCopy: function () {
+	that.getCopy = function () {
 		var copy = {
 			playerCards: [],
 			dealerCards: [],
@@ -62,5 +66,7 @@ game.m.state = {
 			copy.dealerCards.push(this.dealerCards[j]);
 		}
 		return copy;
-	}
-};
+	};
+
+	return that;
+}());
