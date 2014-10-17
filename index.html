@@ -6,48 +6,45 @@
 		<script src="lib/jquery-2.1.1.js"></script>
 		<link rel='stylesheet' type='text/css' href='css/normalize.css'/>
 		<link rel='stylesheet' type='text/css' href='css/main.css'/>
-		<link href='http://fonts.googleapis.com/css?family=Allerta+Stencil' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+		<!-- <link href='http://fonts.googleapis.com/css?family=Allerta+Stencil' rel='stylesheet' type='text/css'> -->
+		<!-- <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'> -->
 	</head>
 	<body>
-	
-	<div id='window'>
-		<div id='table'>
-			<h1 class="title">CatJack</h1>
-			
-			<div id='dealer' class='card-area'>
+	<div id='table'>
+		<h1 class="title">CatJack</h1>
+		
+		<div id='dealer' class='card-area'>
+		</div>
+		<div class='clear-fix'></div>
+		<div id='middle-box'>
+			<div id='scoreboard'>
+				<dl>
+					<dt>Dealer Score:</dt>
+					<dd id='dealer-score'></dd>
+					<dt>Player Score:</dt>
+					<dd id='player-score'></dd>
+				</dl>
 			</div>
-			<div class='clear-fix'></div>
-			<div id='middle-box'>
-				<div id='scoreboard'>
-					<dl>
-						<dt>Dealer Score:</dt>
-						<dd id='dealer-score'></dd>
-						<dt>Player Score:</dt>
-						<dd id='player-score'></dd>
-					</dl>
-				</div>
-				<div id='message-area'>
-					<p>
+			<div id='message-area'>
+				<p>
 
-					</p>
-					<img class='smiling-cat' src='img/cats/catface_tiny.png' alt='a smiling cat'/>
-				</div>
+				</p>
+				<img class='smiling-cat' src='img/cats/catface_tiny.png' alt='a smiling cat'/>
 			</div>
-			<div class='clear-fix'></div>
-			
-			<div id='player' class='card-area'>
-			</div>
-			
-			
-			<div class='clear-fix'></div>
-			<div id='buttons'>
-				<ul>
-					<li id="hit-button">Hit</li>
-					<li id="stand-button">Stand</li>
-				</ul>
+		</div>
+		<div class='clear-fix'></div>
+		
+		<div id='player' class='card-area'>
+		</div>
+		
+		
+		<div class='clear-fix'></div>
+		<div id='buttons'>
+			<ul>
+				<li id="hit-button">Hit</li>
+				<li id="stand-button">Stand</li>
+			</ul>
 
-			</div>
 		</div>
 	</div>
 

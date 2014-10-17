@@ -3,17 +3,39 @@ body {
 	background-color: #557F2C;
 	background-image: url('../img/bg2.png');
 	font-family: 'Gloria Hallelujah', cursive;
-
-}
-#window {
-	padding: 33px;
 }
 
-#table  {
+h1 {
+	width: 100%;
+	margin: 5px;
+	margin-bottom: 15px;
+	text-align: center;
+	font-style: italic;
+}
+ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+dl dd, dl dt {
+	display: inline;
+}
+dl dt {
+	clear:left;
+	float: left;
+}
+dl dd {
+	margin-left: 10px;
+	float: left;
+}
+
+/*The uppermost container that contains the whole game board*/
+#table  {/*1*/
 	background-color: #7FBF42;
 	background-image: url('../img/bg4.png');
 	width: 777px;
 	height: 555px;
+	margin:33px;
 	margin-left: auto;
 	margin-right: auto;
 	border-top: 8px groove #a6f;
@@ -21,28 +43,77 @@ body {
 	border-top-right-radius: 10px;
 	box-shadow: 0px 15px 60px 22px rgba(0, 0, 0, 0.73);
 }
+/*The upper area that contains the title*/
+h1.title {/*2*/
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	border: none;
+	font: normal 44px/1 "Allerta Stencil", Helvetica, sans-serif;
+	color: #b1f;
+	text-align: center;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	text-shadow: 0px 0px 12px rgba(255,255,181,1) ;
+}
 
-.card-area {
+/*The two areas that cards are placed in when drawn*/
+.card-area {/*2*/
 	margin-left: 50px;
 	height: 130px;
 	border: 2px solid #844;
 	width: 90%;
 	float: left;
 }
+.card { 
+	box-shadow: -3px 3px rgba(0,0,0,0.5);
+	height: 100px;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	margin: 20px;
+	margin-right: 0px;
+}
 
-#middle-box {
+.card-back{
+	display: inline-block;
+	width: 64px;
+	height: 94px;
+
+	border: 3px solid black;
+	border-radius: 3px;
+
+	background:
+	linear-gradient(324deg, #FFCF6A 4%,   transparent 4%) -68px 60px,
+	linear-gradient( 36deg, #FFCF6A 4%,   transparent 4%) 32px 60px,
+	linear-gradient( 72deg, #000 8.5%, transparent 8.5%) 32px 60px,
+	linear-gradient(288deg, #000 8.5%, transparent 8.5%) -68px 60px,
+	linear-gradient(216deg, #000 7.5%, transparent 7.5%) -68px 40px,
+	linear-gradient(144deg, #000 7.5%, transparent 7.5%) 32px 40px,
+
+	linear-gradient(324deg, #FFCF6A 4%,   transparent 4%) -20px 93px,
+	linear-gradient( 36deg, #FFCF6A 4%,   transparent 4%) 80px 93px,
+	linear-gradient( 72deg, #000 8.5%, transparent 8.5%) 80px 93px,
+	linear-gradient(288deg, #000 8.5%, transparent 8.5%) -20px 93px,
+	linear-gradient(216deg, #000 7.5%, transparent 7.5%) -20px 73px,
+	linear-gradient(144deg, #000 7.5%, transparent 7.5%) 80px 73px;
+	background-color: #FFCF6A;
+	background-size: 100px 100px;
+}
+
+/*The area between the two card areas. Contains scoreboard and message-area.*/
+#middle-box {/*2*/
 	width: 100%;
 	margin: 33px;
 }
-#scoreboard {
+#scoreboard {/*3*/
 	text-align: left;
 	width: 222px;
 	height: 80px;
 	float: left;
 	margin: 20px;
 }
-
-#message-area {
+#message-area {/*3*/
 	background-color: rgba(255,255,255,0.1);
 	width: 300px;
 	height: 100px;
@@ -55,37 +126,49 @@ body {
 	padding: 10px;
 	padding-bottom: 0px;
 }
-#buttons{
+/* The cat picture that is inside message-area */
+#message-area img.smiling-cat {
+	display: none;
+	position: relative;
+	left: 150px;
+	top: -55px;
+}
+
+/*The lowest area in the table. It contains the buttons.*/
+#buttons{/*2*/
 	text-align: center;	
 }
 #buttons ul{
-	margin-top: 20px;
+	margin-top: 15px;	
 }
 #buttons li {
-	width:100px;
-	/*TODO Somehow changing display to block or inline-block changes 
-	the elements rotation axis*/
-	display: inline; 
+	width: 80px;
+	padding: 10px;
+	margin-left: 20px;	
+	display: inline-block; 
+
+	font: normal normal bold 15px/normal "Lucida Console", Monaco, monospace;
+	text-align: center;
+	text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
+	letter-spacing: 1px;
+	background: #9b1;
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid #fff;
+
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	cursor: pointer;
-	padding: 10px;
-	border: 1px solid #fff/*#054916*/;
+
 	-webkit-border-radius: 6px / 22px;
 	border-radius: 22px / 22px;
-	font: normal normal bold 15px/normal "Lucida Console", Monaco, monospace;
-	color: #fff;
-	text-align: center;
+
 	-o-text-overflow: clip;
 	text-overflow: clip;
-	letter-spacing: 1px;
-	background: #9b1/*#286300*/;
+
 	-webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
-	box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
-	text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
-	-webkit-transform-origin: 0 0 0;
-	transform-origin: 0 0 0;
+	box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2);
+
 }
 
 #buttons li:hover {
@@ -101,31 +184,12 @@ body {
 			animation: spin 0.2s 1;
 }
 
-#buttons li {
-	margin: 20px;
+
+.clear-fix {
+	clear: both;
 }
 
-.title {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	border: none;
-	font: normal 44px/1 "Allerta Stencil", Helvetica, sans-serif;
-	color: #b1f;
-	text-align: center;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	text-shadow: 0px 0px 12px rgba(255,255,181,1) ;
-}
-
-/* The cat picture that is inside message-area */
-.smiling-cat {
-	display: none;
-	position: relative;
-	left: 150px;
-	top: -55px;
-}
-
+/** ANIMATIONS **/
 /* Rotate 90 deg and fade to grayscale animation */
 .tilt-grayscale-anim {
 	display: inline-block;
@@ -185,7 +249,6 @@ body {
 	-webkit-animation: bust 2s linear 1 forwards;
 	        animation: bust 2s linear 1 forwards;
 }
-
 @-webkit-keyframes bust{
 	0%{
 		color: #f00;
@@ -200,7 +263,6 @@ body {
 	-webkit-animation: catjack 0.5s ease-in-out 3 forwards;
 	        animation: catjack 0.5s ease-in-out 3 forwards;
 }
-
 @-webkit-keyframes catjack{
 	0%{
 		color: #df8;
@@ -213,45 +275,10 @@ body {
 	}
 }
 
-h1 {
-	width: 100%;
-	margin: 5px;
-	margin-bottom: 15px;
-	text-align: center;
-	font-style: italic;
-}
-ul {
-	margin: 0px;
-	padding: 0px;
-	list-style-type: none;
-}
-dl dd, dl dt {
-	display: inline;
-}
-dl dt {
-	clear:left;
-	float: left;
-}
-dl dd {
-	margin-left: 10px;
-	float: left;
-}
-
-.card { 
-	box-shadow: -3px 3px rgba(0,0,0,0.5);
-	height: 100px;
-	position: relative;
-	top: 0px;
-	left: 0px;
-	margin: 20px;
-	margin-right: 0px;
-}
-
 .fade-in-anim {
 	-webkit-animation: fade-in 0.3s 1;
 			animation: fade-in 0.3s 1;
 }
-
 @-webkit-keyframes fade-in{
 	0%{
 		opacity: 1;
@@ -260,32 +287,4 @@ dl dd {
 		opacity: 0;
 	}
 }
-.card-back{
-	display: inline-block;
-	width: 64px;
-	height: 94px;
 
-	border: 3px solid black;
-	border-radius: 3px;
-
-	background:
-	linear-gradient(324deg, #FFCF6A 4%,   transparent 4%) -68px 60px,
-	linear-gradient( 36deg, #FFCF6A 4%,   transparent 4%) 32px 60px,
-	linear-gradient( 72deg, #000 8.5%, transparent 8.5%) 32px 60px,
-	linear-gradient(288deg, #000 8.5%, transparent 8.5%) -68px 60px,
-	linear-gradient(216deg, #000 7.5%, transparent 7.5%) -68px 40px,
-	linear-gradient(144deg, #000 7.5%, transparent 7.5%) 32px 40px,
-
-	linear-gradient(324deg, #FFCF6A 4%,   transparent 4%) -20px 93px,
-	linear-gradient( 36deg, #FFCF6A 4%,   transparent 4%) 80px 93px,
-	linear-gradient( 72deg, #000 8.5%, transparent 8.5%) 80px 93px,
-	linear-gradient(288deg, #000 8.5%, transparent 8.5%) -20px 93px,
-	linear-gradient(216deg, #000 7.5%, transparent 7.5%) -20px 73px,
-	linear-gradient(144deg, #000 7.5%, transparent 7.5%) 80px 73px;
-	background-color: #FFCF6A;
-	background-size: 100px 100px;
-}
-
-.clear-fix {
-	clear: both;
-}
