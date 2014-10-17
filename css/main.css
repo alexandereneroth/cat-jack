@@ -16,8 +16,10 @@ body {
 	height: 555px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 8px groove #a6f;
-	box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.73);
+	border-top: 8px groove #a6f;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	box-shadow: 0px 15px 60px 22px rgba(0, 0, 0, 0.73);
 }
 
 .card-area {
@@ -53,10 +55,16 @@ body {
 	padding: 10px;
 	padding-bottom: 0px;
 }
-
+#buttons{
+	text-align: center;	
+}
+#buttons li{
+	display: inline;
+}
 
 button {
-  display: inline-block;
+	width:100px;
+  display: inline;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -71,7 +79,7 @@ button {
   -o-text-overflow: clip;
   text-overflow: clip;
   letter-spacing: 1px;
-  background: #ba3/*#286300*/;
+  background: #9b1/*#286300*/;
   -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
   box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
   text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
@@ -82,7 +90,7 @@ button {
 button:hover {
   -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0) ;
   box-shadow: 0 0 0 0 rgba(0,0,0,0) ;
-  background-color: #cb3;
+  background-color: #ac2;
 }
 
 button:active {
@@ -92,7 +100,6 @@ button:active {
 
 button {
 	margin: 20px;
-	float: left;
 }
 
 .title {
@@ -234,6 +241,20 @@ dl dd {
 	left: 0px;
 	margin: 20px;
 	margin-right: 0px;
+}
+
+.fade-in-anim {
+	-webkit-animation: fade-in 0.3s 1;
+			animation: fade-in 0.3s 1;
+}
+
+@-webkit-keyframes fade-in{
+	0%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
 }
 .card-back{
 	display: inline-block;
