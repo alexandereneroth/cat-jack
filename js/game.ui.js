@@ -1,5 +1,4 @@
 'use strict';
-
 game.ui = (function () {
 	// Public function to update UI
 	var that = {
