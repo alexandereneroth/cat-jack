@@ -1,9 +1,12 @@
 'use strict';
 game.ui = (function () {
-	// Public function to update UI
 	var that = {
+		/* Public function to update UI, takes gamestate object as argument or uses current values.
+		 * Works this way so it can be used both for updating during the player round and for
+		 * replaying gameStateHistory for dealer in which case we are being sent GS objects.
+		 */
 		updateBoard: function (gs) {
-			gs = typeof gs !== 'undefined' ? gs : {
+			gs = typeof gs !== 'undefined' ? gs : { // if no gs is sent use current values
 				playerScore: game.playerScore,
 				dealerScore: game.dealerScore,
 				playerCards: game.playerCards,
@@ -16,27 +19,36 @@ game.ui = (function () {
 			showCards(gs.playerCards, gs.dealerCards);
 
 			if (gs.gameOver === true) {
-				setTimeout(function () {
-					var winner = game.dealer.getWinner();
-					if (winner > 0) { // WIN
-						showMessage('YOU WON!');
-						$('.smiling-cat').addClass('spin-anim');
-					} else if (winner < 0) { // LOSE
-						showMessage('YOU LOST!');
-						$('.smiling-cat').addClass('tilt-grayscale-anim');
-					} else { // TIE
-						showMessage('You tied!');
-					}
-				}, game.globalTimeout);
+				that.displayWinner();
 			}
+		},
+
+		displayWinner: function () {
+			setTimeout(function () {
+				var winner = game.dealer.getWinner();
+				if (winner > 0) {
+					showMessage('YOU WON!');
+					$('.smiling-cat').addClass('spin-anim');
+				} else if (winner < 0) {
+					showMessage('YOU LOST!');
+					$('.smiling-cat').addClass('tilt-grayscale-anim');
+				} else {
+					showMessage('You tied!');
+				}
+			}, game.globalTimeout);
 		}
 	};
 
-	// Private functions
+	/* * * * * *
+	 * Private *
+	 * * * * * */
+
+	// The middle text box area.
 	var showMessage = function (message) {
 		$('#message-area p').text(message);
 	};
 
+	// Takes two arrays of cards and displays them
 	var showCards = function (playerCards, dealerCards) {
 		// Empty the board before adding new cards
 		$('#dealer').empty();
@@ -52,8 +64,10 @@ game.ui = (function () {
 
 	};
 
+
 	var showScore = function (playerScore, dealerScore) {
 		function styleScoreEl(element, score) {
+			// Check for certain scores to add animation for Bust and CatJack
 			if (score > 21) {
 				score += ' - BUST';
 				element.addClass('bust-anim');
@@ -64,6 +78,8 @@ game.ui = (function () {
 			}
 			element.text(score);
 		}
+
+		// Call above function with scores
 		styleScoreEl($('#dealer-score'), dealerScore);
 		styleScoreEl($('#player-score'), playerScore);
 	};
@@ -82,6 +98,5 @@ game.ui = (function () {
 			return $('<div>').addClass('card card-back'); //return card backside 
 		}
 	};
-
 	return that;
 })();

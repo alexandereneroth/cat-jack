@@ -4,8 +4,9 @@
 game.dealer = (function () {
 	var that = {};
 
-	//    ______________________
-	//___/        PRIVATE       \___
+	/* * * * * *
+	 * Private *
+	 * * * * * */
 	var deck = game.getDeck(game.numberOfDecks);
 	var dealerHand = game.createHand();
 	var playerHand = game.createHand();
@@ -41,17 +42,12 @@ game.dealer = (function () {
 		// Set gameover = true for the last gamestate
 		gameStateHistory[gameStateHistory.length - 1].gameOver = true;
 
+		// // Replay the gameround with delay
 		function addReplayTimeout(gameState, index) {
 			setTimeout(function () {
 				game.ui.updateBoard(gameState);
 			}, game.globalTimeout * index);
 		}
-
-		// // Replay the gameround with delay
-		// for (var i = 0; i < gameStateHistory.length; i++) {
-		// 	replayTimeout(i);
-		// }
-
 		gameStateHistory.forEach(addReplayTimeout);
 	};
 
@@ -78,7 +74,7 @@ game.dealer = (function () {
 	that.stand = function () {
 		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			game.isPlayerRound = false;
-			playDealerRound(); // Playe dealer round
+			playDealerRound();
 		}
 	};
 

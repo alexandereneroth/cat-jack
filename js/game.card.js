@@ -2,9 +2,7 @@
 game.getCard = function (rank, suit) {
 	var that = {};
 
-	//    ______________________
-	//___/       PRIVATE        \___
-
+	// Private
 	var rank = rank;
 	var suit = suit;
 	var value = makeValue();
