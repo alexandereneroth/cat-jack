@@ -1,90 +1,84 @@
 'use strict';
+
+// Card constructor, returns object with all the needed properties
+// and functions.
 game.getCard = function (rank, suit) {
-	var that = {};
 
-	// Private
-	var rank = rank;
-	var suit = suit;
-	var value = makeValue();
-	var name = makeName();
-	var url = makeUrl();
+	/* * * * * *
+	 * Private *
+	 * * * * * */
 	var isRevealed = true;
+	var rankWord = getRankWord();
+	var suitWord = getSuitWord();
+	var value = getValue();
+	var url = getUrl();
 
-
-	function getCardText() {
-		var rankWord = '';
-		var suitWord = '';
-
+	function getRankWord() {
 		if ($.isNumeric(rank)) { // 2 3 4 5 6 7 8 9 10
-			rankWord = rank;
+			return rank;
 		} else if (rank === 'A') {
-			rankWord = 'Ace';
+			return 'Ace';
 		} else if (rank === 'J') {
-			rankWord = 'Jack';
+			return 'Jack';
 		} else if (rank === 'Q') {
-			rankWord = 'Queen';
+			return 'Queen';
 		} else if (rank === 'K') {
-			rankWord = 'King';
+			return 'King';
 		} else {
 			throw 'game.getCard > getName > invalid rank!';
 		}
+	}
+
+	function getSuitWord() {
 		if (suit === 'H') {
-			suitWord = 'Hearts';
+			return 'Hearts';
 		} else if (suit === 'S') {
-			suitWord = 'Spades';
+			return 'Spades';
 		} else if (suit === 'C') {
-			suitWord = 'Clubs';
+			return 'Clubs';
 		} else if (suit === 'D') {
-			suitWord = 'Diamonds';
+			return 'Diamonds';
 		} else {
 			throw 'game.getCard > getName > invalid suit!';
 		}
-
-		return [rankWord, suitWord];
 	}
 
-	// Set text representation of cards and url
-	function makeName() {
-		return getCardText()[0] + ' of ' + getCardText()[1];
-	}
-
-	function makeUrl() {
-		return 'img/cards/' + getCardText()[0].toLowerCase() + '_of_' + getCardText()[1].toLowerCase() + '.svg';
-	}
-	// Returns the value of the card (in numbers)
-	function makeValue() {
-		var value = Number(rank);
-
-		if (rank === 'A') { // A
+	function getValue() {
+		// If it is a letter card return 11 or 10..
+		if (rank === 'A') {
 			return 11;
-		}
-		if (isNaN(value)) { // J Q K
+		} else if ('J' || 'Q' || 'K') {
 			return 10;
+		} else { // otherwise return the rank itself
+			return Number(rank);
 		}
-		return value; // 2 3 4 5 6 7 8 9 10
 	}
 
+	function getUrl() { // For card image file
+		return 'img/cards/' + rankWord.toLowerCase() + '_of_' + suitWord.toLowerCase() + '.svg';
+	}
 
-	//    ______________________
-	//___/        PUBLIC        \___
+	/* * * * * *
+	 * Public  *
+	 * * * * * */
+	var card = {}; // Public functions are returned with this object
 
-	// Mutators
-	that.flip = function () {
+	card.flip = function () {
 		isRevealed = !isRevealed;
 	};
-	// Accessors
-	that.isRevealed = function () {
+	card.isRevealed = function () {
 		return isRevealed;
 	};
-	that.getUrl = function () {
+	card.getUrl = function () {
 		return url;
 	};
-	that.getValue = function () {
+	card.getValue = function () {
 		return value;
 	};
-	that.toString = function () {
-		return name;
+	card.toString = function () { // Text representation of card, i.e. '9 of clubs'
+		return rankWord + ' of ' + suitWord;
 	};
 
-	return that;
+	// Return the public functions
+	return card;
 };
