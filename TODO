@@ -1,6 +1,6 @@
 TODO Cat Jack:
   ☐ Refactor all files into Revealing Module Pattern
-  Check through/clean/comment:
+  Check through/refactor/clean/comment:
     ✔ card.js @done (14-10-18 10:17)
     ☐ deck.js
     ☐ hand.js

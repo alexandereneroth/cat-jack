@@ -7,39 +7,28 @@ game.getCard = function (rank, suit) {
 	/* * * * * *
 	 * Private *
 	 * * * * * */
-	var isRevealed = true;
-	var rankWord = getRankWord();
-	var suitWord = getSuitWord();
-	var value = getValue();
-	var url = getUrl();
+	var stringLibrary = {
+		A: 'Ace',
+		K: 'King',
+		Q: 'Queen',
+		J: 'Jack',
+		H: 'Hearts',
+		S: 'Spades',
+		C: 'Clubs',
+		D: 'Diamonds'
+	};
 
-	function getRankWord() {
-		if ($.isNumeric(rank)) { // 2 3 4 5 6 7 8 9 10
+	var isRevealed = true,
+		rankString = getString(rank),
+		suitString = getString(suit),
+		value = getValue(),
+		url = getUrl();
+
+	function getString(key) {
+		if ($.isNumeric(key)) { // If we have a number just use it directly
 			return rank;
-		} else if (rank === 'A') {
-			return 'Ace';
-		} else if (rank === 'J') {
-			return 'Jack';
-		} else if (rank === 'Q') {
-			return 'Queen';
-		} else if (rank === 'K') {
-			return 'King';
-		} else {
-			throw 'game.getCard > getRankWord > invalid rank!';
-		}
-	}
-
-	function getSuitWord() {
-		if (suit === 'H') {
-			return 'Hearts';
-		} else if (suit === 'S') {
-			return 'Spades';
-		} else if (suit === 'C') {
-			return 'Clubs';
-		} else if (suit === 'D') {
-			return 'Diamonds';
-		} else {
-			throw 'game.getCard > getSuitWord > invalid suit!';
+		} else { // Otherwise return the correct string from library
+			return stringLibrary[key];
 		}
 	}
 
@@ -55,7 +44,7 @@ game.getCard = function (rank, suit) {
 	}
 
 	function getUrl() { // For card image file
-		return 'img/cards/' + rankWord.toLowerCase() + '_of_' + suitWord.toLowerCase() + '.svg';
+		return 'img/cards/' + rankString + '_of_' + suitString + '.svg';
 	}
 
 	/* * * * * *
@@ -76,7 +65,7 @@ game.getCard = function (rank, suit) {
 		return value;
 	};
 	card.toString = function () { // Text representation of card, i.e. '9 of clubs'
-		return rankWord + ' of ' + suitWord;
+		return rankString + ' of ' + suitString;
 	};
 
 	// Return the public functions
