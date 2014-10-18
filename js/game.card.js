@@ -1,7 +1,7 @@
 'use strict';
 
-// Card constructor, returns object with all the needed properties
-// and functions.
+// Card constructor function.
+// Returns object with all the needed properties and functions.
 game.getCard = function (rank, suit) {
 
 	/* * * * * *
@@ -25,7 +25,7 @@ game.getCard = function (rank, suit) {
 		} else if (rank === 'K') {
 			return 'King';
 		} else {
-			throw 'game.getCard > getName > invalid rank!';
+			throw 'game.getCard > getRankWord > invalid rank!';
 		}
 	}
 
@@ -39,7 +39,7 @@ game.getCard = function (rank, suit) {
 		} else if (suit === 'D') {
 			return 'Diamonds';
 		} else {
-			throw 'game.getCard > getName > invalid suit!';
+			throw 'game.getCard > getSuitWord > invalid suit!';
 		}
 	}
 
@@ -47,7 +47,7 @@ game.getCard = function (rank, suit) {
 		// If it is a letter card return 11 or 10..
 		if (rank === 'A') {
 			return 11;
-		} else if ('J' || 'Q' || 'K') {
+		} else if (!$.isNumeric(rank)) { // is not numeric
 			return 10;
 		} else { // otherwise return the rank itself
 			return Number(rank);
