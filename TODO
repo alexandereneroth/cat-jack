@@ -2,7 +2,7 @@ TODO Cat Jack:
   ☐ Refactor all files into Revealing Module Pattern
   Check through/refactor/clean/comment:
     ✔ card.js @done (14-10-18 10:17)
-    ☐ deck.js
+    ✔ deck.js @done (14-10-19 21:16)
     ☐ hand.js
     ☐ game.js
     ☐ dealer.js
