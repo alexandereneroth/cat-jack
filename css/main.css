@@ -32,7 +32,7 @@ dl dd {
 /*The uppermost container that contains the whole game board*/
 #table  {/*1*/
 	background-color: #7FBF42;
-	background-image: url('../img/bg4.png');
+	background-image: ;
 	width: 777px;
 	height: 555px;
 	margin:33px;
@@ -45,21 +45,22 @@ dl dd {
 }
 /*The upper area that contains the title*/
 h1.title {/*2*/
+	/*display:none;	*/
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	border: none;
 	font: normal 44px/1 cursive, sans-serif;
-	color: rgba(123,62,62,1);
+	color: rgba(123,62,62,0);
 	text-align: center;
 	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis;/*
     text-shadow:
     -1px -1px 0 #f00,
     1px -1px 0 #f00,
     -1px 1px 0 #f00,
     1px 1px 0 #f00,
-    0px 0px 100px rgba(0,0,0,1);  
+    0px 0px 100px rgba(0,0,0,1); */ 
 }
 
 /*The two areas that cards are placed in when drawn*/
