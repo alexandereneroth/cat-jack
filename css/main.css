@@ -1,5 +1,5 @@
 body {
-	color: #dd8;
+	color: yellow;
 	background-color: #557F2C;
 	background-image: url('../img/bg2.png');
 	font-family: monospace, cursive;
@@ -49,7 +49,7 @@ h1.title {/*2*/
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	border: none;
-	font: normal 44px/1 "Allerta Stencil","Gloria Hallelujah" Helvetica, sans-serif;
+	font: normal 44px/1 cursive, sans-serif;
 	color: rgba(123,62,62,1);
 	text-align: center;
 	-o-text-overflow: ellipsis;
@@ -59,7 +59,7 @@ h1.title {/*2*/
     1px -1px 0 #f00,
     -1px 1px 0 #f00,
     1px 1px 0 #f00,
-    0px 0px 12px rgba(150,255,100,1);  
+    0px 0px 100px rgba(0,0,0,1);  
 }
 
 /*The two areas that cards are placed in when drawn*/
