@@ -185,8 +185,7 @@ h1.title {/*2*/
 #buttons li:active {
 	-webkit-box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
 	box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
-	-webkit-animation: spin 0.5s 1;
-			animation: spin 0.5s 1;
+	background-color: #f44;
 }
 
 

@@ -49,10 +49,10 @@ game.c = (function () {
 	var makeCardElement = function (card) {
 		if (card.isRevealed()) {
 			//return card frontside
-			return $('<img>').attr('src', card.getUrl()).addClass('card fade-in-anim');
+			return $('<img>').attr('src', card.getUrl()).addClass('card');
 		} else {
 			//return card backside 
-			return $('<div>').addClass('card card-back fade-in-anim');
+			return $('<div>').addClass('card card-back');
 		}
 	};
 
