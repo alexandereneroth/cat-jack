@@ -2,7 +2,7 @@ body {
 	color: #dd8;
 	background-color: #557F2C;
 	background-image: url('../img/bg2.png');
-	font-family: 'Gloria Hallelujah', cursive;
+	font-family: monospace, cursive;
 }
 
 h1 {
@@ -38,7 +38,7 @@ dl dd {
 	margin:33px;
 	margin-left: auto;
 	margin-right: auto;
-	border-top: 8px groove #a6f;
+	border-top: 8px groove #500;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	box-shadow: 0px 15px 60px 22px rgba(0, 0, 0, 0.73);
@@ -49,12 +49,17 @@ h1.title {/*2*/
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	border: none;
-	font: normal 44px/1 "Allerta Stencil", Helvetica, sans-serif;
-	color: #b1f;
+	font: normal 44px/1 "Allerta Stencil","Gloria Hallelujah" Helvetica, sans-serif;
+	color: rgba(123,62,62,1);
 	text-align: center;
 	-o-text-overflow: ellipsis;
 	text-overflow: ellipsis;
-	text-shadow: 0px 0px 12px rgba(255,255,181,1) ;
+    text-shadow:
+    -1px -1px 0 #f00,
+    1px -1px 0 #f00,
+    -1px 1px 0 #f00,
+    1px 1px 0 #f00,
+    0px 0px 12px rgba(150,255,100,1);  
 }
 
 /*The two areas that cards are placed in when drawn*/
@@ -108,7 +113,7 @@ h1.title {/*2*/
 }
 #scoreboard {/*3*/
 	text-align: left;
-	width: 222px;
+	width: 253px;
 	height: 80px;
 	float: left;
 	margin: 20px;
@@ -143,15 +148,15 @@ h1.title {/*2*/
 }
 #buttons li {
 	width: 80px;
-	padding: 10px;
-	margin-left: 20px;	
+	/*padding: 10px;*/
+	/*margin-left: 20px;	*/
 	display: inline-block; 
 
 	font: normal normal bold 15px/normal "Lucida Console", Monaco, monospace;
 	text-align: center;
 	text-shadow: -1px -1px 0 rgba(0,3,10,1) ;
 	letter-spacing: 1px;
-	background: #9b1;
+	/*background: #9b1;*/
 	color: #fff;
 	cursor: pointer;
 	border: 1px solid #fff;
@@ -174,14 +179,14 @@ h1.title {/*2*/
 #buttons li:hover {
 	-webkit-box-shadow: 0 0 8px 1px rgba(0,0,0,1) ;
 	box-shadow: 0 0 8px 1px rgba(0,0,0,1) ;
-	background-color: #780;
+	background-color: #f00;
 }
 
 #buttons li:active {
 	-webkit-box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
 	box-shadow: 0 0 8px 1px rgba(0,0,0,0.76) inset;
-	-webkit-animation: spin 0.2s 1;
-			animation: spin 0.2s 1;
+	-webkit-animation: spin 0.5s 1;
+			animation: spin 0.5s 1;
 }
 
 
@@ -208,19 +213,19 @@ h1.title {/*2*/
 	-webkit-transform: 	rotate(0deg);
 		-ms-transform: 	rotate(0deg);
 		 	transform:	rotate(0deg);
-	-webkit-filter: grayscale(0%) opacity(70%);
-	        filter: grayscale(0%) opacity(70%);
+	-webkit-filter: grayscale(0%);
+	        filter: grayscale(0%);
 	}
 	75%{
-	-webkit-filter: grayscale(50%) opacity(70%);
-	        filter: grayscale(50%) opacity(70%);
+	-webkit-filter: grayscale(50%);
+	        filter: grayscale(50%);
 	}
 	100%{
 	-webkit-transform: 	rotate(90deg);
 		-ms-transform: 	rotate(90deg);
 		 	transform:	rotate(90deg);
-	-webkit-filter: grayscale(50%) opacity(70%);
-	        filter: grayscale(50%) opacity(70%);
+	-webkit-filter: grayscale(50%);
+	        filter: grayscale(50%);
 	}
 }
 
