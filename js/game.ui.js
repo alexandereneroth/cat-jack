@@ -25,7 +25,6 @@ game.ui = (function () {
 
 	};
 
-
 	var showScore = function (playerScore, dealerScore) {
 		function styleScoreEl(element, score) {
 			// Check for certain scores to add animation for Bust and CatJack
