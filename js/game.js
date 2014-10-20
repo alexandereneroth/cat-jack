@@ -8,9 +8,6 @@
 // Contact - jitan.elis@gmail.com
 //
 // JS Project @ YHC3L School 2014
-//
-// Notes
-// _ denotes private functions, ex: _privateFunction
 // * * * * * * * * * * * * * * * * * * * * */
 
 'use strict';
