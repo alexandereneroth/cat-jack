@@ -1,4 +1,6 @@
 'use strict';
+
+
 game.createHand = function () {
 	var that = {},
 		cards = [],

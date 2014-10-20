@@ -1,7 +1,7 @@
 'use strict';
 
 // Constructor function to get a deck of cards for the game.
-// Returns shuffled array with all the cards.
+// Returns shuffled array with the specified number of cards.
 game.getDeck = function (numberOfDecks) {
 	/* * * * * *
 	 * Private *
