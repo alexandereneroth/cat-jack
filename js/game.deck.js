@@ -1,30 +1,30 @@
 'use strict';
 
 // Constructor function to get a deck of cards for the game.
-// Returns shuffled array with the specified number of cards.
-game.getDeck = function (numberOfDecks) {
+// Returns shuffled array with the specified number of cards (52 cards in a deck).
+game.createDeck = function (numberOfDecks) {
 	/* * * * * *
 	 * Private *
 	 * * * * * */
 	var cards = [];
-	createDeck();
+	getCards();
 	shuffle();
 
-	function createDeck() {
-		var newDeck = [];
+	function getCards() {
 		var ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 		var suits = ['H', 'S', 'C', 'D'];
 
-		// Push all the cards into the a new deck
-		ranks.forEach(function (rank) {
-			suits.forEach(function (suit) {
-				newDeck.push(game.getCard(rank, suit));
+		function addCards() {
+			ranks.forEach(function (rank) {
+				suits.forEach(function (suit) {
+					cards.push(game.createCard(rank, suit));
+				});
 			});
-		});
+		}
 
-		// Duplicate the the deck to the main cards array based on numerOfDecks
+		// Push all the cards into the a new deck
 		while (numberOfDecks > 0) {
-			cards = cards.concat(newDeck);
+			addCards();
 			numberOfDecks -= 1;
 		}
 	}
@@ -44,7 +44,6 @@ game.getDeck = function (numberOfDecks) {
 			cards[currentIndex] = cards[randomIndex];
 			cards[randomIndex] = temporaryValue;
 		}
-		return cards;
 	}
 
 	/* * * * * *

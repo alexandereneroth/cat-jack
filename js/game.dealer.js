@@ -7,7 +7,7 @@ game.dealer = (function () {
 	/* * * * * *
 	 * Private *
 	 * * * * * */
-	var deck = game.getDeck(game.numberOfDecks);
+	var deck = game.createDeck(game.numberOfDecks);
 	var dealerHand = game.createHand();
 	var playerHand = game.createHand();
 
@@ -28,7 +28,7 @@ game.dealer = (function () {
 
 		// Reveal hidden card
 		dealerHand.flip(1);
-		game.updateGameState('Dealer reveals ' + dealerHand.getCard(1));
+		game.updateGameState('Dealer reveals ' + dealerHand.getCards()[1]);
 
 		// Store gameState for timed replay
 		gameStateHistory.push(game.getCopy());

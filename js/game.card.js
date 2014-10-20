@@ -1,8 +1,8 @@
 'use strict';
 
 // Card constructor function.
-// Returns object with all the needed properties and functions.
-game.getCard = function (rank, suit) {
+// Returns object with public functions.
+game.createCard = function (rank, suit) {
 
 	/* * * * * *
 	 * Private *
