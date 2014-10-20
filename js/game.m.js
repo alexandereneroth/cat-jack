@@ -2,8 +2,7 @@
 
 'use strict';
 /**
- **	The Model that contains the game logic, and is decoupled from the view
- **	and controller.
+ **	The Model that contains the game logic.
  **/
 game.m = {
 	player: {},
@@ -13,13 +12,12 @@ game.m = {
 
 	startGame: function () {
 
-		// Main game function calls
 		game.m.dealer.setNumberOfCardDecks(4);
 		game.m.dealer.shuffleDeck();
-
 		game.m.dealer.dealFirstHand(game.m.player);
 	},
 
+	// This happens when the hit button is pressed.
 	hit: function () {
 		console.log('hit');
 
@@ -38,7 +36,7 @@ game.m = {
 			}
 		}
 	},
-
+	// This happens when the stand button is pressed.
 	stand: function () {
 		console.log('stand');
 
