@@ -3,7 +3,8 @@
 // * * * * * * * * * * * * * * * * * * * * *
 // CatJack v0.2
 //
-// By Alexander Eneroth and Jitan Elis
+// By Alexander Eneroth, Jitan Elis and Robin
+// Brandt.
 // Final refactoring by Jitan
 // Contact - jitan.elis@gmail.com
 //
