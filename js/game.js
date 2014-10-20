@@ -3,9 +3,8 @@
 // * * * * * * * * * * * * * * * * * * * * *
 // CatJack v0.2
 //
-// By Alexander Eneroth, Jitan Elis and Robin
-// Brandt.
-// Final refactoring by Jitan
+// Group assignment in Web Technology course.
+// Final refactoring done by me, Jitan.
 // Contact - jitan.elis@gmail.com
 //
 // JS Project @ YHC3L School 2014
