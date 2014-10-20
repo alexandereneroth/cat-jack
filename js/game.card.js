@@ -67,7 +67,5 @@ game.createCard = function (rank, suit) {
 	card.toString = function () { // Text representation of card, i.e. '9 of clubs'
 		return rankString + ' of ' + suitString;
 	};
-
-	// Return the public functions
 	return card;
 };

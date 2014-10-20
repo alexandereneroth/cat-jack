@@ -57,6 +57,5 @@ game.createHand = function () {
 	hand.getLastCard = function () {
 		return lastCard;
 	};
-
 	return hand;
 };

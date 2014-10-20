@@ -1,8 +1,7 @@
 'use strict';
 
-// Main logic object
+// Main logic of the game is handled by the dealer.
 game.dealer = (function () {
-	var that = {};
 
 	/* * * * * *
 	 * Private *
@@ -51,11 +50,13 @@ game.dealer = (function () {
 		gameStateHistory.forEach(addReplayTimeout);
 	};
 
-	//    ______________________
-	//___/        PUBLIC        \___
+	/* * * * * *
+	 * Public  *
+	 * * * * * */
+	var dealer = {}; // Public functions are returned with this object
 
 	// Button functions
-	that.hit = function () {
+	dealer.hit = function () {
 		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			dealCardTo(playerHand);
 			game.updateGameState('Player received ' + playerHand.getLastCard());
@@ -71,38 +72,37 @@ game.dealer = (function () {
 		}
 	};
 
-	that.stand = function () {
+	dealer.stand = function () {
 		if (game.isPlayerRound) { // Will disable button if it's not the playersround
 			game.isPlayerRound = false;
 			playDealerRound();
 		}
 	};
 
-	// Getters
-	that.getPlayerHand = function () {
+	dealer.getPlayerHand = function () {
 		return playerHand;
 	};
 
-	that.getDealerHand = function () {
+	dealer.getDealerHand = function () {
 		return dealerHand;
 	};
 
 	// Setting up the board for a new game
-	that.dealFirstHand = function () {
+	dealer.dealFirstHand = function () {
 		// House and player gets two cards each.
 		dealCardTo(playerHand);
 		dealCardTo(playerHand);
 		dealCardTo(dealerHand);
 		dealCardTo(dealerHand);
 
-		// Hide the second dealer card until dealer.playRound() is called
+		// Hide the second dealer card (Blackjack rules).
 		dealerHand.flip(1);
 		game.updateGameState('Welcome to a new game!');
 		game.ui.updateBoard();
 	};
 
 	//returns 0 for tie, negative for player loss, and positive for player win
-	that.getWinner = function () {
+	dealer.getWinner = function () {
 
 		// Storing variables for shorter reference below
 		var playerScore = game.playerScore;
@@ -119,5 +119,5 @@ game.dealer = (function () {
 		}
 		return playerScore - dealerScore;
 	};
-	return that;
+	return dealer;
 })();
