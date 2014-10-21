@@ -1,31 +1,26 @@
 'use strict';
-/**
- **	The main object that is used to interact with the game.
- **/
 var game = (function () {
 	var that = {};
 
-	//    ______________________
-	//___/        PUBLIC        \___
+	that.deck = {};
+	that.player = {};
+	that.dealer = {};
 
-	that.m = {}; // model
-	that.c = {}; // controller
+	that.globalTimeout = 1400;
+
+	that.isPlayerTurn = true;
+	that.gameOver = false;
+	that.focusMessage = '';
 
 	that.start = function () {
 
-		// Bind key listeners
-		$('#hit-button').click(function () {
-			game.m.hit();
-		});
-		$('#stand-button').click(function () {
-			game.m.stand();
-		});
+		that.deck = game.getDeck(4).shuffle();
+		that.player = game.getActor();
+		that.dealer = game.getActor();
 
-		// game.m.player = game.m.createPlayer(prompt('Please enter your name:'));
-		game.m.player = game.m.createPlayer('Player');
-		game.m.dealer = game.m.createDealer('Joe the Dealer');
-		game.m.startGame();
+		game.events.dealFirstHand(game.player);
 
 	};
+
 	return that;
 }());
