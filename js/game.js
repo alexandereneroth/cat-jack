@@ -9,8 +9,11 @@ var game = (function () {
 	that.globalTimeout = 1400;
 
 	that.isPlayerTurn = true;
-	that.gameOver = false;
 	that.focusMessage = '';
+
+	that.isGameOver = function () {
+		return that.dealer.getHand().getTotalValue() >= 17;
+	};
 
 	that.start = function () {
 

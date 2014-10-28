@@ -1,5 +1,5 @@
 'use strict';
-game.getState = function () {
+game.getCurrentState = function () {
 	var that = {};
 
 	that.isPlayerTurn = game.isPlayerTurn;
@@ -8,7 +8,7 @@ game.getState = function () {
 	that.dealerCards = $.extend(true, {}, game.dealer.getHand().getCards());
 	that.playerCards = $.extend(true, {}, game.player.getHand().getCards());
 	that.focusMessage = game.focusMessage;
-	that.gameOver = game.gameOver;
+	that.gameOver = game.isGameOver();
 
 	//returns 0 for tie, negative for loss, and positive for win
 	that.getWinState = function () {

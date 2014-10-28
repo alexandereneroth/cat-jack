@@ -35,7 +35,7 @@ game.events = (function () {
 		game.dealer.drawCard();
 		game.dealer.drawCard();
 
-		// Hide the second dealer card until dealer.playRound() is called
+		// Hide the second dealer card in the beginning.
 		game.dealer.flipCard(1);
 		game.focusMessage = 'Welcome to a new game!';
 		game.controller.updateBoard(game.getCurrentState());
@@ -48,10 +48,7 @@ game.events = (function () {
 		// Reveal hidden card
 		game.dealer.flipCard(1);
 
-		// Update the game's state with a message of the flipped card 
-		// and a boolean that tells if the game is over or not
 		game.focusMessage = 'Dealer reveals ' + game.dealer.getHand().getCard(1);
-		game.gameOver = (game.dealer.getHand().getTotalValue() >= 17);
 
 		game.controller.updateBoardIn(game.getCurrentState(), game.globalTimeout);
 
@@ -63,7 +60,6 @@ game.events = (function () {
 			var drawnCard = game.dealer.drawCard();
 
 			game.focusMessage = 'Dealer draws ' + drawnCard;
-			game.gameOver = (game.dealer.getHand().getTotalValue() >= 17);
 
 			game.controller.updateBoardIn(game.getCurrentState(), game.globalTimeout * i++);
 		}
