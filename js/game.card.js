@@ -25,7 +25,13 @@ game.getCard = function (rank, suit) {
 	}
 
 	function buildUrl() {
-		return 'img/cards/' + rank + '_of_' + suit + '.svg';
+		var urlRank;
+		if (isNaN(rank)) {
+			urlRank = rank.toLowerCase();
+		} else {
+			urlRank = rank;
+		}
+		return 'img/cards/' + urlRank + '_of_' + suit.toLowerCase() + '.svg';
 	}
 	// Returns the value of the card (in numbers)
 	function buildValue() {
